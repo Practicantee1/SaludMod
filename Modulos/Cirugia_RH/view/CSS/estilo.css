@@ -1,0 +1,261 @@
+.tab-content {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    text-align: center;     /* Opcional: centra el texto dentro del contenido */
+    height: 100%;           /* Asegúrate de que el div ocupe la altura completa del contenedor */
+    flex-direction: column; /* Coloca los elementos en columna */
+}
+.nav-tabs {
+    display: flex;              /* Utiliza Flexbox para el contenedor */
+    justify-content: center;    /* Centra los elementos hijos horizontalmente */
+    align-items: center;        /* (Opcional) Centra los elementos hijos verticalmente */
+}
+.tab-content .tab-pane {
+    border: 1px solid #ccc; /* Borde alrededor del contenido del tab */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px; /* Espacio interno para el contenido */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#contenedor-boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ajusta esto según sea necesario */
+}
+
+#guardarEntrada {
+    background-color: #28a745; /* Verde */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#guardarPausa {
+    background-color: #28a745; /* Verde */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#guardarSalida {
+    background-color: #28a745; /* Verde */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#guardarFirmaEntrada {
+    background-color: #28a745; /* Verde */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#guardarFirmaSalida {
+  background-color: #28a745; /* Verde */
+  color: white; /* Color del texto */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+/* Estilos para el fondo del popup */
+.popup-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilos para el contenido del popup */
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .popup-content button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popup-content button:hover {
+    background-color: #218838;
+  }
+
+  #registroTablaBody{
+    border-radius: 15px;  /* Bordes redondeados para un estilo más suave */
+    padding: 150px;  /* Aumenta el área alrededor del texto para que el color cubra más espacio */
+    margin: 20px
+
+  }
+  
+
+  .tabla-yellow {
+    background-color: #fce8e6;
+    padding: 5px;  /* Aumenta el área alrededor del texto para que el color cubra más espacio */
+    border-radius: 5px;  /* Bordes redondeados para un estilo más suave */
+    color:#a50e0e; /* Asegura que el texto sea legible */
+    font-weight: bold; 
+    display: inline-block;
+}
+
+  .tabla-green {
+    background-color: #e6f4ea;
+    padding: 5px;  /* Aumenta el área alrededor del texto */
+    border-radius: 5px;  /* Bordes redondeados */
+    color:  #137333; /* Asegura que el texto sea legible */
+    font-weight: bold; 
+    display: inline-block;
+}
+.resaltado {
+  background-color: #ffd580; /* Un tono suave de azul */
+  padding: 5px;  /* Aumenta el área alrededor del texto */
+  border-radius: 5px;  /* Bordes redondeados */
+  color: #8a4b00; /* Un tono oscuro que sea legible sobre azul */
+  font-weight: bold; 
+  display: inline-block;
+}
+.table-responsive {
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+}
+
+.table {
+  width: 100%; /* Asegúrate de que la tabla use todo el ancho disponible */
+}
+.text-divider-Epid .left-span{
+  background-color: transparent; 
+  width: 15px;
+}
+
+.text-divider-rh{
+  margin: 2em 0;
+  line-height: 0; 
+  text-align: left;
+  font-size: 15px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+.text-divider-rh span{
+  background-color:#ffffff; 
+  padding: 1em;
+  color: #006941 !important;
+  font-weight: 700;
+}
+
+.text-divider-rh .left-span{
+  background-color: transparent; 
+  width: 15px;
+}
+
+.text-divider-rh:before{ 
+  content: " "; 
+  display: block;                                 
+  border-top: 1px solid #006941; 
+  border-bottom: 2px solid #006941;
+}
+/* titulo */
+
+
+.text-divider-r{
+  margin: 2em 0;
+  line-height: 0; 
+  text-align: left;
+  font-size: 15px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+.text-divider-r span{
+  background-color:#f7f7f7; 
+  padding: 1em;
+  color: #006941 !important;
+  font-weight: 700;
+}
+
+.text-divider-r .left-span{
+  background-color: transparent; 
+  width: 15px;
+}
+
+.text-divider-r:before{ 
+  content: " "; 
+  display: block;                                 
+  border-top: 1px solid #006941; 
+  border-bottom: 2px solid #006941;
+}
+
+.table {
+  width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho disponible */
+  border-collapse: collapse; /* Para eliminar espacios entre las celdas */
+}
+
+.table th, .table td {
+  padding: 10px; /* Espaciado dentro de las celdas */
+  text-align: center; /* Alinear texto al centro */
+}
+
+.table th {
+  font-size: 14px; /* Tamaño de fuente del encabezado */
+}
+
+.table td {
+  font-size: 12px; /* Tamaño de fuente del cuerpo */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Color de fondo alternativo para filas */
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef; /* Resaltar fila al pasar el mouse */
+}
+th {
+  white-space: nowrap; /* Evita que el texto se divida */
+  line-height: 1.5; /* Espaciado entre líneas */
+  text-align: center; /* Centra el texto */
+}
+
+th.rotate {
+  transform: rotate(-90deg); /* Rota el texto 90 grados */
+  transform-origin: left bottom; /* Ajusta el origen de la transformación */
+  height: 100px; /* Altura ajustable */
+}
+
+select {
+  text-align: center;      /* Centrar texto del select */
+  text-align-last: center; /* Centrar última opción seleccionada */
+}
+
+option {
+  text-align: center;      /* Intento de centrar opciones (puede no ser compatible en todos los navegadores) */
+}

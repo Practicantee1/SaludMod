@@ -1,0 +1,59 @@
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.grid-row{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.clsInputDemograficos{
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.tbl-Seguimiento {
+    width: 100%;
+}
+
+.clsInput{
+    width: 90%;
+    padding: 5px;
+    border: .5px solid #aaa;
+    background-color: #eee;
+    border-radius: 4px;
+    outline: none;
+}
+
+.blanco{
+    background-color: #ffffff !important;
+}
+
+th{
+    text-wrap: wrap;
+    box-sizing: border-box;
+    text-wrap-style: pretty;
+}
+.section-title .text {
+    color: #006941;
+    margin: 0;
+}
+
+.blanco{
+    background-color: #ffffff !important;
+}
+
+
+.div-tbl label{
+    margin: 0;
+}
+.div-tbl{
+    display:grid; 
+    grid-template-columns: 1fr 3fr;
+    text-align: left;
+}

@@ -1,0 +1,364 @@
+
+
+/* #container-UbicacionPacientes{
+            
+    background-color: #97bf0d;
+    display: flex;
+    /* background-image: url('../IMG/SanVicenteFundación_fondo.jpg'); */
+    /* Set background image size */
+    /* background-size: cover; */
+    /* Set background image to cover entire viewport */
+    /* background-repeat: no-repeat; */
+    /* Prevent background image from repeating */
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+/* } */
+
+.UbicacionPacientes-label{
+    color: #fff;
+}
+
+.i-Ubicacion{
+  color: #fff;
+  margin-right: 20px !important;  
+}
+
+.container{
+    margin: 0 !important;
+    min-width: 100% !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.form-control{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#006941;
+  font-size: 15px;
+  text-align: center;
+}
+
+.FolderStyle-Label{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 8px; width: fit-content;
+    /*border: 2px solid #000;
+    border-bottom: transparent;*/
+}
+
+.FolderStyle-Input{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
+    /*border: 2px solid #000;*/
+    
+}
+
+.Dark-Green{
+    background-color: #006941; 
+}
+
+.Light-Green{
+    background-color: #97bf0d;
+}
+
+#HeaderBanner{
+    background-color: #006941;
+    padding-bottom: 0px;
+    width: 90% !important;
+    margin: 0;
+    margin-top: 25px;
+    color: #fff;
+}
+
+#Search-UbicacionPacientes{
+    background-color: #006941 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+    font-size: 12px;
+    
+}
+
+#Search-UbicacionPacientes:hover{
+    background-color: #fff !important;
+    color: #006941 !important;
+    border: 3px solid #006941 !important;
+}
+
+#Search-acompanante{
+    background-color: #006941 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+    font-size: 12px;                                              
+}
+
+#Search-acompanante:hover{
+    background-color: #fff !important;
+    color: #006941 !important;
+    border: 3px solid #006941 !important;
+}
+
+
+#Logo{
+    width: 80%;
+    height: 85%;
+}
+
+.titles-UbiCita{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.text-divider-UbiCita{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 15px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+.text-divider-UbiCita span{
+    background-color: #f7f7f7; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-UbiCita .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-UbiCita:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+#MainTittle-UbiCitas{
+    background-color: #006941;
+    width: 70%;
+    margin: auto;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-bottom: 10px;
+}
+
+#MainTittle-UbiCitas h2{
+    font-weight: bolder;   
+    color: #fff !important;
+}
+
+.tooltip-info {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .tooltip-info .tooltiptext {
+    visibility: hidden;
+    font-weight: 700;
+    width: 120px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 100%; /* Position to the right of the button */
+    margin-left: -30px;
+    transform: translate(0, -50%); /* Center vertically */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+.tooltip-info .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* Below the tooltip */
+    right: -5px;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+  }
+  
+  .tooltip-info:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* ----------- CSS Checkbox -------------------------- */
+
+  .select-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Estilo del checkbox cuando está marcado */
+.select-checkbox:checked {
+    background-color: rgb(25,135,84);
+    border-color: #000;
+}
+
+/* Estilo de la marca de verificación */
+.select-checkbox:checked::after {
+    content: '\2713'; /* Carácter Unicode de marca de verificación */
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    top: -2px;
+    left: 2px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+  /* ----------- FIN ESTILO CSS Checkbox --------------- */
+
+  /* ----------------- CSS MODAL ----------------------- */
+
+  .modal-body, .modal-footer{
+    background-color: #fff;
+  }
+
+  .modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+  }
+
+  h5{
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: 15px;
+  }
+
+  .personaId,.persona{
+    color: #006941;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+
+  #success, #abrirModal, button[name="modificar"]{
+    border: 2px solid #000;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.3s, color 0.3;
+  }
+
+  button[name="modificar"]:hover{
+    background-color: lightgray;
+    border-color: #000;
+  }
+
+  .modal-body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  button[name="modificar"]:focus, button[name="modificar"]:active{
+    border-color: #000;
+    background-color: white;
+    color: #000;
+    outline: none;
+  }
+  
+
+  .modificar-icon {
+    color: #000; /* Cambia el color al que desees */
+  }
+
+
+  .modal-footer{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+   /* ----------------- CSS MODAL ----------------------- */
+
+  @media (max-width: 575.98px) {
+    .modal-xl {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .modal-xl {
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .modal-xl {
+      max-width: 70%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .modal-xl {
+      max-width: 60%;
+    }
+  }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item {
+    flex: 1 1 200px; /* Crece, encoge, tamaño base */
+    margin: 10px;
+    padding: 20px;
+    background-color: lightgray;
+    text-align: center;
+}
+
+#loadModalButton{
+  background-color: #006941 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  font-size: 12px;
+  
+}
+
+#loadModalButton:hover{
+  background-color: #fff !important;
+  color: #006941 !important;
+  border: 3px solid #006941 !important;
+}
+
+#loadModalButtonCerrar{
+  background-color: red !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  font-size: 12px;
+  
+}
+
+#loadModalButtonCerrar:hover{
+  background-color: #fff !important;
+  color: red !important;
+  border: 3px solid red !important;
+}
+
+
+
+

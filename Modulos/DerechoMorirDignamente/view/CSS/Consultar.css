@@ -1,0 +1,53 @@
+
+
+#tbl_DMD tr:nth-child(even){background-color: #f2f2f2;}
+
+#tbl_DMD tr:hover {background-color: #ddd;}
+
+#tbl_DMD th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color:#007048 ;
+    color: white;
+    position: sticky;
+    top:65px;
+}
+
+#tbl_DMD{
+    margin-top: 30px;
+    width: 80%;
+}
+
+.div-tablaDMD{
+    display: flex;
+    justify-content: center;
+}
+
+#idDocumento{
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin: 0 10%;
+    width: 30%;
+}
+
+.lb{
+    margin-left: 10%;
+}
+
+#pdf{
+    background-color: #00C851;
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+
+#btn-Consultar{
+    padding: 12px;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: #006941;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-weight:700;
+}

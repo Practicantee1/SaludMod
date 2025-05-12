@@ -1,0 +1,534 @@
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.grid-row{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.clsInputDemograficos{
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.antropometria{
+    display: flex;
+    flex-direction: row;
+}
+
+.metaIMC{
+    grid-column: 5 / 6;
+}
+
+.antropometria-1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.antropometria-2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#ingreso1-session1 {
+    position: sticky;
+    top: 70px;
+    z-index: 50;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    opacity: 1;
+}
+
+
+.stepper-container {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.stepper-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    flex-shrink: 0;
+}
+
+.stepper-circle.active {
+    background-color: #066E45;
+}
+
+.stepper-line {
+    flex-grow: 1;
+    height: 4px;
+    background-color: #ccc;
+    margin: 0;
+}
+/* ##### */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 25px 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title .line {
+    width: 30px;
+    height: 2px;
+    background-color: #006941;
+    display: block;
+}
+
+.section-title .text {
+    color: #006941;
+    margin: 0;
+}
+
+/* Específico para el título derecho */
+.section-title.right {
+    color: #006941;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: auto auto; 
+    gap: 10px; 
+}
+
+.grid2 {
+    margin-top:20px ;
+    display: grid;
+    grid-template-columns:  repeat(3, 1fr); 
+    gap: 10px; 
+}
+
+.div-observaciones{
+    margin-top: 20px;
+}
+
+.lb-inicio{
+    width: 100%;
+    color: #555;
+    font-weight: 200;
+}
+
+.div-input{
+    display:flex;
+    justify-content: left;
+    align-items: start;
+}
+
+.clsInput{
+    width: 90%;
+    padding: 5px;
+    border: .5px solid #aaa;
+    background-color: #eee;
+    border-radius: 4px;
+    outline: none;
+}
+
+.input-box{
+    display: grid;
+    grid-template-columns: 20% 15% 18% 15% 17% 15%;
+    margin: 10px 0;
+    align-items: center;
+}
+
+
+.div-observaciones .clsInput{
+    width: 97%;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.grid .clsInput{
+    width: 94%;
+}
+
+.grid3{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.last3{
+    grid-column: span 3;
+}
+
+.last2{
+    grid-column: 4 / 7;
+}
+.last3 input{
+    width :97%;
+}
+
+
+/* 
+.barra-interna{
+    width: 50%;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px ;
+    border: 1px solid #333;
+} */
+
+.barra-externa {
+    position: relative; 
+    width: 97%;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #cacaca;
+    height: 37px;
+}
+
+.barra-interna {
+    width: 50%;
+    height: 100%; 
+    background-color: #93C020;
+    border: none;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius:6px;
+    border-right: 1px solid #333;
+}
+
+.barra-externa::after {
+    content: "";
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 75%; 
+    width: 2px;
+    background-color: #C02020; 
+}
+
+.grid4{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid5{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+#tbl-Seguimiento{
+    margin-top: 20px;
+    width: 80%;
+    border: 0.5px solid #000000;
+}
+
+.tbl-Container{
+    display: flex;
+    justify-content: center;
+}
+
+#tbl-Seguimiento th{
+    background-color: #93C020;
+    border: 0.5px solid #444;
+    color: #fff;
+}
+
+#tbl-Seguimiento td{
+    border: 0.5px solid #444;
+}
+
+.flex-boton{
+    margin: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.flex-paginacion{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+
+.blanco{
+    background-color: #ffffff !important;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 120em;
+    padding: 1em;
+}
+
+.contenedor .ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contenedor .li {
+    list-style: none;
+    padding: 1em;
+    margin: 0 2em 0 0;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.contenedor .li.activo {
+    background-color: #066E45;
+    color: white;
+}
+
+.contenedor .subcontenedor {
+    margin-top: 0;
+}
+
+.contenedor .bloque {
+    display: none; /* Oculta por defecto */
+    padding: 1em;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor .bloque.activo {
+    display: block; /* Muestra el bloque activo */
+}
+
+.tbl-SeguimientoAntropometria {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl-SeguimientoAntropometria th,
+.tbl-SeguimientoAntropometria td {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.Gastrointestinal-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.Gastrointestinal{
+    display: grid;
+    grid-template-columns: 5% 20% 20% 20% 15% 20%;
+    margin-bottom: 15px;
+}
+label{
+    margin: 0 !important;
+}
+
+.col4{
+    grid-column: 4;
+}
+
+.Gastrointestinal input[type=checkbox]{
+    height: 20px;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+#btn-mas{
+    background-color: #0D9B62;
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+}
+#btn-menos{
+    background-color: #ff1c1c;
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+}
+
+.mas{
+    position: relative;
+    top: 13%;
+    left: 24%;
+    color: #fff;
+}
+
+.obsDeposicion{
+    display: flex;
+    flex-direction: column;
+}
+    
+.tbl-Seguimiento{
+    width: 100%;
+}
+
+th{
+    text-wrap: wrap;
+    box-sizing: border-box;
+    text-wrap-style: pretty;
+}
+
+td > input{
+    width: 90%;
+}
+
+.td-grid > input{
+    width: 90%;
+}
+
+.td-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.adecuacion-2 input{
+    width: 60%;
+}
+.adecuacion-2{
+    margin-top: 20px;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.text-area{
+    resize: none;
+    height: 50px;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.input-area{
+    display:flex;
+    margin: 10px 0 20px 0;
+}
+
+
+.div-container_terapia{
+    display: flex;
+}
+
+.div-2{
+    width: 50%;
+}
+
+.doble-titulo{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.input-box{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.row{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: end;
+}
+
+label{
+    margin: 0;
+}
+
+.select{
+    background-color: #eee !important;
+    border-radius: 4px !important;
+    border: 1px solid #333 !important;
+}
+
+.btn-si{
+    background-color: #fff;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 40%;
+    border: 1px solid #888;
+    transition: all 0.4s;
+}
+
+.btn-si:hover{
+    background-color: #aaa;
+}
+
+.btn-no{
+    background-color: #fff;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 40%;
+    transform: translateX(-10px);
+    border: 1px solid #888;
+    transition: all 0.4s;
+}
+.btn-no:hover{
+    background-color: #aaa;
+}
+
+#tbl-Inicio{
+    margin-top: 20px;
+    width: 80%;
+    border: 0.5px solid #000000;
+}
+
+.tbl-Container{
+    display: flex;
+    justify-content: center;
+}
+
+#tbl-Inicio th{
+    background-color: #93C020;
+    border: 0.5px solid #444;
+    color: #fff;
+}
+
+#tbl-Inicio td{
+    border: 0.5px solid #444;
+}
+
+.pAdecuacion-content{
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+.pAdecuacion1{
+    display: flex;
+    flex-direction: column;
+}
+.pAdecuacion-item{
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr;
+}
+
+.pAdecuacion2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#tblAdecuacion{
+    width: 100%;
+}

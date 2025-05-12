@@ -1,0 +1,350 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    overflow-y: hidden;
+    --colorPrimario: #00529F;
+}
+
+.tilt-neon {
+    font-family: "Tilt Neon", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "XROT" 0,
+      "YROT" 0;
+  }
+
+
+
+.monoton-regular {
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.title{
+    font-size: 50px;
+    text-shadow: 0 0 5px var(--colorPrimario), 0 0 5px var(--colorPrimario), 0 0 5px var(--colorPrimario);
+}
+
+#fondo{
+    position: absolute;
+}
+
+
+.div-contenido{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    /* z-index: 10; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.titulo{
+    text-align: center;
+}
+.contenido{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.volver {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 50px; /* Define un ancho fijo para que sea un círculo perfecto */
+    height: 50px; /* Define una altura igual al ancho */
+    padding: 0; /* Elimina el padding adicional */
+    background-color: #fff;
+    border-radius: 50%; /* Hace que sea un círculo */
+    text-decoration: none;
+    color: #000;
+    font-size: 18px; /* Ajusta el tamaño del icono si es necesario */
+}
+
+
+
+/* ########### Estilos de modo claro ############# */
+
+
+h1{
+    color: #fff;
+}
+
+.card{
+    position: relative;
+    width: 600px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+.card .circle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card .circle::before{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    clip-path: circle(120px at center);
+    transition: 0.5s;
+}
+
+.card:hover .circle:before{
+    background-color: var(--colorPrimario);
+    clip-path: circle(400px at center);
+}
+
+.subtitulo{
+    margin-top: 10px;
+    color: #fff;
+    position: absolute;
+    top: 55%;
+    left: 33%;
+    transition: 0.5s;
+}
+
+.card img{
+    position: absolute;
+    top: 35%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    height: 130px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.card:hover img{
+    left: 72%;
+    top: 50%;
+    height: 330px;
+}
+
+.card:hover .subtitulo {
+    left: 35%;
+    top: 5%;
+    height: 330px;
+    transition: all 0.3s ease-in-out; /* Asegúrate de que el hover también tenga transición */
+}
+
+.card:hover .icono_subtitulo {
+    color: transparent;
+    transition: color 0.3s ease-in-out; /* Aplica transición solo al color */
+}
+
+.card .content{
+    position: relative;
+    width: 50%;
+    padding: 20px 20px 20px 20px;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 20;
+}
+
+.card:hover .content{
+    left: 0;
+    opacity:1;
+    visibility: visible;
+}
+
+.card .content a{
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-modulo{
+    padding: 5%;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 15;
+}
+
+.card-modulo:hover{
+    box-shadow: 0 0 4px #000;
+}
+
+
+
+
+.icono_subtitulo{
+    text-shadow: 0 0 5px var(--colorPrimario), 0 0 5px var(--colorPrimario), 0 0 5px var(--colorPrimario);
+    z-index: 20;
+    color: var(--colorPrimario);
+    z-index: 150;
+}
+
+.flicker1{
+    animation: parpadear 2s infinite backwards;
+}
+.flicker2{
+    animation: parpadear 1s infinite backwards;
+}
+
+@keyframes parpadear {
+    to{
+        text-shadow:none;
+    }
+
+}
+/* #### PRUEBA TARJETA GIRATORIA #### */
+
+.card__back, .card__front{
+    backface-visibility: hidden ;
+    transition:transform 1s;
+    background-color: #fff;
+    border-radius: 18px ;
+    padding: 10px;
+    height: 100%;
+
+}
+
+.card__back::before, .card__front::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -20;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(45deg, #00529F, #fff); */
+    background-size: 800%;
+    border-radius: 8px;
+    filter: blur(8px);
+    animation: glowing 10s linear infinite;
+}
+
+/* @keyframes glowing{
+    0%{
+        background-position: 0 0;
+    }
+    50%{
+        background-position: 400% 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+} */
+
+.carta.flipped .card__front {
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+.carta.flipped .card__back {
+    transform: perspective(1200px) rotateY(360deg);
+}
+
+.card__back{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    transform: perspective(900px) rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content:center;
+}
+
+#volver{
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--colorPrimario);
+    color: #fff;
+}
+
+#volver:hover{
+    box-shadow: 0 0 3px #000;
+    cursor: pointer;
+}
+
+/* ######################## */
+
+@media (max-width: 991px){
+    .card{
+        width: auto;
+        max-width: 350px;
+        align-items: flex-start;
+    }
+    .card:hover{
+        height: 450px;
+    }
+    .card .circle::before {
+        clip-path: circle(100px at center);
+    }
+    .card .content{
+        width: 100%;
+        left: 0;
+        padding: 40px;
+    }
+    .card img{
+        top: 40%;
+        left: 45%;
+        height: 80px;
+    }
+    .card .circle::before {
+        clip-path: circle(90px at center);
+    }
+    .card:hover img{
+        top: 70%;
+        left: 45%;
+        height: 100px;
+    }
+    .card:hover .subtitulo{
+        top: 1%;
+        left: 15%;
+    }
+
+    .subtitulo {
+        left: 15%;
+        font-size: 15px;
+    }
+
+    .title{
+        font-size: 28px;
+    }
+
+    .light-theme .title{
+        font-size: 28px;
+    }
+}

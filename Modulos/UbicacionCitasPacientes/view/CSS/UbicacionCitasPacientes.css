@@ -1,0 +1,814 @@
+/* #container-UbicacionPacientes{header
+            
+    background-color: #97bf0d;
+    display: flex;
+    /* background-image: url('../IMG/SanVicenteFundaci贸n_fondo.jpg'); */
+    /* Set background image size */
+    /* background-size: cover; */
+    /* Set background image to cover entire viewport */
+    /* background-repeat: no-repeat; */
+    /* Prevent background image from repeating */
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+/* } */
+.modal-img {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9); /* Fondo semitransparente */
+}
+/* Estilos para el modal */
+/* .modal-content {
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+} */
+
+/* El contenido de la imagen */
+.modal-content-img {
+  margin: auto;
+  display: block;
+  max-width: 60%;
+  max-height: 60%;
+  z-index: 2000;
+}
+/* .modal-header {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: #006941;
+  color: white;
+  padding: 300px;
+} */
+
+
+
+
+
+/* cambios desde aqui  */
+
+.modal-content {
+  border-radius: 15px; /* Bordes redondeados */
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* El texto del pie de la imagen */
+#caption {
+  text-align: center;
+  color: #ccc;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* El bot贸n para cerrar el modal */
+.close-img {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fondo{
+  background-color: #00000075;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fondo-blanco{
+  padding: 20px;
+  background-color: #ffffff;
+  position: fixed;
+  width: 800px;
+  height: auto;
+  z-index: 1060;
+}
+
+.hidden-column {
+  display: none;
+}
+
+#tabla-container td{background-color: #fff !important;}
+
+#tabla-container tr:hover {background-color: #ff1e1e !important;}
+
+#tabla-container th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color:#007048 ;
+  color: white;
+  position: sticky;
+  top:0;
+  text-wrap:wrap ;
+}
+#tabla-container{
+  width:100%;
+  background-color: transparent;
+  margin-top: 30px;    
+}
+
+
+th{
+  text-wrap:wrap ;
+}
+
+table{
+  width: 100%;
+}
+
+.div-inputs{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.div-botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.btn{
+  background-color: #0d9b62;
+  color: #fff;
+  transition: all 0.3s;
+}
+.btn:hover{
+  background-color: #067046;
+  color: #fff;
+  box-shadow:0 0 6px #000;
+}
+
+/* .input-ubi{
+  width: 100%;
+} */
+
+.div-inputs,.div-botones{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* .div-botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+} */
+
+.UbicacionPacientes-label{
+    color: #fff;
+}
+
+.i-Ubicacion{
+  color: #fff;
+  margin-right: 20px !important;  
+}
+
+.container{
+    margin: 0 !important;
+    min-width: 100% !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+hr{
+  display: none;
+}
+
+form{
+  border: none;
+}
+
+.form-control{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#006941;
+  font-size: 15px;
+  text-align: center;
+  /* aqui se agg esto */
+  border: 2px solid #000;
+  border-radius: 8px; /* Bordes redondeados para inputs */
+  padding: 10px;
+  color: #006941;
+
+  
+}
+
+.FolderStyle-Label{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 8px; width: fit-content;
+    /*border: 2px solid #000;
+    border-bottom: transparent;*/
+}
+
+.FolderStyle-Input{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
+    /*border: 2px solid #000;*/
+    
+}
+
+.Dark-Green{
+    background-color: #006941; 
+}
+
+.Light-Green{
+    background-color: #97bf0d;
+}
+
+#HeaderBanner{
+    background-color: #006941;
+    padding-bottom: 0px;
+    width: 90% !important;
+    margin: 0;
+    margin-top: 25px;
+    color: #fff;
+}
+
+#Search-UbicacionPacientes {
+  background-color: #006941 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 290px;
+  height: 40px;
+  position: relative;
+  top: 17px;
+margin-right:220px;
+}
+.card-header{
+  border: none !important; 
+}
+
+#FullName{
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones pasen a otra l韓ea en pantallas peque馻s */
+    gap: 10px; /* Espacio entre botones */
+    justify-content: center; /* Centra los botones */
+ 
+position:relative;
+right:42px
+
+
+}
+
+#Search-UbicacionPacientes:hover {
+  background-color: #fff !important;
+  color: #006941 !important;
+  border: 2px solid #006941 !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+#buscar-nombre{
+  background-color: #006941 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 40px;
+  position: relative;
+  top: 14.5px;
+    
+}
+
+#buscar-nombre:hover{
+  background-color: #fff !important;
+  color: #006941 !important;
+  border: 2px solid #006941 !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+#Search-acompanante{
+  background-color: #006941 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  height: 40px;
+  /* position: relative;
+  top:  1800px; 
+  right: -506px;  */
+  position:relative; /* O usa fixed si quieres que est茅 fijo en la pantalla */
+  /* right: 0.1px; Ajusta la distancia desde la derecha */
+  margin-right: 200px;
+  /* Ajusta la distancia desde arriba */ 
+  width: 280px;
+  height: 40px;
+  position: relative;
+  /* top: 14.5px;                                          
+} */
+ 
+ }
+
+#Search-acompanante:hover{
+  background-color:#fff !important;
+  color: #006941 !important;
+  border: 2px solid #006941 !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) { /* Para tablets */
+  #Search-acompanante,#FullName {
+    width: 200px;
+    height: 35px;
+    font-size: 9px;
+    right: 5px;
+    top: 30px;
+  }
+}
+
+@media (max-width: 480px) { /* Para celulares */
+  #Search-acompanante {
+    width: 180px;
+    height: 30px;
+    font-size: 8px;
+    right: 2px;
+    top: 20px;
+  }
+}
+
+#btn-verificar{
+  background-color: #006941 !important;
+  color: #fff !important;
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  /* position: relative;
+  top:  1800px; s
+  right: -506px;  */
+  position:relative; /* O usa fixed si quieres que est茅 fijo en la pantalla */
+  right: -10px; /* Ajusta la distancia desde la derecha */
+  top: -2px;
+
+
+
+}
+
+/* #btn-verificar:hover{
+border-top: 2px solid #97bf0d;
+border-left: 2px solid #97bf0d;
+border-bottom:2px solid #0d9b62;
+border-right:2px solid #0d9b62;
+ box-shadow: 
+ #1eb00a 5px 5px,
+ /* #39b60c 10px 10px,
+ #38bd0b 15px 15px ; */
+   
+
+
+
+#Logo{
+    width: 80%;
+    height: 85%;
+}
+
+.titles-UbiCita{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.text-divider-UbiCita{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 15px;   /*Modificamos el el tama帽o de la letra para darle resposividad al texto en vista m贸vil*/
+
+}
+
+.text-divider-UbiCita span{
+    background-color:#ECEEF1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-UbiCita .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-UbiCita:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+#MainTittle-UbiCitas{
+  background-color: #006941;
+  width: 70%;
+  margin: auto;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding-bottom: 10px;
+}
+
+
+
+#MainTittle-UbiCitas h2{
+    font-weight: bolder;   
+    color: #fff !important;
+} 
+
+.tooltip-info {
+  position: relative;
+  display: inline-block;
+}
+  
+  .tooltip-info .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    top: -40px; /* Posiciona el tooltip encima del bot贸n */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+  .tooltip-info .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+}
+.tooltip-info:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}-------- CSS Checkbox -------------------------- */
+
+  .select-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Estilo del checkbox cuando est谩 marcado */
+.select-checkbox:checked {
+    background-color: rgb(25,135,84);
+    border-color: #000;
+}
+
+/* Estilo de la marca de verificaci贸n */
+.select-checkbox:checked::after {
+    content: '\2713'; /* Car谩cter Unicode de marca de verificaci贸n */
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    top: -2px;
+    left: 2px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+  /* ----------- FIN ESTILO CSS Checkbox --------------- */
+
+  /* ----------------- CSS MODAL ----------------------- */
+
+  .modal-body, .modal-footer{
+    background-color: #fff;
+    padding: 20px;
+   
+   border-radius: 5px;
+  }
+
+  /* Tabla */
+.table thead {
+  background-color: #006941;
+  color: white;
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+
+/* Botones del modal */
+.btn-outline-danger, .btn-success {
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 8px 15px;
+  
+}
+
+.btn-outline-danger i, .btn-success i {
+  margin-right: 5px;
+}
+
+.btn-close:hover {
+  background-color: #f8d7da;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+  .modal-xl {
+    max-width: 95%;
+  }
+
+  .btn-outline-danger, .btn-success {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+}
+
+
+/* aqui llego el cambioa arriba  */
+
+
+
+/* Bot贸n de cierre */
+.btn-close {
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  transition: 0.3s;
+}
+
+  .modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+  }
+
+  h5{
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: 15px;
+  }
+
+  .personaId,.persona{
+    color: #006941;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+
+  #success, #abrirModal, button[name="modificar"]{
+    border: 2px solid #006941;
+    cursor: pointer;
+    color: rgb(12, 36, 22);
+    transition: background-color 0.3s, color 0.3;
+    border-radius: 4px;
+  }
+
+  button[name="modificar"]:hover{
+    background-color: lightgray;
+    border-color: #000;
+  }
+
+  .modal-body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  button[name="modificar"]:focus, button[name="modificar"]:active{
+    border-color: #000;
+    background-color: white;
+    color: #000;
+    outline: none;
+   
+  }
+  
+
+  .modificar-icon {
+    color: #000; /* Cambia el color al que desees */
+  }
+
+
+  .modal-footer{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    /* aqui se agg esto */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 55px;
+  }
+   /* ----------------- CSS MODAL ----------------------- */
+
+  @media (max-width: 575.98px) {
+    .modal-xl {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .modal-xl {
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .modal-xl {
+      max-width: 70%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .modal-xl {
+      max-width: 60%;
+    }
+  }
+
+/* <!-- form verificar ceedula--> */
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.error-input {
+  animation: shake 0.3s ease-in-out;
+  border: 2px solid red !important;
+  background-color: #ffdddd; /* Fondo rojo claro */
+  color: red; /* Texto rojo */
+}
+
+.error-input::placeholder {
+  color: darkred; /* Color del placeholder en rojo oscuro */
+}
+
+.verificar-btn {
+  background-color: #030e09;
+  color: white;
+  border: none;
+}
+
+.verificar-btn:hover {
+  background-color: #010a07;
+}
+  
+  #TablaIncapacidades th, 
+#TablaIncapacidades td {
+    padding: 50px 30px; /* Aumenta el espacio interno */
+    width: 180px;
+    height: 30px;
+}
+
+.modal-body {
+  max-width: 190%; /* Limita el ancho del modal */
+  width: 100%; /* Se ajusta al tama帽o disponible */
+  margin: auto; /* Centra el contenido */
+}
+
+
+
+
+
+
+
+
+.is-invalid {
+  border: 2px solid red !important;
+  background-color: #ffe6e6;
+}
+
+
+
+
+
+
+/* estilos de los checkbox */
+
+#TablaIncapacidades input[type=checkbox] {
+  transform: scale(1.5); /* Cambia el tama駉, 1.5 es un 50% m醩 grande */
+  width: 20px;   /* Ancho personalizado opcional */
+  height: 20px;  /* Alto personalizado opcional */
+  cursor: pointer; /* Hace que el cursor sea tipo "mano" */
+}
+.modal-body {
+  max-width: 120%; /* Limita el ancho del modal */
+  width: 100%; /* Se ajusta al tama駉 disponible */
+  margin: auto; /* Centra el contenido */
+  accent-color: #37d410;
+}
+
+
+
+
+
+
+
+
+/* esto no solo es de  prueba revisar  */
+
+
+#TablaIncapacidades {
+  border-collapse: collapse; /* Asegura que las celdas no se superpongan */
+  width: 100%; /* Ocupar todo el ancho disponible */
+}
+
+#TablaIncapacidades th, 
+#TablaIncapacidades td {
+  border-radius: 1.5px;
+  border: 1px solid black; /* Bordes entre celdas */
+  padding: 30px; /* Espaciado interno */
+  text-align: center; /* Centra el texto */
+  width: 180px;
+  width-space: normal;
+}
+
+#TablaIncapacidades th {
+  background-color: rgb(29, 151, 78); /* Color de encabezado */
+  color: white; /* Letras blancas */
+}

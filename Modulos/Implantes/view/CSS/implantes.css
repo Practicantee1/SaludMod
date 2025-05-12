@@ -1,0 +1,131 @@
+
+
+  /* ----------- FIN ESTILO CSS Checkbox --------------- */
+
+  /* ----------------- CSS MODAL ----------------------- */
+
+  .modal-body, .modal-footer{
+    background-color: #fff;
+  }
+
+  .modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+  }
+
+  h5{
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: 15px;
+  }
+
+  .personaId,.persona{
+    color: #006941;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+
+  #success, #abrirModal, button[name="modificar"]{
+    border: 2px solid #000;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.3s, color 0.3;
+  }
+
+  button[name="modificar"]:hover{
+    background-color: lightgray;
+    border-color: #000;
+  }
+
+  .modal-body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  button[name="modificar"]:focus, button[name="modificar"]:active{
+    border-color: #000;
+    background-color: white;
+    color: #000;
+    outline: none;
+  }
+  
+
+  .modificar-icon {
+    color: #000; /* Cambia el color al que desees */
+  }
+
+
+  .modal-footer{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+   /* ----------------- CSS MODAL ----------------------- */
+
+  @media (max-width: 575.98px) {
+    .modal-xl {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .modal-xl {
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .modal-xl {
+      max-width: 70%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .modal-xl {
+      max-width: 60%;
+    }
+  }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex: 1 1 200px; /* Crece, encoge, tamaño base */
+    margin: 10px;
+    padding: 20px;
+    background-color: lightgray;
+}
+
+#loadModalButton{
+  background-color: #006941 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  font-size: 12px;
+  
+}
+
+#loadModalButton:hover{
+  background-color: #fff !important;
+  color: #006941 !important;
+  border: 3px solid #006941 !important;
+}
+
+#loadModalButtonCerrar{
+  background-color: red !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  font-size: 12px;
+  
+}
+
+#loadModalButtonCerrar:hover{
+  background-color: #fff !important;
+  color: red !important;
+  border: 3px solid red !important;
+}
+
+
+
+

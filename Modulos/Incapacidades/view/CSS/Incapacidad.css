@@ -1,0 +1,132 @@
+.card-header{
+    padding-top: 0;
+}
+
+.custom-swal-Incapacidad-popup{
+    color: #ffdf0c; /* Font color */
+    background-color: #fff; /* Background color */
+    border: 5px solid #006941;
+}
+
+.custom-swal-Incapacidad-Tittle{
+    font-size: 35px;
+    color: #000; /* Font color */
+}
+
+.custom-swal-Incapacidad-Content{
+    font-size: 20px;
+    color: #000; /* Font color */
+}
+
+.custom-swal-Incapacidad-ConfirmBtn{
+    background-color: #006941 !important;
+    color: #fff !important;
+    border: 5px solid #fff !important;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.custom-swal-Incapacidad-ConfirmBtn:hover{
+    background-color: #fff !important;
+    color: #006941 !important;
+    border: 5px solid #006941 !important;
+    box-shadow: 0 0 8px #000;
+    transition: all .3s;
+}
+
+#BuscarIncapacidad{
+    background-color: #006941 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+    font-weight: 600;
+    bottom: 0;
+    position: absolute;
+}
+
+#BuscarIncapacidad:hover{
+    background-color: #fff !important;
+    color: #006941 !important;
+    border: 3px solid #006941 !important;
+}
+
+.row-Incapacidad{
+    margin-top: -10px;
+}
+
+.titles-Incapacidad{
+    margin-top: -10px;
+}
+
+.text-divider-Incapacidad{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+
+}
+
+.text-divider-Incapacidad span{
+    background-color: #f7f7f7; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Incapacidad .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-Incapacidad:before{ 
+    content: " "; 
+    display: block; 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+#RazonContainer{
+    max-width: 50% !important;
+    z-index: 2;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: #f0f0f0; 
+    padding: 0; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+#BannerRazon{
+    margin-bottom: 10px;
+}
+
+#TextRazon{
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+#BannerRazon .col H2{
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #3f8755;
+}
+
+#ButtonsRazon{
+    margin-bottom: 15px;
+}
+
+#MainTittle-Incapacidad{
+    background-color: #006941;
+    width: 70%;
+    margin: auto;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-bottom: 10px;
+}
+
+#MainTittle-Incapacidad h2{
+    font-weight: bolder;
+    color: #fff !important;
+}

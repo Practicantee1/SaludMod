@@ -1,0 +1,77 @@
+.posiciones{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido{
+    display: flex;
+    flex-direction: column;
+}
+
+.tbl-ranking{
+    width: 100%;
+    text-align: left;
+}
+
+.top-1{
+    color: rgb(194, 165, 0);
+}
+.top-2{
+    color: rgb(155, 155, 155);
+}
+.top-3{
+    color:  rgb(108, 47, 1);
+}
+
+.btn-ranking{
+    padding: 10px;
+    width: 100px;
+    border: none;
+    background-color: #48e;
+    color: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 4px #000;
+    transition: background-color 0.2s ease-in;
+}
+
+.reves{
+    position: relative;
+    left: 43%;
+}
+
+.btn-ranking:hover{
+    background-color: rgb(0, 39, 99);
+    cursor: pointer;
+}
+
+
+.card__back, .card__front{
+    backface-visibility: hidden ;
+    transition:transform 1s;
+    background-color: #fff;
+    border-radius: 8px ;
+    padding: 10px;
+    height: 100%;
+}
+
+.carta.flipped .card__front {
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+.carta.flipped .card__back {
+    transform: perspective(1200px) rotateY(360deg);
+}
+
+.card__back{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    transform: perspective(900px) rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content:center;
+}

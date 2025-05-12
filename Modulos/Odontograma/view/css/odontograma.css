@@ -1,0 +1,254 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.card-header{
+    padding-top: 0;
+}
+
+.text-divider-Epid{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 23px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+
+
+.text-divider-Epid span{
+    background-color:#ECEEF1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Epid .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-Epid:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140%;  /* Asegura que el contenedor ocupe el 100% del ancho disponible */
+    max-width: none; /* Elimina cualquier restricción de ancho máximo */
+}
+
+.card {
+    margin: auto;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 20px;
+}
+
+.odontogram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.tooth-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.tooth {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 3px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.tooth:hover {
+    background-color: #d0d0d0;
+    transform: scale(1.1);
+}
+
+.tooth-number {
+    font-size: 10px;
+    color: #555;
+}
+
+.tooth-symbol {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.treatment-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.treatment-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.treatment-button:hover {
+    background-color: #f0f0f0;
+}
+
+.treatment-symbol {
+    margin-right: 8px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.treatment-button.active {
+    border-color: #007bff;
+    background-color: #d9eaff;
+}
+
+.legend {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.legend-symbol {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.save-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.alert {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.well {
+    
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 23px;
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    font-size: 16px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+@media (max-width: 1300px) {
+    .tooth {
+        max-width: 40px; /* Reducir el tamaño de cada diente en pantallas pequeñas */
+        padding: 5px;
+    }
+
+    .treatment-button {
+        padding: 5px 10px;
+    }
+
+    .card {
+        width: 100% ;
+    }
+}

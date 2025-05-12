@@ -1,0 +1,562 @@
+label{
+    font-size: 13px;
+}
+
+.well h3{
+    text-align: center;
+}
+
+.flex {
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% 18%;
+    justify-content: center;
+    gap: 10px; 
+}
+
+.grid-row{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.clsDemograficos{
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+#ingreso1-session1 {
+    position: sticky;
+    top: 70px;
+    z-index: 50;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    opacity: 1;
+}
+
+.clsInput{
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+    border: .5px solid #b1b1b1;
+    background-color: #ffffff;
+    outline: none;
+    font-size: 13px;
+    height: 35px;
+    color: #000;
+}
+
+.inputAntropometria{
+    border: .5px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.antropometria{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    width: 100%;
+    justify-content: center;
+}
+.antropometria-1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.antropometria-2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.antropometria-3{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.antropometria-4{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input-box{
+    display: grid;
+    grid-template-columns: 65% 35%;
+    margin: 10px 0;
+    align-items: center;
+}
+.input-box2{
+    display: grid;
+    grid-template-columns: 65% 17% 17%;
+    margin: 10px 0;
+    align-items: center;
+}
+
+label{
+    margin: 0;
+}
+
+.select{
+    background-color: #eee !important;
+    border-radius: 4px !important;
+    border: 1px solid #333 !important;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(7, 14%);
+    margin-bottom: 25px;
+}
+
+.grid input[type="text"]{
+    width: 90%;
+}
+
+.div-check{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+div > .clsInput{
+    width: 100%;
+}
+
+.div-Cantidad > .clsInput{
+    padding: 1px 2px;
+    height: 30px;
+}
+
+.lb-inicio{
+    width: 100%;
+    color: #555;
+    font-weight: 200;
+}
+
+.div-input{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.adecuacion{
+    display: flex;
+    flex-direction:column;
+}
+.adecuacion-content{
+    display: flex;
+    flex-direction:row;
+}
+
+.div-observaciones .clsInput{
+    width: 97%;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.adecuacion > .input-box .clsInput{
+    width: 100%;
+}
+
+.inputClasi{
+    grid-column: span 2;
+}
+
+.porcentajeAdecuacion{
+    text-align: center;
+} 
+
+/* BARRA */
+
+
+/* .stepper-container {
+    position: sticky;
+    top: 70px;
+    background-color: #fff;
+    width: 100%;
+    height: 50px;
+} */
+
+.stepper-container {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.stepper-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    flex-shrink: 0;
+}
+
+.stepper-circle.active {
+    background-color: #066E45;
+}
+
+.stepper-line {
+    flex-grow: 1;
+    height: 4px;
+    background-color: #ccc;
+    margin: 0;
+}
+/* ##### */
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 25px 0;
+}
+
+.section-title{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+h4{
+    width: 100%;
+    text-align: center;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 5px;
+}
+
+.section-title .line {
+    width: 30px;
+    height: 2px;
+    background-color: #006941;
+    display: block;
+}
+
+.section-title .text {
+    color: #006941;
+    margin: 0;
+}
+.left > h4{
+    background-color: #ffffff;
+    border: 1px solid #5DCDA2;
+    width: 90%;
+    border-radius: 10px;
+}
+
+/* Específico para el título derecho */
+.section-title.right {
+    color: #006941;
+}
+
+.div-input .clsInput{
+    width: 100%;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+#tbl-Inicio{
+    margin-top: 20px;
+    width: 80%;
+    border: 0.5px solid #000000;
+}
+
+.tbl-Container{
+    display: flex;
+    justify-content: center;
+}
+
+#tbl-Inicio th{
+    background-color: #93C020;
+    border: 0.5px solid #444;
+    color: #fff;
+}
+
+#tbl-Inicio td{
+    border: 0.5px solid #444;
+}
+
+.blanco{
+    background-color: #ffffff !important;
+}
+
+#idPeriodoEvaluado{
+    grid-column: span 2;
+}
+
+.text-area{
+    resize: none;
+    height: 50px;
+    width: 100%;
+}
+
+.input-area{
+    display:flex;
+    margin: 10px 0 20px 0;
+}
+
+.examenes1-2, .examenes3-4{
+    display: flex;
+    flex-direction: row;
+}
+
+.nutricionales,.F-Renal, .ionograma, .F-Hepatica{
+    width: 100%;
+}
+
+.tamizaje input{
+    width: 100%;
+}
+
+.tamizaje label{
+    text-align: center;
+}
+
+.tamizaje{
+    display: grid;
+    gap: 5px;
+    justify-content: center;
+    grid-template-columns: repeat(2,1fr);
+    background-color: #5DCDA2;
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.diagnostico{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.diagnostico1, .diagnostico2{
+    width: 100%;
+}
+
+.btn-si{
+    background-color: #fff;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 40%;
+    border: 1px solid #888;
+    transition: all 0.4s;
+}
+
+.btn-si:hover{
+    background-color: #aaa;
+}
+
+.btn-no{
+    background-color: #fff;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 40%;
+    transform: translateX(-10px);
+    border: 1px solid #888;
+    transition: all 0.4s;
+}
+.btn-no:hover{
+    background-color: #aaa;
+}
+/* Sesión activa */
+/* .session.active {
+    opacity: 1;
+    transform: translateX(0);
+    display: block;
+    }
+    
+    .session.fade-out {
+        opacity: 0;
+        transform: translateX(-100%);
+        } */
+  
+.div-container_terapia{
+    display: flex;
+}
+
+.div-2{
+    width: 50%;
+}
+
+.doble-titulo{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.contenedor {
+    max-width: 120em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contenedor .ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contenedor .li {
+    list-style: none;
+    padding: 1em;
+    margin: 0 2em 0 0;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.contenedor .li.activo {
+    background-color: #066E45;
+    color: white;
+}
+
+.contenedor .subcontenedor {
+    margin-top: 0;
+}
+
+.contenedor .bloque {
+    display: none; /* Oculta por defecto */
+    padding: 1em;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor .bloque.activo {
+    display: block; /* Muestra el bloque activo */
+}
+
+th{
+    text-wrap: wrap;
+    box-sizing: border-box;
+    text-wrap-style: pretty;
+}
+table{
+    width: 100%;
+}
+
+.btnNuevoExamen, .btn-eliminar{
+    border: none;
+    border-radius: 50%;
+    background-color: #066E45;
+    color:#fff;
+    width: 30px;
+    height: 30px;
+}
+
+.btn-eliminar{
+    background-color: #ff0000;
+}
+
+.td-grid > input{
+    width: 90%;
+}
+
+.td-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.clsInputDemograficos{
+    width: 100%;
+    text-align: left;
+}
+.tbl-Demograficos{
+    width: 98%;
+}
+
+.demo-titulo{
+    color:#066E45;
+    font-weight: bold;
+}
+
+.div-demograficos{
+    display: inline;
+    font-size: 13px;
+}
+
+.div-demograficos label{
+    color: #222;
+}
+
+.well{
+    display: flex;
+    flex-direction: column;
+}
+
+.antropometria-1, .glim{
+    background-color: #5dcda2;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+
+.antro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.glimm{
+    font-size: 16px;
+}
+
+.tbl-SeguimientoAntropometria {
+    border-collapse: separate; /* Necesario para bordes redondeados */
+    border-spacing: 0; /* Para que las celdas estén juntas */
+    border: 1px solid #ccc; /* Borde externo de la tabla */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Para recortar los bordes si el contenido se desborda */
+}
+
+.tbl-SeguimientoAntropometria th, .tbl-SeguimientoAntropometria td {
+    border: 1px solid #ccc; /* Bordes de las celdas */
+
+    padding: 10px;
+}
+
+.tbl-SeguimientoAntropometria th {
+    background-color: #066E45;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.pesoEstimado{
+    display: grid;
+    grid-template-columns: 2fr repeat(3,1fr);
+}
+
+.main-footer{
+    position: absolute !important;
+}
+
+.mostrarMINMAX{
+    display: none;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    /* transition: .5s all; */
+}
+
+.oscuro{
+    background-color: #ccc;
+}
+
+.ingesta2{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}

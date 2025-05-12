@@ -1,0 +1,8 @@
+{
+    "require": {
+        "setasign/fpdf": "^1.8",
+        "dompdf/dompdf": "^2.0",
+        "google/apiclient": "^2.15",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

@@ -1,0 +1,208 @@
+.search {
+    border: 1px solid #ccc; 
+    border-radius: 20px; 
+    padding: 8px 12px;
+}
+#tablaMedidas, #tablaPIT , #tablaImagenes, #tablaEstudiosEndoscopicos{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tab-container {
+    display: flex;
+    cursor: pointer;
+}
+.tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    margin-right: 5px;
+}
+.tab.active {
+    background-color: #ffffff94;
+    font-weight: bold;
+    border-top: 2px solid #006941;
+}
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: -1px;
+}
+.tab-content.active {
+    display: block;
+}
+th, td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #e0e0e0;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    font-weight: bold;
+}
+td {
+    background-color: #f9f9f9;
+}
+.text-divider-Epid{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 23px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+.text-divider-Epid span{
+    background-color:#eceef1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Epid .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+td:first-child {
+    position: sticky;
+    left: 0; /* Mantener sticky en la primera columna */
+    background-color: #e0e0e0; 
+    z-index: 1;
+}
+#registroTabla{
+    width: auto;
+    border-collapse: collapse;
+}
+.table-container {
+    width: auto;
+    max-width: 3100%; 
+    overflow-x: auto; /* Permite el desplazamiento vertical */
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+.exam-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: space-between; /* Space between items */
+}
+#gases{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.gases-label {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.exam-item {
+    flex: 1 1 calc(24% - 10px); /* Four items per row with space */
+    margin: 5px; /* Adjust as needed for spacing */
+    padding: 10px; /* Inner padding */
+    border: 1px solid #e0e0e0; /* Border around each item */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center; /* Center the label */
+    background-color: #f9f9f9; /* Light background color */
+    color:#3F8755;
+    justify-content: center;
+}
+
+.value-input {
+    width: 100%; /* Full width for the input */
+    padding: 5px; /* Padding for input */
+    margin-bottom: 5px; /* Space below input */
+    border: 1px solid #ccc; /* Border for the input */
+    border-radius: 4px; /* Rounded corners */
+}
+.input-group {
+    display: flex;
+    flex-direction: column; /* Pone el label debajo del input */
+    align-items: center; /* Centra el label con respecto al input */
+}
+.text-divider-Epid{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 23px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+.card-header{
+    padding-top: 0;
+}
+
+.card {
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 20px;
+}
+.text-divider-Epid span{
+    background-color:#eceef1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Epid .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-Epid:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+.sub-header {
+    background-color: #3F8755;
+    color: white;
+    font-size: 12px;
+    padding: 8px;
+    text-align: center;
+}
+
+.left-align {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    padding: 10px;
+    margin: 2px;
+    font-size: 12px;
+    z-index: 10;
+    color: white;
+    min-width: 350px; /* Cambia este valor según necesites */
+    word-wrap: break-word; /* Para asegurar que el texto largo se ajuste a la celda */
+}
+
+#MainTittle-Ver {
+    background-color: #006941;
+    font-size: 12px;
+    width: 70%;
+    margin: auto;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-bottom: 10px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.well {
+    
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.col {
+    flex: 1;
+    padding: 0 10px;
+}

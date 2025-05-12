@@ -1,0 +1,193 @@
+.div-check1{
+    display: flex;
+    flex-direction: column;
+}
+.div-check{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.div-check div{
+    margin:10px ;
+}
+
+.check-1{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stepper-container {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin-left: 80%;
+    margin-top: 5%;
+}
+
+.stepper-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    flex-shrink: 0;
+}
+
+.stepper-circle.active {
+    background-color: #066E45;
+}
+
+.stepper-line {
+    flex-grow: 1;
+    height: 4px;
+    background-color: #ccc;
+    margin: 0;
+}
+/* ##### */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 25px 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title .line {
+    width: 30px;
+    height: 2px;
+    background-color: #006941;
+    display: block;
+}
+
+.section-title .text {
+    color: #006941;
+    margin: 0;
+}
+
+/* Específico para el título derecho */
+.section-title.right {
+    color: #006941;
+}
+
+
+.div-input{
+    display:flex;
+    justify-content: left;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+.clsInput{
+    width: 90%;
+    padding: 5px;
+    border: .5px solid #aaa;
+    background-color: #eee;
+    border-radius: 4px;
+    outline: none;
+}
+
+.btn-siguiente{
+    display: flex;
+    justify-content: right;
+    margin: 20px;
+}
+
+label{
+    color: #444 !important;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: auto auto; 
+    gap: 10px; 
+}
+
+.grid2 {
+    margin-top:20px ;
+    display: grid;
+    grid-template-columns:  repeat(3, 1fr); 
+    gap: 10px; 
+}
+
+.div-observaciones{
+    margin-top: 20px;
+}
+
+.obs{
+    resize: none;
+    height: 90px;
+    width: 97%;
+}
+
+.last{
+    grid-column: span 3;
+}
+
+.flex-boton{
+    margin: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.grid3{
+    display: grid;
+    grid-template-columns: 1fr ;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    margin-left: 40%;
+}
+
+.div-indi{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.div-container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+
+.area-container{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.area-container label{
+    width: 90%;
+    text-align: left;
+}
+
+#txtObservaciones{
+    resize: none;
+    width: 90%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.flex-boton{
+    margin: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.flex-paginacion{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}

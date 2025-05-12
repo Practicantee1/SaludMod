@@ -1,0 +1,83 @@
+input.border-success, select.border-success {
+    border-color: #021306 !important; /* Borde verde */
+    border-radius: 4px;
+  }
+  
+  input.border-danger, select.border-danger {
+    border-color: #000000 !important; /* Borde rojo */
+  }
+  
+  input, select {
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+  }
+  
+  #modalRestricciones{
+   
+    border-radius: 4px;
+
+
+  }
+
+  /* Estilos personalizados para el modal */
+  .custom-modal {
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Bordes redondeados y mejor apariencia para los inputs */
+.form-control,
+.form-select {
+    border-radius: 10px;
+}
+
+/* Mejor espaciado interno */
+.modal-body {
+    padding: 20px;
+}
+
+/* Estilo mÃ¡s elegante para los botones */
+.btn-success {
+    background-color: #28a745;
+    border-color: #218838;
+    border-radius: 10px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #c82333;
+    border-radius: 10px;
+}
+
+/* Estilo del encabezado */
+.modal-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Asegurar que todos los inputs tengan la misma altura */
+.form-control, .form-select {
+  height: 38px; /* Ajusta la altura según necesites */
+}
+
+/* Asegurar que las etiquetas estén alineadas uniformemente */
+.form-label {
+  font-weight: bold; /* Opcional: destacar etiquetas */
+  display: flex;
+  align-items: center;
+  min-height: 38px; /* Mismo alto que los inputs */
+}
+
+/* Ajustar espaciado entre filas */
+.row {
+  margin-bottom: 10px;
+}
+
+
+#tipoDocumentoAcomp{
+ position: relative;
+  top: 181px; /
+
+}

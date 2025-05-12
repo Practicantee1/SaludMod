@@ -1,0 +1,298 @@
+body{font-family: Arial, Arial, Helvetica, sans-serif;
+    /* background-image: url("http://localhost/programas-educativos/image/bottom_san_vicente_2.jpg"); */
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+
+}
+
+.text-divider-Epid{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 23px;   /*Modificamos el el tamaÃ±o de la letra para darle resposividad al texto en vista mÃ³vil*/
+
+}
+
+
+.text-divider-Epid span{
+    background-color:#ECEEF1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Epid .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+
+.text-divider-Epid:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+
+
+
+.item {
+    border-collapse: collapse;
+    background-color: #97BF0D;
+    height: 5px;
+    width:5px;
+    border:none;
+    margin:2px;
+    color:#fff;
+    line-height:50px;
+    border: 1px solid #007048;
+}
+
+
+td img{
+display: block;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+.boton-con-imagen {
+    border-collapse: collapse;
+    background-color:#007048;
+    height: 5px;
+    width: 5px;
+    border:1px solid #007048;
+    margin:2px;
+    color:#fff;
+
+}
+
+.scrollable-content {
+    overflow-y: auto; /* Habilitar el desplazamiento vertical */
+    max-height: 100%; /* Establecer la altura mÃ¡xima para que el contenido sea desplazable */
+    width: 80%; /* Ancho deseado para el contenido */
+    background-color: #7EBCA9;
+    border-radius: 5%;
+    padding: 20px; /* Espacio interior para el contenido */
+}
+
+.myContainer{
+    overflow:auto;
+    margin: auto;
+    
+}
+
+div.myContainer div {
+    float:left;
+}
+
+h2{
+    text-align: center;
+    color:#007048;
+}
+
+#th-tblsatisfaccion{
+    background-color: #ECEEF1;
+}
+
+
+#customer-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#customer-table tr:hover {background-color: #ddd;}
+
+#customer-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color:#007048 ;
+    color: white;
+    position: sticky;
+    top:0;
+}
+#customer-table{
+    width:100%;
+    background-color: white;
+    margin-left: 2%;
+    
+}
+
+
+footer{
+    background-color: #006941;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  position: fixed; /*footer fijo abajo*/
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.button{
+  background-color: #007048; /* Color green para el botÃ³n */
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 1px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+  padding:3px 15px;
+}
+
+#content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#selecciones{
+    width: 100%;
+
+}
+
+td, tr{
+    border: none;
+}
+
+#table-answer{
+    width: 80%;
+}
+
+ #table-answer tr th{
+    border: none;
+} 
+
+#tabla{
+    max-height: 600px; /* Ajusta la altura mÃ¡xima segÃºn tus necesidades */
+    overflow-y: auto; /* Habilita la barra de desplazamiento vertical */
+    border: 1px solid #ddd; /* Opcional: agrega un borde alrededor del contenedor */
+    overflow-x: hidden;
+}
+
+#content-tabla{
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    height:600px;
+}
+
+#tabla th{
+   top: -13px; 
+}
+
+#cont-sugerencias{
+    margin-right: 30px;
+}
+
+#cont-sugerencias, #tabla{
+    padding: 12px;
+}
+
+#btn-guardar{
+    width: 150px;
+}
+
+#btn-borrar{
+    width: 150px;
+}
+
+.btn-modal {
+    background-color: #007048; 
+    width:300px;
+    margin-top:37px; 
+    border-radius:5px; 
+    padding: 6px 12px; 
+    color:#ffffff; 
+    border:none;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.btn-modal:hover {
+    box-shadow: 0 0 8px #000;
+    transition-duration: .3s;
+}
+
+
+
+.contenido-modal { 
+    box-sizing: border-box;
+    height: 300px;
+    display: flex;
+    flex-direction: column; 
+    gap: 0px; 
+    justify-content: center;
+    align-items:center ;
+}
+
+
+.input-modal {
+    width: 100%;
+    padding: 4px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: .5px solid #7d7d7dac;
+    border-radius: 4px;
+}
+
+#div_cerrarmodal{
+    display: flex; 
+    justify-content: flex-end; 
+}
+
+
+.fondo-opaco {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con 50% de opacidad */
+    z-index: 5; /* Asegura que el fondo estÃ© encima de otros elementos */
+}
+
+#surgerencias{
+    border: .5px solid #CED4DA;
+    border-radius: 4px;
+
+}
+
+#modal-excel {
+    margin: auto;
+    width: 450px;
+    height: 300px;
+    background-color: #fff;
+    z-index: 10;
+    padding: 10px; 
+    box-sizing: border-box;
+    border: 3px solid #28A745;
+}
+
+#fecha_final, #fecha_inicial{
+    max-width: 200px ;
+    margin-left: 20px;
+}
+
+.div-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a {
+    float: none;
+    display: block;
+    }
+}
