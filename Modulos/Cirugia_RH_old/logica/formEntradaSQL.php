@@ -13,7 +13,7 @@ if (isset($_POST['episodio'])) {
     
     // Validar si el episodio ya existe
     $checkEpisodioQuery = "SELECT COUNT(*) as count 
-                           FROM tbl_paciente_formulario_cirugia 
+                        FROM tbl_paciente_formulario_cirugia 
                            WHERE (episodio = '$episodio' OR  episodio = SUBSTRING('$episodio', 4)) 
                            AND (entrada = 'PENDIENTE' 
                            OR pausa = 'PENDIENTE' 
@@ -123,7 +123,7 @@ if (isset($_POST['episodio'])) {
                                                                   '$procedimiento')"; 
                     
                     if ($conexion->query($query_procedimiento)) {
-                        echo json_encode(['success' => 'Datos guardados correctamente.', "paciente" => $idPaciente]);
+                        echo json_encode(['success' => 'Datos guardados correctamente.']);
                     } else {
                         echo json_encode(['error' => "Error en la ejecución de la consulta de diagnóstico: " . $conexion->error]);
                     }

@@ -1,0 +1,59 @@
+/* Ajustar la tabla para que sea más legible */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    table-layout: auto; /* Permitir que las celdas se ajusten automáticamente */
+}
+
+/* Encabezados */
+.table thead th {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap; /* Evita que los títulos hagan salto de línea */
+    height: auto; /* Permite que la altura se ajuste */
+}
+
+/* Celdas de datos */
+.table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Alternar colores de filas */
+.table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Hacer la tabla responsive */
+.table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .table {
+        font-size: 10px;
+    }
+
+    /* Ocultar ciertas columnas en móviles */
+    .table thead th:nth-child(n+6),
+    .table tbody td:nth-child(n+6) {
+        display: none;
+    }
+
+    .table-responsive {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px;
+    }
+}

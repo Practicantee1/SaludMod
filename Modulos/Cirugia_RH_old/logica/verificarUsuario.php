@@ -20,23 +20,18 @@ if (isset($_POST['login']) && isset($_POST['clave'])) {
     // Verificar si la consulta fue exitosa y si se encontró el usuario
     if ($resultado && $resultado->num_rows > 0) {
         // Usuario autenticado correctamente
-        // Obtener el nombre y el número de documento del usuario 
+        // Obtener el nombre y el número de documento del usuario
         $datosUsuario = $resultado->fetch_assoc(); // Obtener datos del usuario
-        $id_usuario = $datosUsuario['idusuario'];
         $nombre = $datosUsuario['nombre']; // Cambia 'nombre' al nombre real de la columna
         $num_documento = $datosUsuario['num_documento']; // Cambia 'num_documento' al nombre real de la columna
         $cargo = $datosUsuario['cargo'];
-        $idusuario = $datosUsuario['idusuario'];
-
-
         // Respuesta de éxito
         echo json_encode([
             "success" => true,
             "message" => "Usuario autenticado correctamente",
             "nombre" => $nombre,
             "num_documento" => $num_documento,
-            "cargo" => $cargo,
-            "id_usuario" => $id_usuario
+            "cargo" => $cargo
         ]);
     } else {
         // Si el usuario no fue encontrado, puedes hacer otra consulta para buscarlo

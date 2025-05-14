@@ -22,7 +22,6 @@ $(document).ready(function() {
 
 
 function consultar(id_Paciente) { // Cambiado a 'idPaciente'
-    
     $.ajax({
         type: "POST",
         url: '../logica/completarSQL.php',
@@ -33,7 +32,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                 if (response.length > 0) {
                     // Suponiendo que s贸lo necesitas el primer registro
                     var item = response[0]; // Toma el primer elemento del array
-                    console.log(item);
+
                     // Ocultar botones y bloqueo de observaciones
 
                     if (item.Numero_identificacion === null || item.Numero_identificacion === undefined) {
@@ -57,9 +56,9 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     } else {
                         document.getElementById('guardarSalida').style.display = 'none'; // Oculta el bot贸n
                         document.getElementById('idObservacionesSalida').disabled = true;
-                        document.getElementById('guardarFirmaSalida').removeAttribute('disabled');  
+                        document.getElementById('guardarFirmaSalida').removeAttribute('disabled');   
                     }
-                    console.log(response);
+
                     // Asignar valores a los campos del formulario
                     $('#episodio').val(item.Episodio);
                     $('#idNumeroDocumento').val(item.Numero_identificacion);
@@ -74,8 +73,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     $('#id_NombrIdentificacion').val(item.Nombre_identificacion);
                     $('#id_intrumental').val(item.Instrumental);
                     $('#id_AlergiaReporta').val(item.Alergia_reporta);
-                    console.log(item.AlergiasReportadasIndicacion);
-                    if(item.AlergiasReportadasIndicacion !== "" && item.AlergiasReportadasIndicacion !== null){
+		    if(item.AlergiasReportadasIndicacion !== "" && item.AlergiasReportadasIndicacion !== null){
                         $('#textoarea_alergia_completar').val(item.AlergiasReportadasIndicacion);
                     }else{
                         $("#texto_alergia_completar").attr("hidden", true);
@@ -85,7 +83,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     $('#idSeleccione').val(item.Seleccione);
                     $('#id_Verificacion').val(item.Verificacion);
                     $('#id_Confirmacion').val(item.Confirmacion);
-                    $("#id_esterilidad").val(item.esterilidad);
+		    $("#id_esterilidad").val(item.esterilidad);
                     $('#id_Monitoreo').val(item.Monitoreo);
                     $('#id_Perdida').val(item.Perdida);
                     $('#id_Reserva').val(item.Reserva);
@@ -93,8 +91,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     $('#id_Estudios').val(item.Estudios);
                     $('#id_Via').val(item.Via);
                     $('#id_Antibiotico').val(item.Antibiotico);
-                    console.log(item.AntibioticosDefinidos);
-                    if(item.AntibioticosDefinidos !== "" && item.AntibioticosDefinidos !== null){
+		    if(item.AntibioticosDefinidos !== "" && item.AntibioticosDefinidos !== null){
                         $('#textoarea_antibiotico_completar').val(item.AntibioticosDefinidos); 
                     }else{
                         $("#texto_antibiotico_completar").attr("hidden", true);
@@ -109,7 +106,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     $('#id_Existen').val(item.Existen);
                     $('#id_Administracion').val(item.Administracion);
                     $('#id_Plan').val(item.Plan);
-                    if(item.textoPlan !== "" && item.textoPlan !== null){
+		    if(item.textoPlan !== "" && item.textoPlan !== null){
                         $("#textoarea_Plan").val(item.textoPlan);
                     }else{
                         $("#texto_Plan_completar").attr("hidden", true);
@@ -129,11 +126,6 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     $('#id_posopetario').val(item.posopetario);
                     $('#id_problemas').val(item.problemas);
                     $('#idObservacionesSalida').val(item.observaciones);
-
-                    const select = document.querySelectorAll(".form-completar");
-                    select.forEach(select => {
-                        select.style.fontWeight  = "bold";
-                    });
                 
                     
                     // L贸gica para habilitar/deshabilitar campos seg煤n los valores
@@ -216,8 +208,6 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                         icon: "error",
                         title: "No se encontr贸 informaci贸n...",
                         text: "No hay registros disponibles",
-			confirmButtomText: "ntendido!",
-			confirmButtomColor: "#066E45"
                     });
                 }
             } else {
@@ -255,3 +245,4 @@ dosis.addEventListener("change", function(e){
         texto.value = "";
     }
 });
+

@@ -22,8 +22,7 @@ if (!isset($_SESSION["nombre"])) {
     if ($_SESSION['completar_procedimiento'] == 1) {
 
 ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>../Modulos/Cirugia_RH/view/CSS/estilos_completar.css">
-    <div class="content-wrapper">
+       <div class="content-wrapper">
     <div id="alertContainer" class="alert" role="alert"></div>
     <!--- Content Header (Page header) ----->
     <div class="container" style="overflow-y: hidden;">
@@ -39,28 +38,26 @@ if (!isset($_SESSION["nombre"])) {
                     <br>
                     <h4 class="form-label text-divider-r"><span class="left-span"></span><span>COMPLETAR FORMULARIOS</span></h4>
                     <br>
-                    <div class="div_contenedor">
-                        <div class="table-responsive"> <!-- Asegúrate de que este div contenga la tabla -->
-                            <table class="table">
-                            <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-center bg-success">Fecha </th>
-                                        <th class="text-center bg-success">Número episodio</th>
-                                        <th class="text-center bg-success">Número documento</th>
-                                        <th class="text-center bg-success">Nombre del paciente</th>
-                                        <th class="text-center bg-success">Primera Pausa</th>
-                                        <th class="text-center bg-success">Segunda Pausa</th>
-                                        <th class="text-center bg-success">Tercera Pausa</th>
-                                        <th class="text-center bg-success">Firma entrada</th>
-                                        <th class="text-center bg-success">Firma Salida</th>
-                                        <th class="text-center bg-success">Continuar</th> <!-- Nueva columna para el botón "Completar" -->
-                                    </tr>
-                                </thead>
-                                <tbody id="registroTablaBody" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left; background-color: #dedede;">
-                                    <!-- Aquí se agregarán las filas dinámicamente -->
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="table-responsive"> <!-- Asegúrate de que este div contenga la tabla -->
+                        <table class="table">
+                        <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center bg-success">Fecha </th>
+                                    <th class="text-center bg-success">Número episodio</th>
+                                    <th class="text-center bg-success">Número documento</th>
+                                    <th class="text-center bg-success">Nombre del paciente</th>
+                                    <th class="text-center bg-success">Primera Pausa</th>
+                                    <th class="text-center bg-success">Segunda Pausa</th>
+                                    <th class="text-center bg-success">Tercera Pausa</th>
+                                    <th class="text-center bg-success">Firma entrada</th>
+                                    <th class="text-center bg-success">Firma Salida</th>
+                                    <th class="text-center bg-success">Continuar</th> <!-- Nueva columna para el botón "Completar" -->
+                                </tr>
+                            </thead>
+                            <tbody id="registroTablaBody" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left; background-color: #dedede;">
+                                <!-- Aquí se agregarán las filas dinámicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

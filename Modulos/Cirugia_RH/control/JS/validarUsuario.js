@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    let paciente = urlParams.get("id_paciente"); 
+    
+
     let filaActual; // Variable para almacenar la referencia de la fila actual
 
     // Manejar el clic en los botones "Agregar" y "Eliminar" para ambos formularios
@@ -10,7 +16,59 @@ document.addEventListener('DOMContentLoaded', function() {
         handleRowActions(event, 'salida');
     });
 
-    function handleRowActions(event, tipo) {
+    async function eliminarFirmar(event){
+        let confirmado = false;
+        let tipo = event.target.getAttribute("data-tipo");
+        console.log(tipo)
+        let fila;
+        if(tipo === "INICIO"){
+            fila = await event.target.closest(".firma-item").querySelector(".documento").dataset.id;
+        }else{
+            console.log("llego aqui", $(event.target).data("tipo"))
+            fila = await event.target.closest(".firmaSalida-item").querySelector(".documento").dataset.id;
+        }
+        
+    
+        let resultado = await Swal.fire({
+            icon: "info",
+            title: "¿Estás seguro de realizar esta acción?",
+            text: "La firma seleccionada será eliminada",
+            showCancelButton: true,
+            confirmButtonColor: "#006941",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "No, cancelar"
+        });
+        let response
+        if(resultado.isConfirmed){
+            response = new Promise(resolve => {
+                $.ajax({
+                    type: "POST",
+                    url: "../logica/eliminarFirmaUsuario.php",
+                    data: { usuario_id: fila, tipo_Firma: tipo, paciente: paciente },
+                    success: function(response) {
+                        resolve(JSON.parse(response));
+                    },
+                });
+            });
+        }
+        confirmado = await response;
+        console.log(confirmado)
+        Swal.fire({
+            icon: confirmado.success ? "success" : "error",
+            text: confirmado.success ? "Firma eliminada correctamente" : confirmado.message,
+            toast: true,
+            timer: 3000,
+            confirmButtonColor: "#006941",
+            position: "bottom-start",
+        });
+
+        
+
+        return confirmado;
+    }
+
+    async function handleRowActions(event, tipo) {
+        
         // Manejar el clic en los botones "Agregar"
         if (event.target.classList.contains('add-row')) {
             // Selecciona la fila a clonar
@@ -37,15 +95,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Manejar el clic en los botones "Eliminar"
         if (event.target.classList.contains('remove-row')) {
-            const fila = event.target.closest('.row.firma-item') || event.target.closest('.row.firmaSalida-item');
-            const container = document.getElementById(tipo === 'entrada' ? 'firmas-container' : 'firmas-container-salida');
-
-            // Verifica si hay más de una fila antes de eliminar
-            if (container.querySelectorAll('.row.firma-item').length > 1 || container.querySelectorAll('.row.firmaSalida-item').length > 1) {
-                fila.remove(); // Eliminar la fila actual
-            } else {
-                // alert('Debes añadir al menos una persona a cargo de la cirugía.'); // Mensaje de advertencia
+            let confirmado;
+            let tipo;
+            let evento;
+            if($(event.target).data("tipo") == "INICIO"){
+                tipo = event.target.closest(".firma-item").querySelector(".nombre").value;
+                evento = ".firma-item";
+            }else{
+                tipo = event.target.closest(".firmaSalida-item").querySelector(".nombre").value
+                evento = ".firmaSalida-item";
             }
+
+            if(tipo === ""){
+                confirmado = true;
+            }else{
+                confirmado  = await eliminarFirmar(event, tipo);
+            }
+            
+            if(confirmado){
+
+                const fila = event.target.closest('.row.firma-item') || event.target.closest('.row.firmaSalida-item');
+                
+                const container = document.getElementById($(event.target).data("tipo") === 'INICIO' ? 'firmas-container' : 'firmas-container-salida');
+                // Verifica si hay más de una fila antes de eliminar
+                if (container.querySelectorAll('.row.firma-item').length > 1 || container.querySelectorAll('.row.firmaSalida-item').length > 1) {
+                    fila.remove(); // Eliminar la fila actual
+                } else {
+                    event.target.closest(evento).querySelector(".cargo").value = "";
+                    event.target.closest(evento).querySelector(".nombre").value = "";
+                    event.target.closest(evento).querySelector(".documento").value = "";
+
+                    const firmarBtn = event.target.closest(evento).querySelector('.validarBtn');
+                    if (firmarBtn) {
+                        firmarBtn.disabled = false; // O firmarBtn.style.display = 'none'; para hacerlo invisible
+                    }
+                }
+            }
+               
         }
 
         // Manejar el clic en los botones "VALIDAR"
@@ -55,65 +141,138 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    async function verificarFirma(usuario, ciruPaciente, tipo){
+        let firma;
+        firma = await new Promise(resolve => {
+            $.ajax({
+                type: "POST",
+                url: "../logica/buscarFirmaUsuario.php",
+                data: {usuario: usuario, ciruPaciente: ciruPaciente, tipo: tipo },
+                success: function(response){
+                    response = JSON.parse(response);
+                    resolve(response.success);
+                }
+            });
+        });
+        console.log(firma);
+        return firma
+    }
+
+    async function ingresarFirmar(usuario, ciruPaciente, tipo){
+        let dato;
+        dato = await new Promise(resolve => {
+            $.ajax({
+                type: "POST",
+                url: "../logica/firmarPausas.php",
+                data: {usuario_id: usuario, paciente_id: ciruPaciente, tipo: tipo},
+                success: function(response){
+                    try{
+                        response = JSON.parse(response);
+                        console.log(response.message);
+                        resolve(response);
+                    }catch(e){
+                        console.log(e)
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.error('Error AJAX:', error);
+                    console.error('Detalles:', xhr.responseText);
+                }
+            });
+        });
+
+        return dato;
+    }
+
+
     // Evento para el botón "Confirmar" en el modal
-    document.getElementById('confirmarBtn').addEventListener('click', function() {
+    document.getElementById('confirmarBtn').addEventListener('click', function(e) {
+        let tipo = e.target.getAttribute("data-firma");
+        let datos;
+        if(paciente == null){
+            paciente = window.paciente;
+        }
         let username = document.getElementById('username').value;
         let password = document.getElementById('password').value;
+        let boleano = true;
 
         // Validar que los campos no estén vacíos
         if (username === '' || password === '') {
             mostrarMensaje('Por favor, complete todos los campos', 'error');
             return;
         }
-
         // Enviar la solicitud Ajax
         $.ajax({
             type: 'POST',
-            url: 'http://vmsrv-web2.hospital.com/SaludMod/Modulos/Cirugia_RH/logica/verificarUsuario.php',
-            data: { login: username, clave: password },
-            success: function(response) {
-		console.log("Respuesta del servidor:", response);
+            //url: 'http://vmsrv-web2.hospital.com/SaludMod/Modulos/Cirugia_RH/logica/verificarUsuario.php',
+            url: 'http://localhost/SaludModDev/Modulos/Cirugia_RH/logica/verificarUsuario.php',
+            data: { login: username, clave: password},
+            success: async function(response) {
                 // Intentar analizar la respuesta JSON
                 try {
                     var jsonResponse = JSON.parse(response);
                     if (jsonResponse.success) {
-                        mostrarMensaje('Credenciales correctas', 'success');
+                        boleano = await verificarFirma(jsonResponse.id_usuario, paciente, tipo);
+                        if(!boleano){
+                            mostrarMensaje('Credenciales correctas', 'success');
+                            // Llenar los campos de la fila actual
+                            if (filaActual.closest('#firmas-container')) {
+                                // Si está en el contenedor de firmas de entrada
+                                filaActual.querySelector('[name="idNombreFirmaEntrada[]"]').value = jsonResponse.nombre;
+                                filaActual.querySelector('[name="idDocumentoFirmaEntrada[]"]').value = jsonResponse.num_documento;
+                                filaActual.querySelector('[name="idCargoEntrada[]"]').value = jsonResponse.cargo;
+                                const inputEntrada = filaActual.querySelector('.documento');
 
-                        // Llenar los campos de la fila actual
-                        if (filaActual.closest('#firmas-container')) {
-                            // Si está en el contenedor de firmas de entrada
-                            filaActual.querySelector('[name="idNombreFirmaEntrada[]"]').value = jsonResponse.nombre;
-                            filaActual.querySelector('[name="idDocumentoFirmaEntrada[]"]').value = jsonResponse.num_documento;
-                            filaActual.querySelector('[name="idCargoEntrada[]"]').value = jsonResponse.cargo;
-                        } else if (filaActual.closest('#firmas-container-salida')) {
-                            // Si está en el contenedor de firmas de salida
-                            filaActual.querySelector('[name="idNombreFirmaSalida[]"]').value = jsonResponse.nombre;
-                            filaActual.querySelector('[name="idDocumentoFirmaSalida[]"]').value = jsonResponse.num_documento;
-                            filaActual.querySelector('[name="idCargoSalida[]"]').value = jsonResponse.cargo;
+                                datos = await ingresarFirmar(jsonResponse.id_usuario, paciente, tipo);
+                                inputEntrada.setAttribute("data-id", jsonResponse.id_usuario);
+                                
+                            } else if (filaActual.closest('#firmas-container-salida')) {
+                                // Si está en el contenedor de firmas de salida
+                                filaActual.querySelector('[name="idNombreFirmaSalida[]"]').value = jsonResponse.nombre;
+                                filaActual.querySelector('[name="idDocumentoFirmaSalida[]"]').value = jsonResponse.num_documento;
+                                filaActual.querySelector('[name="idCargoSalida[]"]').value = jsonResponse.cargo;
+                                const inputEntrada = filaActual.querySelector('.documento');
+
+                                datos = await ingresarFirmar(jsonResponse.id_usuario, paciente, tipo);           
+                                inputEntrada.setAttribute("data-id", jsonResponse.id_usuario);
+                            }
+                            
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Firmado Exitosamente',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                            /// bloquea boton!!
+                            const firmarBtn = filaActual.querySelector('.validarBtn');
+                            if (firmarBtn) {
+                                firmarBtn.disabled = true; // O firmarBtn.style.display = 'none'; para hacerlo invisible
+                            }
+
+                            // Cerrar el modal
+                            $('#Modal').modal('hide');
+                        }else{
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'No se puede guarda esta firma',
+                                text: "El usuario ya se encuentra registrado en las firmas",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Firmado Exitosamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-
-                        /// bloquea boton!!
-                        const firmarBtn = filaActual.querySelector('.validarBtn');
-                        if (firmarBtn) {
-                            firmarBtn.disabled = true; // O firmarBtn.style.display = 'none'; para hacerlo invisible
-                        }
-
-                        // Cerrar el modal
-                        $('#Modal').modal('hide');
                     } else {
                         mostrarMensaje(jsonResponse.message, 'error');
                     }
                 } catch (e) {
+                    // console.log("Nombre del error:", e.name);     // ej: TypeError, ReferenceError
+                    // console.log("Mensaje del error:", e.message); // ej: "Cannot read property 'x' of null"
+                    // console.log("Stack trace:", e.stack);
                     mostrarMensaje('Error en la respuesta del servidor', 'error');
                 }
             },
             error: function(xhr, status, error) {
+                console.log(error);
                 mostrarMensaje('Ocurrió un error al validar las credenciales', 'error');
             }
         });
@@ -197,3 +356,4 @@ $(document).ready(function() {
         }
     });
 });
+

@@ -39,18 +39,4 @@ plan.addEventListener("change", function(e){
 });
 
 
-const select = document.querySelectorAll(".form-control");
-select.forEach(select => {
-    select.style.fontSize = "0.8rem"
-
-
-    select.addEventListener("change", function(){
-        this.classList.add("opcionSeleccionada");
-        this.blur();
-    });
-});
-
-$(document).on("click", ".validarBtn", function(e){
-    $("#confirmarBtn").attr("data-firma", $(e.target).data("tipo"));
-});
 

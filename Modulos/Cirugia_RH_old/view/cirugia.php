@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
 ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>../Modulos/Cirugia_RH/view/CSS/estilo.css">
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>../Modulos/Cirugia_RH/view/CSS/estilos_salida.css">
 
 
     <div class="modal" id="Modal">
@@ -107,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input readonly type="text" id="idEdad" class="form-control rqr" name="idEdad" value="<?php echo isset($DatosIncapacidad['Edad']) && !empty($DatosIncapacidad['Edad']) ? $DatosIncapacidad['Edad'] : ''; ?>">
                                         </div>
                                         <div class="col-md-2">
-                                            <label>G�nero</label>
+                                            <label>Sexo</label>
                                             <input readonly type="text" id="idSexo" class="form-control rqr" name="idSexo" value="<?php echo isset($DatosIncapacidad['Sexo']) && !empty($DatosIncapacidad['Sexo']) ? $DatosIncapacidad['Sexo'] : ''; ?>">
                                         </div>
                                     </div>
@@ -175,13 +174,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form method="POST" id="idFormEntrada">
                                         <table class="table-responsive" id="entradaTable">
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color:rgb(143, 137, 137);">
                                                     Antes de la inducción de la anestesia
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Se confirma con el Paciente</th>
-                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Respuesta</th>
+                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Se confirma con el Paciente</th>
+                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Respuesta</th>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">1. Nombre e identificación:</td>
@@ -200,7 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         <option value=""disabled selected>Seleccione</option>
                                                         <option value="si">Sí</option>
                                                         <option value="no">No</option>
-							<option value="N/A">N/A</option> 
                                                     </select>
                                                 </td>
                                             </tr>
@@ -252,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">
                                                     Chequeo de equipos, insumos e imágenes</th>
                                             </tr>
                                             <tr>
@@ -409,7 +407,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                             <td colspan="2">
                                                 <label for="idObservacionesEntrada" style="font-weight: bold; font-size: 14px; ">Observaciones:</label>
-                                                <textarea class="form-control" id="idObservacionesEntrada" name="ObservacionesEntrada" rows="3" style="width: 100%; text-align: left;"></textarea>
+                                                <textarea class="form-control" id="idObservacionesEntrada" name="ObservacionesEntrada" rows="3" style="width: 100%;"></textarea>
                                             </td>
                                         </table>
                                         <br>
@@ -423,29 +421,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form id="firmas" method="POST" enctype="multipart/form-data">
                                         
                                         <div id="firmas-container">
-                                            <!-- <div style="text-align: right;">
-                                                <button type="button" class="btn btn-success add-row" id="agregarInicio" disabled>+</button>
-                                            </div> -->                                            
-					    <div class="row firma-item">
+                                        <div style="text-align: right;">
+                                            <button type="button" class="btn btn-success add-row">+</button>
+                                        </div>
+                                            <div class="row firma-item">
                                                 <div class="col-md-3">
                                                     <label>Cargo</label>
-                                                    <input readonly type="text" class="form-control rqr cargo" name="idCargoEntrada[]">
+                                                    <input readonly type="text" class="form-control rqr" name="idCargoEntrada[]">
                                                     <!-- <select class="form-control rqr" name="idCargoEntrada[]" required>
                                                         <option value="" disabled selected>Seleccionar</option>
                                                     </select> -->
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Nombre Completo</label>
-                                                    <input readonly type="text" class="form-control rqr nombre" name="idNombreFirmaEntrada[]">
+                                                    <input readonly type="text" class="form-control rqr" name="idNombreFirmaEntrada[]">
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Número de documento</label>
-                                                    <input readonly type="text" class="form-control rqr documento" name="idDocumentoFirmaEntrada[]" data-id="">
+                                                    <input readonly type="text" class="form-control rqr" name="idDocumentoFirmaEntrada[]">
                                                 </div>
                                                 <div class="col-md-3">
                                                     <br>
-                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal" data-tipo="INICIO" disabled>FIRMAR</button>
-                                                    <button type="button" class="btn btn-danger remove-row" data-tipo="INICIO" disabled>-</button>
+                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal" >FIRMAR</button>
+                                                    <button type="button" class="btn btn-danger remove-row">-</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -462,13 +460,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form method="POST" id="idFormPausa">
                                         <table class="table-responsive" id="entradaPausa">
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color:rgb(143, 137, 137);">
                                                     Antes de la incisión
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Se confirma</th>
-                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Respuesta</th>
+                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Se confirma</th>
+                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Respuesta</th>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">1. Equipo humano completo:</td>
@@ -481,8 +479,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>                                            
                                             <tr>
-                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Se confirma con el Cirujano</th>
-                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Respuesta</th>
+                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Se confirma con el Cirujano</th>
+                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Respuesta</th>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">2. Paciente, abordaje y procedimiento:</td>
@@ -529,7 +527,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </tr>
 
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">
                                                     Se confirma con el Anestesiólogo</th>
                                             </tr>
                                             <tr>
@@ -543,7 +541,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">
                                                     Se confirma con Instrumentadora</th>
                                             </tr>
                                             
@@ -558,7 +556,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">
                                                     Se confirma con Perfusionista</th>
                                             </tr>
                                             <tr>
@@ -594,7 +592,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     </tr>
                                             <td colspan="2">
                                                 <label for="idObservacionesPausa" style="font-weight: bold; font-size: 14px; ">Observaciones:</label>
-                                                <textarea class="form-control" id="idObservacionesPausa" name="ObservacionesPausa" rows="3" style="width: 100%; text-align: left;"></textarea>
+                                                <textarea class="form-control" id="idObservacionesPausa" name="ObservacionesPausa" rows="3" style="width: 100%;"></textarea>
                                             </td>
                                         </table>
                                         <br>
@@ -609,13 +607,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form method="POST" id="idFormSalida">
                                         <table class="table-responsive" id="entradaSalida">
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color:rgb(143, 137, 137);">
                                                     Antes de que el cirujano se retire de la sala
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Se confirma</th>
-                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">Respuesta</th>
+                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Se confirma</th>
+                                                <th class="sub-header" style="font-weight: bold; font-size: 16px;background-color: #cbcbcc;">Respuesta</th>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">1. La cirugía realizada fue la programada:</td>
@@ -679,7 +677,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </tr>
                                             <td colspan="2">
                                                 <label for="idObservacionesSalida" style="font-weight: bold; font-size: 14px; ">Observaciones:</label>
-                                                <textarea class="form-control" id="idObservacionesSalida" name="observaciones" rows="3" style="width: 100%; text-align: left;"></textarea>
+                                                <textarea class="form-control" id="idObservacionesSalida" name="observaciones" rows="3" style="width: 100%;"></textarea>
                                             </td>
                                         </table>
                                         <br>
@@ -694,28 +692,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form id="firmaSalida" method="POST" enctype="multipart/form-data">
                                         <div id="firmas-container-salida">
                                             <div style="text-align: right;"> 
-                                                <button type="button" class="btn btn-success add-row" id="btnAgregarFinal">+</button>
+                                                <button type="button" class="btn btn-success add-row">+</button>
                                             </div>
                                             <div class="row firmaSalida-item">
                                                 <div class="col-md-3">
                                                     <label>Cargo</label>
-                                                    <input readonly type="text" class="form-control rqr cargo" name="idCargoSalida[]">
+                                                    <input readonly type="text" class="form-control rqr" name="idCargoSalida[]">
                                                     <!-- <select class="form-control rqr" name="idCargoSalida[]" required>
                                                         <option value="" disabled selected>Seleccionar</option>
                                                     </select> -->
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Nombre Completo</label>
-                                                    <input readonly type="text" class="form-control rqr nombre" name="idNombreFirmaSalida[]">
+                                                    <input readonly type="text" class="form-control rqr" name="idNombreFirmaSalida[]">
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Número de documento</label>
-                                                    <input readonly type="text" class="form-control rqr documento" name="idDocumentoFirmaSalida[]"  data-id="">
+                                                    <input readonly type="text" class="form-control rqr" name="idDocumentoFirmaSalida[]">
                                                 </div>
                                                 <div class="col-md-3">
                                                     <br>
-                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal"  data-tipo="FINAL">FIRMAR</button>
-                                                    <button type="button" class="btn btn-danger remove-row" data-tipo="FINAL">-</button>
+                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal" >FIRMAR</button>
+                                                    <button type="button" class="btn btn-danger remove-row">-</button>
                                                 </div>
                                             </div>
                                         </div>

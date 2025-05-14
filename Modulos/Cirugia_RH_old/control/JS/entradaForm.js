@@ -1,11 +1,8 @@
 $(document).ready(function() {
-
-    let id_paciente = null;
-    window.paciente = null;
     $('#guardarEntrada').on('click', function(event) {
         event.preventDefault();
 
-        //Datos de FORM información general del paciente
+        // Datos de FORM información general del paciente
         var episodio = $("#episodio").val();
         var num_documento = $("#idNumeroDocumento").val();
         var edad = $("#idEdad").val();
@@ -16,19 +13,19 @@ $(document).ready(function() {
         var cirujano = $("#idNombreCirujano").val();
         var especialidad = $("#idEspecialidad").val();
         var fecha = $("#Fecha").val();
-        var centrosanitario = $("#centrosanitario").val();    // ESTO SE DEBE CAMBIAR
+        var centrosanitario = $("#centrosanitario").val();
 
         // Datos de FORM ENTRADA
         var nombreIdentificacion = $("#id_NombrIdentificacion").val();
         var instrumental = $("#id_intrumental").val();
         var alergiaReporta = $("#id_AlergiaReporta").val();
-        var IndicacionAlergia = $("#textoarea_alergia").val();
+	 var IndicacionAlergia = $("#textoarea_alergia").val();
         var consentimiento = $("#id_Consentimiento").val();
         var marcacion = $("#Marcacion").val();
         var seleccione = $("#idSeleccione").val();
         var verificacion = $("#id_Verificacion").val();
         var confirmacion = $("#id_Confirmacion").val();
-        var esterilidad = $("#id_esterilidad").val();
+	 var esterilidad = $("#id_esterilidad").val();
         var monitoreo = $("#id_Monitoreo").val();
         var perdida = $("#id_Perdida").val();
         var reserva = $("#id_Reserva").val();
@@ -36,7 +33,7 @@ $(document).ready(function() {
         var estudios = $("#id_Estudios").val();
         var via = $("#id_Via").val();
         var antibiotico = $("#id_Antibiotico").val();
-        var IndicacionAntibiotico = $("#textoarea_antibiotico").val();
+	 var IndicacionAntibiotico = $("#textoarea_antibiotico").val();
         var suspension = $("#id_Suspension").val();
         var comercial = $("#id_comercial").val();
         var cultivos = $("#id_cultivos").val();
@@ -44,7 +41,7 @@ $(document).ready(function() {
 
         var observaciones = $("#idObservacionesEntrada").val();
         
-        //Validar si hay campos nulos no se pone asegurador ni observaciones
+        // Validar si hay campos nulos no se pone asegurador ni observaciones
         if (
             !episodio || !num_documento || !edad || !sexo ||
             !nombre || !procedimiento || !cirujano ||
@@ -53,7 +50,7 @@ $(document).ready(function() {
             !marcacion || !verificacion || !confirmacion ||
             !monitoreo || !perdida || !reserva || !disponibilidad ||
             !estudios || !via || !antibiotico || !suspension ||
-            !comercial || !cultivos || !patologias   
+            !comercial || !cultivos || !patologias 
         ) {
             Swal.fire({
                 icon: 'error',
@@ -62,7 +59,7 @@ $(document).ready(function() {
                 showConfirmButton: true
             });
             return; // Salir de la función si se detecta un valor nulo
-        }    //-------> ESTO SE DEBE CAMBIAR
+        }
 
         // Envía los datos combinados usando AJAX
         $.ajax({
@@ -111,8 +108,7 @@ $(document).ready(function() {
             
                 // Asegurarse de que la respuesta se trate como un objeto JSON
                 var jsonResponse = JSON.parse(response); // Si el servidor no devuelve JSON directamente
-                window.paciente = jsonResponse.paciente;
-                
+            
                 if (jsonResponse.error) {
                     Swal.fire({
                         icon: 'error', // Cambiado a error
@@ -132,9 +128,6 @@ $(document).ready(function() {
                     $('#idFormEntrada input, #idFormEntrada select, #idFormEntrada textarea').prop('disabled', true); 
                     $('#idProcedimientoDatos input, #idProcedimientoDatos select, #idProcedimientoDatos textarea').prop('disabled', true); 
                     document.getElementById('guardarFirmaEntrada').removeAttribute('disabled');
-                    //document.getElementById("agregarInicio").removeAttribute('disabled');
-                    document.getElementById("firmas-container").querySelector(".validarBtn").removeAttribute('disabled');
-                    document.getElementById("firmas-container").querySelector(".remove-row").removeAttribute('disabled');
 
                     
                     Swal.fire({
@@ -144,7 +137,7 @@ $(document).ready(function() {
                         timer: 1500
                     });
                 }
-                
+            
              
                 
             },
@@ -161,4 +154,3 @@ $(document).ready(function() {
         });
     });
 });
-

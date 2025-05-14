@@ -1,0 +1,8 @@
+select.predeterminado{
+    font-size: 0.2rem;
+}
+
+select.opcionSeleccionada{
+    font-weight: bold;
+}
+
