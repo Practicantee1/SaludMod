@@ -349,57 +349,63 @@
     </div>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-light" style="background-color: #fff; height: 73px;">
-  <!-- Left navbar links -->
-  <ul class="navbar-nav" style="flex: 0.5; display: flex; align-items: center;">
-    <li class="nav-item">
-      <a class="nav-link-menu" data-widget="pushmenu" href="#" role="button">
-        <i class="fas fa-bars"></i>
-      </a>
-    </li>
-  </ul>
-
-  <!-- Center label -->
-  <ul class="navbar-nav" style="flex: 3; justify-content: center;">
-    <li class="nav-item d-none d-sm-inline-block" style="text-align: center;">
-      <label style="color: #066E45; font-size: 1rem; margin:0; margin-left: 5%; width: 100%;">
-      <?php echo isset($_SESSION['module_title']) ? $_SESSION['module_title'] : 'SALUDMOD'; ?>
-      </label>
-    </li>
-  </ul>
-
-  <!-- Right navbar links -->
-  <ul class="navbar-nav" style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
-    <li class="nav-item">
-      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-        <i class="fas fa-expand-arrows-alt"></i>
-      </a>
-    </li>
-
-    <!-- Profile dropdown -->
-    <div class="dropdown" style="display: flex; align-items: center;">
-      <div style="display:flex; flex-direction:column">
-        <label style="margin: 0 5px;"><?php echo $_SESSION['nombre']; ?></label>
-        <label style="margin: 0 5px; font-weight: 400"><?php echo $_SESSION['cargo']; ?></label>
-      </div>
-        <button class="btn-Colibri" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="<?php echo BASE_URL; ?>../plantilla/dist/img/logoColibri.png" alt="AdminLTE Logo" style="opacity: .8; max-width: 45px;">
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li class="user-footer">
-          <?php if(isset($_SESSION['login'])) { ?>
-            <a href="<?php echo BASE_URL; ?>../controller/usuario.php?op=cambiar contrasena" class="dropdown-item">
-              <i class="fa-solid fa-user"></i> Cambiar Contrase&#241;a
-            </a>
-          <?php } ?>
-          <a href="<?php echo BASE_URL; ?>../controller/usuario.php?op=salir" class="dropdown-item">
-            <i class="fas fa-arrow-left mr-2"></i> Salir
+      <!-- Left navbar links -->
+      <ul class="navbar-nav" style="flex: 0.5; display: flex; align-items: center;">
+        <li class="nav-item">
+          <a class="nav-link-menu" data-widget="pushmenu" href="#" role="button">
+            <i class="fas fa-bars"></i>
           </a>
         </li>
-      </div>
-    </div>
-  </ul>
-</nav>
+      </ul>
 
+      <!-- Center label -->
+      <ul class="navbar-nav" style="flex: 3; justify-content: center;">
+        <li class="nav-item d-none d-sm-inline-block" style="text-align: center;">
+          <label style="color: #066E45; font-size: 1rem; margin:0; margin-left: 5%; width: 100%;">
+          <?php echo isset($_SESSION['module_title']) ? $_SESSION['module_title'] : 'SALUDMOD'; ?>
+          </label>
+        </li>
+      </ul>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav" style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+
+        <!-- Profile dropdown -->
+        <div class="dropdown" style="display: flex; align-items: center;">
+          <button style="background-color: white; border-radius: 5px; box-shadow: 4px 4px 10px rgba(36, 36, 36, 0.3); border-color:rgb(208, 216, 213);" 
+                  data-toggle="dropdown"
+                  id="dropdownMenuButton"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            <div style="display:flex;">
+              <div style="width: 95%;">
+                <label style="margin: 0 5px; cursor: pointer; user-select: none; white-space: nowrap"><?php echo $_SESSION['nombre']; ?></label>
+                <label style="margin: 0 5px; font-weight: 400; cursor: pointer; user-select: none; white-space: nowrap"><?php echo $_SESSION['cargo']; ?></label>
+              </div>
+              <div class="dropdown-toggle" style="margin-top: 5%;"></div>
+            </div>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li class="user-footer">
+              <?php if(isset($_SESSION['login'])) { ?>
+                <a href="<?php echo BASE_URL; ?>../controller/usuario.php?op=cambiar contrasena" class="dropdown-item">
+                  <i class="fa-solid fa-user"></i> Cambiar Contrase&#241;a
+                </a>
+              <?php } ?>
+              <a href="<?php echo BASE_URL; ?>../controller/usuario.php?op=salir" class="dropdown-item">
+                <i class="fas fa-arrow-left mr-2"></i> Salir
+              </a>
+            </li>
+          </div> 
+        </div>
+        
+      </ul>
+    </nav>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #08090A;">
@@ -452,6 +458,12 @@ if (isset($_SESSION['Escritorio']) && $_SESSION['Escritorio'] == 1) {
   &nbsp;<i class="fa-solid fa-house fa-lg" style="color: #ffffff;"></i>
     <p>
     &nbsp;&nbsp;Inicio
+    </p>
+  </a>
+  <a href="'.BASE_URL.'../Modulos/Medicamentos/view/StockMedicamentos.php" class="nav-link active" style="background-color: transparent;">
+  &nbsp;<i class="fa-solid fa-house fa-lg" style="color: #ffffff;"></i>
+    <p>
+    &nbsp;&nbsp;Stock Medicamentos
     </p>
   </a>
   </li>';
