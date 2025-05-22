@@ -5,7 +5,21 @@ $(document).ready(function() {
 
 
 
-    $('#guardarFirmaEntrada').on('click', function(event) {
+    $('#guardarFirmaEntrada').on('click', async function(event) {
+        let resultado = await Swal.fire({
+            icon: "info",
+            title: "¿Estás seguro que quieres completar las firmas de esta pausa?",
+            text: "Esta acción no se puede revertir",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#006941",
+            confirmButtonText: "Confirmar"
+        });
+
+        if(!resultado.isConfirmed){
+            return;
+        }
+
         event.preventDefault();
         if(paciente == null){
             paciente = window.paciente;
