@@ -138,9 +138,15 @@ Class Usuario
     	return ejecutarConsulta($sql);  
     }
 
+	// public function googleVerificar($email)
+    // {
+    // 	$sql="CALL SPGoogle_VerificarUsuario('$email')"; 
+    // 	return ejecutarConsulta($sql);  
+    // } //Método anterior
+
 	public function googleVerificar($email)
     {
-    	$sql="CALL SPGoogle_VerificarUsuario('$email')"; 
+    	$sql="CALL SP_VerificarUsuarioCorreo('$email')"; 
     	return ejecutarConsulta($sql);  
     }
 

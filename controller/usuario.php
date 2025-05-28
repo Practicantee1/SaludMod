@@ -357,63 +357,157 @@ switch ($_GET["op"]){
 	break;
 
 	case 'googleLogin':
-		$email=$_SESSION['user_email_address'];
+	// 	$email=$_SESSION['user_email_address'];
 	
-		$rspta=$usuario->googleVerificar($email);
-		$fetch=$rspta->fetch_object();
+	// 	$rspta=$usuario->googleVerificar($email);
+	// 	$fetch=$rspta->fetch_object();
 
-		$rsptaPerm = $usuario->googleVerificar($email);
-		$fetchPerm = $rsptaPerm->fetch_object();
+	// 	$rsptaPerm = $usuario->googleVerificar($email);
+	// 	$fetchPerm = $rsptaPerm->fetch_object();
 			
-		if (isset($fetch))
-		{
-			$_SESSION['idusuario']=$fetch->id_usuario_google;
-			$_SESSION['cargo']= "";
-			//Declaramos las variables de sesión
-			$_SESSION['nombre']= $_SESSION['user_first_name'].' '.$_SESSION['user_last_name'];
-			//Declaramos las variables de sesión
-			$id_rol = '';
-			do{
-				$id_rol .= $fetch->id_rol;
-				$id_rol .= ",";
-				$fetch = $rspta->fetch_object();
+	// 	if (isset($fetch))
+	// 	{
+	// 		$_SESSION['idusuario']=$fetch->id_usuario_google;
+	// 		$_SESSION['cargo']= "";
+	// 		//Declaramos las variables de sesión
+	// 		$_SESSION['nombre']= $_SESSION['user_first_name'].' '.$_SESSION['user_last_name'];
+	// 		//Declaramos las variables de sesión
+	// 		$id_rol = '';
+	// 		do{
+	// 			$id_rol .= $fetch->id_rol;
+	// 			$id_rol .= ",";
+	// 			$fetch = $rspta->fetch_object();
 
-			}while($fetch);
-			$id_rol .= '0';
-			//$id_rol = str_replace(" ", ",",$id_rol);
-			//$id_rol = json_encode($id_rol);
-			//$_SESSION['nombre'] = json_decode($id_rol);
+	// 		}while($fetch);
+	// 		$id_rol .= '0';
+	// 		//$id_rol = str_replace(" ", ",",$id_rol);
+	// 		//$id_rol = json_encode($id_rol);
+	// 		//$_SESSION['nombre'] = json_decode($id_rol);
 
-			$rspta2=$usuario->GoogleRoleVerificar($id_rol);			
-			$fetch2 = $rspta2->fetch_object();
-			$ids ='';
-			do{
+	// 		$rspta2=$usuario->GoogleRoleVerificar($id_rol);			
+	// 		$fetch2 = $rspta2->fetch_object();
+	// 		$ids ='';
+	// 		do{
 
-				$idpermiso = $fetch2->idpermiso;
-				$ids .= $idpermiso;
-				$ids .= ',';
+	// 			$idpermiso = $fetch2->idpermiso;
+	// 			$ids .= $idpermiso;
+	// 			$ids .= ',';
 				
 			
-				$fetch2 = $rspta2->fetch_object();
-			}while($fetch2);
-			$ids .= '0';
-			//$ids = str_replace(" ", ",",$ids);
-			//$ids = json_encode($ids);
-			//echo '<script> console.log('. $ids.') </script>';
+	// 			$fetch2 = $rspta2->fetch_object();
+	// 		}while($fetch2);
+	// 		$ids .= '0';
+	// 		//$ids = str_replace(" ", ",",$ids);
+	// 		//$ids = json_encode($ids);
+	// 		//echo '<script> console.log('. $ids.') </script>';
 
 			
 	
-			//Obtenemos los permisos del usuario
-			$marcados = $usuario->listarRolePermisos($ids);
+	// 		//Obtenemos los permisos del usuario
+	// 		$marcados = $usuario->listarRolePermisos($ids);
+	// 		$valores = [];
+		
+	// 		//Almacenamos los permisos marrhhrcados en el array
+	// 		while ($per = $marcados->fetch_object())
+	// 			{
+	// 				array_push($valores, $per->idpermiso);
+	// 			}
+	
+	// 			include("../config/Conexion.php");
+		
+	// 		// Consultamos todos los permisos
+	// 		$sql = "SELECT `idpermiso`, `nombre` FROM `permiso`";
+	// 		$query = $conexion->query($sql);
+		
+	// 		// Almacenamos los resultados de la consulta en el array $permisos
+	// 		$permisos = [];
+	// 		while ($row = $query->fetch_assoc()) {
+	// 			$permisos[] = $row;
+	// 		}
+		
+	// 		// Configuramos los permisos en la sesi�n
+	// 		foreach ($permisos as $permiso) {
+	// 			$id = $permiso['idpermiso'];
+	// 			$nombre = $permiso['nombre'];
+		
+	// 			// Asigna 1 o 0 en $_SESSION seg�n si el permiso est� en $valores
+	// 			$_SESSION[$nombre] = in_array($id, $valores) ? 1 : 0;
+	// 		}
+	// 		//Determinamos los accesos del usuario
+	
+	// 				//ESCRITORIO
+	// 				// in_array(1,$valores)?$_SESSION['escritorio']=1:$_SESSION['escritorio']=0;
+	// 				// //USUARIOS - PERMISOS
+	// 				// in_array(2,$valores)?$_SESSION['acceso']=1:$_SESSION['acceso']=0;
+	// 				// //CONSULTA DE CITAS
+	// 				// in_array(3,$valores)?$_SESSION['ConsultaCitas']=1:$_SESSION['ConsultaCitas']=0;
+	// 				// //UBICACION DEL PACIENTE
+	// 				// in_array(4,$valores)?$_SESSION['UbicacionPaciente']=1:$_SESSION['UbicacionPaciente']=0;
+	// 				// //GENERAR INCAPACIDADES
+	// 				// in_array(5,$valores)?$_SESSION['GenerarIncapacidades']=1:$_SESSION['GenerarIncapacidades']=0;
+	// 				// //CONSOLIDADO INCAPACIDADES
+	// 				// in_array(6,$valores)?$_SESSION['ObservarIncapacidades']=1:$_SESSION['ObservarIncapacidades']=0;
+	// 				// //ANULAR INCAPACIDADES
+	// 				// in_array(7,$valores)?$_SESSION['AnularIncapacidades']=1:$_SESSION['AnularIncapacidades']=0;
+	// 				// in_array(19,$valores)?$_SESSION['verificaciones_implantados']=1:$_SESSION['verificaciones_implantados']=0;
+	// 				// in_array(20,$valores)?$_SESSION['verificacion_epidemiologa']=1:$_SESSION['verificacion_epidemiologa']=0;
+	// 				// in_array(8,$valores)?$_SESSION['Odontograma']=1:$_SESSION['Odontograma']=0;
+	// 				// in_array(21,$valores)?$_SESSION['ProgramaEducativo']=1:$_SESSION['ProgramaEducativo']=0;
+	// 				// //ACCESO PARA REGISTRO DE IMPLANTES
+	// 				// in_array(18,$valores)?$_SESSION['implantes']=1:$_SESSION['implantes']=0;
+	// 				// //ACCESO PARA REGISTRO DE CIRUGIA RH
+	// 				// in_array(23,$valores)?$_SESSION['Cirugia_RH']=1:$_SESSION['Cirugia_RH']=0;
+	// 				// //ACCESO PARA DERECHO A MORIR DIGNAMENTE
+	// 				// in_array(26,$valores)?$_SESSION['Derecho_morir_dignamente']=1:$_SESSION['Derecho_morir_dignamente']=0;
+	// 				// in_array(28,$valores)?$_SESSION['ConsultarSolicitud_DMD']=1:$_SESSION['ConsultarSolicitud_DMD']=0;
+	// 				// in_array(29,$valores)?$_SESSION['Solicitud_DMD']=1:$_SESSION['Solicitud_DMD']=0;
+	// 				// in_array(30,$valores)?$_SESSION['Ubicacion y citas']=1:$_SESSION['Ubicacion y citas']=0;
+	// 				// in_array(31,$valores)?$_SESSION['RegistrarOdontograma']=1:$_SESSION['RegistrarOdontograma']=0;
+	// 				// in_array(32,$valores)?$_SESSION['BuscarOdontograma']=1:$_SESSION['BuscarOdontograma']=0;
+	// 				// in_array(33,$valores)?$_SESSION['Incapacidades']=1:$_SESSION['Incapacidades']=0;
+	// 				// in_array(34,$valores)?$_SESSION['Encuesta de satisfaccion']=1:$_SESSION['Encuesta de satisfaccion']=0;
+	// 				// in_array(63,$valores)?$_SESSION['prueba']=1:$_SESSION['prueba']=0;
+	// 				// in_array(64,$valores)?$_SESSION['prueba']=1:$_SESSION['prueba']=0;
+	// 	}
+	// 	$respuestajson = json_encode($fetchPerm);
+	
+	// 	if(!($respuestajson == "null")){
+	// 		header('location:'.$PageToGo);
+	// 	}
+	
+	
+	// break;
+
+	$email = $_SESSION['user_email_address'];
+
+
+		
+
+		$rspta=$usuario->googleVerificar($email);
+
+		if($rspta){
+			$fetch=$rspta->fetch_object();
+		}
+
+		if (isset($fetch)) {
+			// Declaramos las variables de sesión
+			$_SESSION['idusuario'] = $fetch->idusuario;
+			$_SESSION['nombre'] = $fetch->nombre;
+			$_SESSION['cargo'] = $fetch->cargo;
+		
+			// Obtenemos los permisos del usuario
+			$marcados = $usuario->listarmarcados($fetch->idusuario);
+		
+			// Declaramos el array para almacenar todos los permisos marcados
 			$valores = [];
 		
-			//Almacenamos los permisos marrhhrcados en el array
-			while ($per = $marcados->fetch_object())
-				{
-					array_push($valores, $per->idpermiso);
-				}
-	
-				include("../config/Conexion.php");
+			// Almacenamos los permisos marcados en el array
+			while ($per = $marcados->fetch_object()) {
+				array_push($valores, $per->idpermiso);
+			}
+		
+			// Incluimos la conexión
+			include("../config/Conexion.php");
 		
 			// Consultamos todos los permisos
 			$sql = "SELECT `idpermiso`, `nombre` FROM `permiso`";
@@ -425,58 +519,26 @@ switch ($_GET["op"]){
 				$permisos[] = $row;
 			}
 		
-			// Configuramos los permisos en la sesi�n
+			// Configuramos los permisos en la sesión
 			foreach ($permisos as $permiso) {
 				$id = $permiso['idpermiso'];
 				$nombre = $permiso['nombre'];
 		
-				// Asigna 1 o 0 en $_SESSION seg�n si el permiso est� en $valores
+				// Asigna 1 o 0 en $_SESSION según si el permiso está en $valores
 				$_SESSION[$nombre] = in_array($id, $valores) ? 1 : 0;
 			}
-			//Determinamos los accesos del usuario
-	
-					//ESCRITORIO
-					// in_array(1,$valores)?$_SESSION['escritorio']=1:$_SESSION['escritorio']=0;
-					// //USUARIOS - PERMISOS
-					// in_array(2,$valores)?$_SESSION['acceso']=1:$_SESSION['acceso']=0;
-					// //CONSULTA DE CITAS
-					// in_array(3,$valores)?$_SESSION['ConsultaCitas']=1:$_SESSION['ConsultaCitas']=0;
-					// //UBICACION DEL PACIENTE
-					// in_array(4,$valores)?$_SESSION['UbicacionPaciente']=1:$_SESSION['UbicacionPaciente']=0;
-					// //GENERAR INCAPACIDADES
-					// in_array(5,$valores)?$_SESSION['GenerarIncapacidades']=1:$_SESSION['GenerarIncapacidades']=0;
-					// //CONSOLIDADO INCAPACIDADES
-					// in_array(6,$valores)?$_SESSION['ObservarIncapacidades']=1:$_SESSION['ObservarIncapacidades']=0;
-					// //ANULAR INCAPACIDADES
-					// in_array(7,$valores)?$_SESSION['AnularIncapacidades']=1:$_SESSION['AnularIncapacidades']=0;
-					// in_array(19,$valores)?$_SESSION['verificaciones_implantados']=1:$_SESSION['verificaciones_implantados']=0;
-					// in_array(20,$valores)?$_SESSION['verificacion_epidemiologa']=1:$_SESSION['verificacion_epidemiologa']=0;
-					// in_array(8,$valores)?$_SESSION['Odontograma']=1:$_SESSION['Odontograma']=0;
-					// in_array(21,$valores)?$_SESSION['ProgramaEducativo']=1:$_SESSION['ProgramaEducativo']=0;
-					// //ACCESO PARA REGISTRO DE IMPLANTES
-					// in_array(18,$valores)?$_SESSION['implantes']=1:$_SESSION['implantes']=0;
-					// //ACCESO PARA REGISTRO DE CIRUGIA RH
-					// in_array(23,$valores)?$_SESSION['Cirugia_RH']=1:$_SESSION['Cirugia_RH']=0;
-					// //ACCESO PARA DERECHO A MORIR DIGNAMENTE
-					// in_array(26,$valores)?$_SESSION['Derecho_morir_dignamente']=1:$_SESSION['Derecho_morir_dignamente']=0;
-					// in_array(28,$valores)?$_SESSION['ConsultarSolicitud_DMD']=1:$_SESSION['ConsultarSolicitud_DMD']=0;
-					// in_array(29,$valores)?$_SESSION['Solicitud_DMD']=1:$_SESSION['Solicitud_DMD']=0;
-					// in_array(30,$valores)?$_SESSION['Ubicacion y citas']=1:$_SESSION['Ubicacion y citas']=0;
-					// in_array(31,$valores)?$_SESSION['RegistrarOdontograma']=1:$_SESSION['RegistrarOdontograma']=0;
-					// in_array(32,$valores)?$_SESSION['BuscarOdontograma']=1:$_SESSION['BuscarOdontograma']=0;
-					// in_array(33,$valores)?$_SESSION['Incapacidades']=1:$_SESSION['Incapacidades']=0;
-					// in_array(34,$valores)?$_SESSION['Encuesta de satisfaccion']=1:$_SESSION['Encuesta de satisfaccion']=0;
-					// in_array(63,$valores)?$_SESSION['prueba']=1:$_SESSION['prueba']=0;
-					// in_array(64,$valores)?$_SESSION['prueba']=1:$_SESSION['prueba']=0;
 		}
-		$respuestajson = json_encode($fetchPerm);
-	
-		if(!($respuestajson == "null")){
-			header('location:'.$PageToGo);
+		
+
+	    $respuestajson = json_encode($fetch);
+
+		if ($respuestajson !== "null") {
+			header('location:' . $PageToGo);
 		}
-	
-	
+
+
 	break;
+
 
 	case 'salir':
 
