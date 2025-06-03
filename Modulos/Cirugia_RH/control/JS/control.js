@@ -54,3 +54,39 @@ $(document).on("click", ".validarBtn", function(e){
     $("#confirmarBtn").attr("data-firma", $(e.target).data("tipo"));
 });
 
+$(document).ready(function () {
+    $("#confirmacion_perfusionista").on("change", function(e){
+        let valor = e.target.value;
+        console.log("Cambio detectado, valor:", valor);
+
+        if(valor === "si"){
+            $("#id_Detalles_relevantes").prop("disabled", false).val("");
+            $("#id_T").prop("disabled", false).val("");
+            $("#id_perfusion").prop("disabled", false).val("");
+        } else {
+            $("#id_Detalles_relevantes").prop("disabled", true).val("N/A");
+            $("#id_T").prop("disabled", true).val("N/A");
+            $("#id_perfusion").prop("disabled", true).val("N/A");
+        }
+
+
+    });
+});
+
+
+$(document).ready(function () {
+    $("input[name='confirm_perfusionista']").on("change", function(e){
+        let valor = e.target.checked;
+        console.log(valor)
+         if(valor){
+            $("#id_Detalles_relevantes").prop("disabled", false).val("");
+            $("#id_T").prop("disabled", false).val("");
+            $("#id_perfusion").prop("disabled", false).val("");
+        } else {
+            $("#id_Detalles_relevantes").prop("disabled", true).val("N/A");
+            $("#id_T").prop("disabled", true).val("N/A");
+            $("#id_perfusion").prop("disabled", true).val("N/A");
+        }
+    });
+});
+

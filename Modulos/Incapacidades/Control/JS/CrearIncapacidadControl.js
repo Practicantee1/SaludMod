@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //Verificar si la persona tiene incapacidades activas y cuantas de estas tienen
 $(document).ready(function(){
   IDPaciente = document.getElementById("IDNumberPaciente").value;
+  console.log(fecha)
   if(IDPaciente !== ""){
     $.ajax({
       type: "POST",
@@ -43,8 +44,15 @@ $(document).ready(function(){
       success: async function(response){
         response = JSON.parse(response);
         if(response.success){
+          fecha = await obtenerFechaIncapacidad();
           if(response.message["registros"] == 1){  //Si hay incapacidad entonces se hace una renovación
-            fecha = await obtenerFechaIncapacidad();
+            Swal.fire({
+              icon: "info",
+              title: "Hay una incapacidad activa",
+              text: `Actualmente el paciente cuenta con una incapacidad activa hasta el ${fecha}. Por tal motivo, solo se podrá gestionar una prórroga adicional.`,
+              confirmButtonText: "¡Entendido!",
+              confirmButtonColor: "#066E45"
+            });
             cambiarDatosIniciales();
             return;
           }
@@ -52,7 +60,7 @@ $(document).ready(function(){
             Swal.fire({
               icon: "info",
               title: "Acción no permitida",
-              text: "El paciente tiene una incapacidad activa, para generar una nueva debes anular la existente",
+              text: "El paciente ya cuenta con una incapacidad y una prórroga activas. Para generar una nueva, primero debes anular la existente.",
               allowOutsideClick: false, 
               allowEscapeKey: false,    
               allowEnterKey: false,    

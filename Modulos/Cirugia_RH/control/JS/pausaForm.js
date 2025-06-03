@@ -10,7 +10,7 @@ $(document).ready(function() {
         var existen = $("#id_Existen").val();
         var administracion = $("#id_Administracion").val();
         var plan = $("#id_Plan").val();
-	var textoPlan = $("#textoarea_Plan").val();
+	    var textoPlan = $("#textoarea_Plan").val();
         var anestesiologo = $("#id_anestesiologo").val();
         var esterilidad = $("#id_esterilidad").val();
         var vo = $("#id_Vo").val();
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 existen: existen,
                 administracion: administracion,
                 plan: plan,
-		textoPlan: textoPlan,
+		        textoPlan: textoPlan,
                 anestesiologo: anestesiologo,
                 esterilidad: esterilidad,
                 vo: vo,
@@ -89,6 +89,22 @@ $(document).ready(function() {
                         title: 'Se guardó el registro correctamente',
                         showConfirmButton: false,
                         timer: 1500
+                    }).then(() => {
+                        // Habilitar y mostrar la tercera pestaña
+                        $('#salida-tab').prop('disabled', false).removeClass('disabled');    
+                        const salidaTab = new bootstrap.Tab(document.querySelector('#salida-tab'));
+                        salidaTab.show();
+
+                       
+                        setTimeout(() => {
+                            const elemento = document.querySelector('#myTab'); 
+                            const posicion = elemento.offsetTop;
+
+                            window.scrollTo({
+                                top: posicion,
+                                behavior: 'smooth'
+                            });
+                        }, 300); 
                     });
                 }
             },

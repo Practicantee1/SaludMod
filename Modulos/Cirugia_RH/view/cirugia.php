@@ -27,6 +27,14 @@ if (!isset($_SESSION["nombre"])) {
         $_SESSION["param"] = $_GET["param"];
     }
     require '../../../logica/ApiURL.php';
+    //Variable que contendrá los datos del MonitorIQ que trae el API
+    $MonitorIQ = isset($DataPaciente["DatosEpisodio"]["MonitorIQ"]) && !empty($DataPaciente["DatosEpisodio"]["MonitorIQ"]) ? $DataPaciente["DatosEpisodio"]["MonitorIQ"] : "";
+
+    if($MonitorIQ){
+        //Se separa la ubicación y
+        $ubicacion = explode(" ", $MonitorIQ["UbicacionQX"]["UOAnestesia"], 2);
+    }
+    
 
     $_SESSION["param"] = "";
 
@@ -93,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <h4 class="form-label text-divider-r"><span class="left-span" ></span><span>INFORMACIÓN GENERAL</span></h4>
                                 <br>
                                 <div class="well">
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-md-4">
                                             <label>Número de episodio</label>
                                             <input readonly type="number" id="episodio" class="form-control rqr" name="episodio" required  value="<?php echo $Doc; ?>">
@@ -107,11 +115,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input readonly type="text" id="idEdad" class="form-control rqr" name="idEdad" value="<?php echo isset($DatosIncapacidad['Edad']) && !empty($DatosIncapacidad['Edad']) ? $DatosIncapacidad['Edad'] : ''; ?>">
                                         </div>
                                         <div class="col-md-2">
-                                            <label>G�nero</label>
+                                            <label>Género</label>
                                             <input readonly type="text" id="idSexo" class="form-control rqr" name="idSexo" value="<?php echo isset($DatosIncapacidad['Sexo']) && !empty($DatosIncapacidad['Sexo']) ? $DatosIncapacidad['Sexo'] : ''; ?>">
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label>Nombres del paciente</label>
                                             <input readonly type="text" class="form-control rqr" id="idNombrePaciente" name="idNombrePaciente" value="<?php echo isset($DatosIncapacidad['NombreApellido']) && !empty($DatosIncapacidad['NombreApellido']) ? $DatosIncapacidad['NombreApellido'] : ''; ?>">
@@ -121,18 +129,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input readonly type="text" class="form-control rqr" id="idAsegurador" name="asegurador" value="<?php echo isset($DatosIncapacidad["NomEntidad"]) && !empty($DatosIncapacidad["NomEntidad"]) ? $DatosIncapacidad["NomEntidad"] : ''; ?>">
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-md-12">
                                             <label>Procedimiento</label>
-                                            <input type="text" class="form-control rqr fechasDP" id="idProcedimiento" name="idProcedimiento" required>                                    
+                                            <input readonly type="text" class="form-control rqr fechasDP" id="idProcedimiento" name="idProcedimiento" required value="<?php echo isset($MonitorIQ["EntradaPrestacion"]["DenominacionPrestacin"]) && !empty($MonitorIQ["EntradaPrestacion"]["DenominacionPrestacin"]) ? $MonitorIQ["EntradaPrestacion"]["DenominacionPrestacin"] : "" ?>">                                    
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-md-4">
                                             <label>Nombre del responsble</label>
                                             <input readonly type="text" class="form-control rqr fechasDP" id="idNombreCirujano" name="idNombreCirujano" required value="<?php echo $DatosIncapacidad['NombreMedico']; ?>">
                                         </div>
-
                                         <div class="col-md-4">
                                             <label>Cargo del responsable</label>
                                             <input  readonly type="text" class="form-control" id="idEspecialidad" name="idEspecialidad" required value="<?php echo $DatosIncapacidad['Especialidad']; ?>">
@@ -140,6 +147,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="col-md-4">
                                             <label>Fecha de la cirugía</label>
                                             <input readonly type="DATE" class="form-control" id="Fecha" name="Fecha">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label>Ubicación</label>
+                                            <input  readonly type="text" class="form-control" id="idUbicacion" name="idUbicacion" required value="<?php echo $ubicacion[0]; ?>">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>Ubicación Quirófano</label>
+                                            <input  readonly type="text" class="form-control" id="idUbicacionQuiro" name="idUbicacionQuiro" required value="<?php echo $ubicacion[1]; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-8" hidden>
@@ -200,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         <option value=""disabled selected>Seleccione</option>
                                                         <option value="si">Sí</option>
                                                         <option value="no">No</option>
-							<option value="N/A">N/A</option> 
+							                            <option value="N/A">N/A</option> 
                                                     </select>
                                                 </td>
                                             </tr>
@@ -237,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     <option value="" disabled selected>Seleccione</option>
                                                     <option value="si">Sí</option>
                                                      <option value="no">No</option>    
- 						     <option value="N/A">N/A</option>                                                  
+ 						                            <option value="N/A">N/A</option>                                                  
                                                     </select>
                                                 </td>
                                             </tr>
@@ -418,6 +435,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </form>
                                     <br>
+                                        <h4 class="form-label text-divider-rh"><span class="left-span"></span><span>EQUIPO IQ</span></h4>
+                                    <br>
+                                    <br>
                                     <h4 class="form-label text-divider-rh"><span class="left-span"></span><span>FIRMAS ANTES DE LA INDUCCIÓN DE LA CIRUGÍA</span></h4>
                                     <br>
                                     <form id="firmas" method="POST" enctype="multipart/form-data">
@@ -426,7 +446,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <!-- <div style="text-align: right;">
                                                 <button type="button" class="btn btn-success add-row" id="agregarInicio" disabled>+</button>
                                             </div> -->                                            
-					    <div class="row firma-item">
+					                        <div class="row firma-item">
                                                 <div class="col-md-3">
                                                     <label>Cargo</label>
                                                     <input readonly type="text" class="form-control rqr cargo" name="idCargoEntrada[]">
@@ -445,14 +465,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <div class="col-md-3">
                                                     <br>
                                                     <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal" data-tipo="INICIO" disabled>FIRMAR</button>
-                                                    <button type="button" class="btn btn-danger remove-row" data-tipo="INICIO" disabled>-</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
-                                        <div id="contenedor-boton-entrada">
+                                        <!-- <div id="contenedor-boton-entrada">
                                             <input type="button" id="guardarFirmaEntrada" name="agregarEntrada" class="btn" value="Guardar Firma Entrada" disabled>
-                                        </div>
+                                        </div> -->
                                     </form>
                                     <br>
                                 </div>
@@ -495,7 +514,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">3. Existen riesgos adicionales:</td>
+                                                <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">3. Cumple el número máximo de personas permitidas (9 incluyendo el paciente):</td>
                                                 <td id="tds">
                                                     <select class="form-control" style="width: 100%; height: 50%;" name="Existen" id="id_Existen" required>
                                                         <option value="" disabled selected>Seleccione</option>
@@ -558,40 +577,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
-                                                    Se confirma con Perfusionista</th>
+                                                <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                    Se confirma con Perfusionista
+                                                </th>
+                                                <th id="perfusionista">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="confirm_perfusionista" name="confirm_perfusionista">
+                                                        <label class="form-check-label" for="confirm_perfusionista">SI/NO</label>
+                                                    </div>
+                                                </th>
                                             </tr>
-                                            <tr>
-                                                <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">8. Se validaron detalles relevantes respecto a la canulación:</td>
+                                            <!-- <tr>
+                                                <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">8. Se confirma perfusionista:</td>
                                                 <td id="tds">
-                                                    <select class="form-control" style="width: 100%; height: 50%;" name="Detalles_relevantes" id="id_Detalles_relevantes" required>
+                                                    <select class="form-control" style="width: 100%; height: 50%;" name="confirmacion_perfusionista" id="confirmacion_perfusionista" required>
                                                         <option value="" disabled selected>Seleccione</option>
                                                         <option value="si">Sí</option>
                                                         <option value="no">No</option>
-                                                        <!-- <option value="N/A">N/A</option>  -->
+                                                    </select>
+                                                </td>
+                                            </tr> -->
+                                            <tr>
+                                                <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">8. Se validaron detalles relevantes respecto a la canulación:</td>
+                                                <td id="tds">
+                                                    <select class="form-control" style="width: 100%; height: 50%;" name="Detalles_relevantes" id="id_Detalles_relevantes" required disabled>
+                                                        <option value="" disabled>Seleccione</option>
+                                                        <option value="si">Sí</option>
+                                                        <option value="no">No</option>
+                                                        <option value="N/A" selected>N/A</option>
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">9. Se definió a qué temperatura llevar al paciente:</td>
                                                 <td id="tds">
-                                                    <select class="form-control" style="width: 100%; height: 50%;" name="T" id="id_T" required>
+                                                    <select class="form-control" style="width: 100%; height: 50%;" name="T" id="id_T" required disabled>
                                                         <option value="" disabled selected>Seleccione</option>
                                                         <option value="si">Sí</option>
                                                         <option value="no">No</option>
+                                                        <option value="N/A" selected>N/A</option>
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">10. Se validó la necesidad de perfusión selectiva y/o enfriamiento cerebral con hielo:</td>
                                                 <td id="tds">
-                                                    <select class="form-control" style="width: 100%; height: 50%;" name="perfusion" id="id_perfusion" required>
+                                                    <select class="form-control" style="width: 100%; height: 50%;" name="perfusion" id="id_perfusion" required disabled>
                                                         <option value="" disabled selected>Seleccione</option>
                                                         <option value="si">Sí</option>
                                                         <option value="no">No</option>
+                                                        <option value="N/A" selected>N/A</option>
                                                     </select>
                                                 </td>
-                                                    </tr>
+                                            </tr>
                                             <td colspan="2">
                                                 <label for="idObservacionesPausa" style="font-weight: bold; font-size: 14px; ">Observaciones:</label>
                                                 <textarea class="form-control" id="idObservacionesPausa" name="ObservacionesPausa" rows="3" style="width: 100%; text-align: left;"></textarea>
@@ -714,7 +752,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </div>
                                                 <div class="col-md-3">
                                                     <br>
-                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal"  data-tipo="FINAL">FIRMAR</button>
+                                                    <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" 
+                                                                                                             data-bs-target="#Modal"  
+                                                                                                             data-tipo="FINAL" 
+                                                                                                             data-firmado="No">FIRMAR</button>
                                                     <button type="button" class="btn btn-danger remove-row" data-tipo="FINAL">-</button>
                                                 </div>
                                             </div>
@@ -771,6 +812,9 @@ ob_end_flush();
 <script src="../control/JS/firmaSalida.js"></script>
 
 <script src="../control/JS/control.js"></script>
+<script src="../control/JS/monitorIQ.js"></script>
+
+<script src="../control/JS/pruebita.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

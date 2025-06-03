@@ -10,19 +10,19 @@
         if($IdentityNum != 0 && $IdentityNum != ''){
 
             $username = "po_appintern";  
-            $password = "8HQS65oFjZ";
-	    //$password = "3AqHS4MJIM";
+            //$password = "8HQS65oFjZ";
+	        $password = "3AqHS4MJIM";
             $data = [];
             $dataR = [];
 
             //URL DESARROLLO
-            //$url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_dev/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_dev/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
 
             //URL CALIDAD
             //$url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_qas/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
 
             //URL PRODUCTIVO
-            $url1 = 'http://aspop.hospital.com:50000/RESTAdapter/appinternos_prd/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            //$url1 = 'http://aspop.hospital.com:50000/RESTAdapter/appinternos_prd/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
 
 
             switch($typeData){
@@ -83,7 +83,7 @@
                 
                 case 1:
             
-                    $url3 = '&Episodio='.$IdentityNum.'&Datos_ultimo_episodio=X&Ubicacion_episodio=X&Diagnostico_episodio=X';
+                    $url3 = '&Episodio='.$IdentityNum.'&Datos_ultimo_episodio=X&Ubicacion_episodio=X&Diagnostico_episodio=X&MonitorIQ=X';  //Esto es muy importante, añadir el parámetro
 
                     $url = $url1.$url3;
 
@@ -93,7 +93,7 @@
                     curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
 
                     $response = curl_exec($ch);
-
+                
                     if(curl_errno($ch)){
                         $error_msg= curl_error($ch);
                         return null;
@@ -228,21 +228,22 @@
         return null; // Return null if $Episodio is 0 or empty
     }
 
-    function getEpidemiologiaApi($Episodio, $CentroSanitario ) { //COLOCAR LOS NOMBRES DE LAS FUNCIONES DIFERENTES PARA NO INTERFERRIR
+    function getEpidemiologiaApi($Episodio, $CentroSanitario) { //COLOCAR LOS NOMBRES DE LAS FUNCIONES DIFERENTES PARA NO INTERFERRIR
         
         if ($Episodio != 0 && $Episodio != '') {      
             $username = "po_appintern";  
-            $password = "8HQS65oFjZ";
+            //$password = "8HQS65oFjZ";
+            $password = "3AqHS4MJIM";
             $dataR = [];
     
             // URL DESARROLLO
-            // $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_dev/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_dev/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
     
             // URL CALIDAD
-            // $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_qas/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            //$url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_qas/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
     
             // URL PRODUCTIVO
-            $url1 = 'http://aspop.hospital.com:50000/RESTAdapter/appinternos_prd/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            //$url1 = 'http://aspop.hospital.com:50000/RESTAdapter/appinternos_prd/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
 
 
                     $url3 = '&Episodio=' . $Episodio . '&Datos_ultimo_episodio=X&Diagnostico_episodio=X&Ubicacion_episodio=X';
@@ -276,7 +277,7 @@
             // $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_dev/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
     
             // URL CALIDAD
-            // $url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_qas/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
+            //$url1 = 'http://aspod.hospital.com:50000/RESTAdapter/appinternos_qas/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;
     
             // URL PRODUCTIVO
             $url1 = 'http://aspop.hospital.com:50000/RESTAdapter/appinternos_prd/datosdemograficospaciente?Centro_Sanitario='.$CentroSanitario;

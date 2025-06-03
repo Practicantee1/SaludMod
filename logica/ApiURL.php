@@ -25,7 +25,7 @@ if (isset($answer)) {
     $DatosIncapacidad["TipoIDMedico"] = $TipoIDMedico;
     $DatosIncapacidad["IDNumberMedico"] = $IDNumberMedico;
     $DatosIncapacidad['Especialidad'] = $DoctorData["Especialidad"];
-    $DatosIncapacidad['Registro'] = isset($DoctorData["NMédicoSS"]);
+    $DatosIncapacidad['Registro'] = isset($DoctorData["NMï¿½dicoSS"]);
     $DatosIncapacidad['CentroSanitario'] =  $DoctorData["CentroSanitario"];
 
     $Doc = ltrim($DoctorData["Episodio"], '0');} else {
@@ -67,7 +67,7 @@ if (isset($answer)) {
     if($messageMedellin === "000"){
         $DataPaciente = $DataPacienteMedellin;
         $CentroSanitario = "HSVM";
-        $Lugar = "Medellín";
+        $Lugar = "Medellï¿½n";
         
     }elseif($messageRionegro === "000"){
         $DataPaciente = $DataPacienteRionegro;
@@ -103,7 +103,7 @@ if (isset($answer)) {
             $DatosIncapacidad['Sexo'] = $DatosBasicos["Sexo"];
             $UbicacionPaciente = isset($DataPaciente["DatosEpisodio"]["Ubicacion"]) 
             ? $DataPaciente["DatosEpisodio"]["Ubicacion"] 
-            : "Ubicación no disponible";
+            : "Ubicaciï¿½n no disponible";
         
             if(array_key_exists('DatosUltimoEpisodio', $DataPaciente)){
                 
@@ -127,11 +127,7 @@ if (isset($answer)) {
             }
             
             
-
-
-            
-
-            
+           
         }
 
         foreach($DatosIncapacidad as $key => $value){

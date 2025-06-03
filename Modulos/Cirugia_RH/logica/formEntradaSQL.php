@@ -40,6 +40,16 @@ if (isset($_POST['episodio'])) {
         $centrosanitario = $_POST['centrosanitario'];
 
         // Ejecutar el primer procedimiento almacenado
+        // if ($result = $conexion->query("CALL sp_insertar_formulario_cirugia('$episodio', 
+        //                                                 '$num_documento', 
+        //                                                 '$edad', 
+        //                                                 '$sexo', 
+        //                                                 '$nombre', 
+        //                                                 '$asegurador',
+        //                                                 '$cirujano', 
+        //                                                 '$especialidad', 
+        //                                                 '$fecha','$centrosanitario')")) {
+        // Ejecutar el primer procedimiento almacenado
         if ($result = $conexion->query("CALL sp_insertar_formulario_cirugia('$episodio', 
                                                         '$num_documento', 
                                                         '$edad', 
@@ -48,7 +58,7 @@ if (isset($_POST['episodio'])) {
                                                         '$asegurador',
                                                         '$cirujano', 
                                                         '$especialidad', 
-                                                        '$fecha','$centrosanitario')")) {
+                                                        '$fecha')")) {
             // Recuperar el ID del paciente insertado
             if ($row = $result->fetch_assoc()) {
                 $idPaciente = $row['id_paciente'];

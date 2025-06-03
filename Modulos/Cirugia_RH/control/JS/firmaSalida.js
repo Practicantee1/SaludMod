@@ -7,6 +7,25 @@ $(document).ready(function() {
 
     $('#guardarFirmaSalida').on('click',async function(event) {
 
+        let firmasAcumulado = 0;
+        let cantidadFirmas = document.querySelectorAll(".validarBtn");
+        cantidadFirmas.forEach(element => {     
+            if(element.dataset.firmado == "Si"){
+                firmasAcumulado++;
+            }
+        });
+
+        if(firmasAcumulado < 4){
+            Swal.fire({
+                icon: "error",
+                title: "No se pueden guardar las firmas",
+                text: "Deben firmar mínimo 4 personas para completar esta acción",
+                confirmButtonText: "¡Entendido!",
+                confirmButtonColor: "#006941",
+            });
+            return;
+        }
+
         let resultado = await Swal.fire({
             icon: "info",
             title: "¿Estás seguro que quieres completar las firmas de esta pausa?",

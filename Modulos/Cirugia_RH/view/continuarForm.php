@@ -45,9 +45,9 @@ if (!isset($_SESSION["nombre"])) {
                             <thead class="thead-light">
                                     <tr>
                                         <th class="text-center bg-success">Fecha </th>
-                                        <th class="text-center bg-success">Número episodio</th>
-                                        <th class="text-center bg-success">Número documento</th>
-                                        <th class="text-center bg-success">Nombre del paciente</th>
+                                        <th class="text-center bg-success">N episodio</th>
+                                        <th class="text-center bg-success">N documento</th>
+                                        <th class="text-center bg-success">Nombre paciente</th>
                                         <th class="text-center bg-success">Primera Pausa</th>
                                         <th class="text-center bg-success">Segunda Pausa</th>
                                         <th class="text-center bg-success">Tercera Pausa</th>

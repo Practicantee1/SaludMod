@@ -24,7 +24,6 @@ $(document).ready(function() {
         if(paciente == null){
             paciente = window.paciente;
         }
-	console.log("Al menos llega aqui");
         $.ajax({
             type: "POST",
             data: {paciente: paciente, tipo_Firma: "INICIO"},
@@ -46,9 +45,9 @@ $(document).ready(function() {
         //$('#guardarFirmaEntrada').prop("disabled", true);
         //$('.add-row').prop("disabled", true);
         //$(".remove-row ").prop("disabled", true);
-	$('#guardarFirmaEntrada').prop("disabled", true);
+	    // $('#guardarFirmaEntrada').prop("disabled", true);
         $('#agregarInicio').prop("disabled", true);
-        $(".firma-item .remove-row ").prop("disabled", true);
+        // $(".firma-item .remove-row ").prop("disabled", true);
     });
 });
 

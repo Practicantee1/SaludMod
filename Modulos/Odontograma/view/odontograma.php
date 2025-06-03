@@ -104,12 +104,11 @@ if (!isset($_SESSION["nombre"])) {
                                 </div>
 
                             </div>
-
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <center><label for="cama">Cama:</label></center>
                                     <input type="text" id="cama" name="cama" class="form-control" readonly
-                                        value="<?php echo isset($UbicacionPaciente["IdUbicacion_cama"]) && !empty($UbicacionPaciente["IdUbicacion_cama"]) ? $UbicacionPaciente["IdUbicacion_cama"] : ''; ?>">
+                                        value="<?php echo isset($UbicacionPaciente["IdUnidad_Organizativa"]) && !empty($UbicacionPaciente["IdUnidad_Organizativa"]) ? $UbicacionPaciente["IdUnidad_Organizativa"] : ''; ?>">
                                 </div>
                                 <div class="form-group col-md-8">
                                     <center><label for="entidad">Aseguradora:</label></center>
@@ -369,20 +368,20 @@ if (!isset($_SESSION["nombre"])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Obtener los parámetros de la URL
+        // Obtener los parï¿½metros de la URL
         const params = new URLSearchParams(window.location.search);
 
-        // Suponiendo que 'param' es el parámetro que quieres decodificar
+        // Suponiendo que 'param' es el parï¿½metro que quieres decodificar
         const encodedParam = params.get('param');
 
         if (encodedParam) {
-            // Decodificar el parámetro en base64
+            // Decodificar el parï¿½metro en base64
             let parametros = window.atob(encodedParam);
 
             // Parsear el JSON
             const data = JSON.parse(parametros);
 
-            // Obtener el último objeto del array `parametros`
+            // Obtener el ï¿½ltimo objeto del array `parametros`
             const lastParam = data.parametros[data.parametros.length - 1];
 
             // Obtener el valor del campo
@@ -422,7 +421,8 @@ if (!isset($_SESSION["nombre"])) {
         // Check if the user clicked the "Confirm" button
         if (result.isConfirmed) {
           // Redirect to another page
-          window.location.href = 'ConsultarSolicitud.php';
+        //   window.location.href = 'ConsultarSolicitud.php';
+            window.location.href = "./buscarOdontograma.php"
         } else {
           // Close the current tab
           window.close();
@@ -433,6 +433,44 @@ if (!isset($_SESSION["nombre"])) {
 
 <script src="../Control/JS/controlOdonto.js"></script>
 
+<script>
+    $(document).ready(() => {
+        let nombrePacient = $("#nombrePaciente").val();
+        let documentoPaciente = $("#nroDoc").val();
+        let ubicacionPaciente = $("#ubicacion").val();
+        let camaPaciente = $("#cama").val();
+        let episodio = $("#episodio").val();
+
+        if(nombrePacient == "" && documentoPaciente == "" && episodio != ""){
+            mostrarAlerta("Episodio no encontrado", "No se encontrÃ³ informaciÃ³n para el episodio ingresado.");
+            return;
+        }
+
+        if(ubicacionPaciente == "" && camaPaciente == "" && episodio != "" && nombrePacient != "" && documentoPaciente != ""){
+            mostrarAlerta("Paciente de alta", "El paciente con el episodio asociado estÃ¡ en estado de alta");
+            return;
+        }
+    });
+
+
+    function mostrarAlerta(titulo, texto){
+        Swal.fire({
+            icon: "info",
+            title: titulo,
+            text: texto,
+            confirmButtonText: "Entendido",
+            confirmButtonColor: "#066E45",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href = "./buscarOdontograma.php"
+            }      
+        });
+    }
+    
+</script>
 </html>
         <?php
     } else {

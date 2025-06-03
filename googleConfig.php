@@ -9,8 +9,11 @@ $clientID = '14374271811-ch38fb2k3iggtg69hen66m2cm35ujoh5.apps.googleusercontent
 $clientSecret = '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';
 
 //Link de direccionamiento al momento de verificar el logueo de google
-$redirectUri = 'http://vmsrv-web2.hospital.com/SaludMod/view/login.php';
+//$redirectUri = 'http://vmsrv-web2.hospital.com/SaludMod/view/login.php';
 //$redirectUri = 'http://localhost/SaludMod/view/login.php';
+
+$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['SCRIPT_NAME']}";
+$redirectUri = $url;
   
 // create Client Request to access Google API 
 $client = new Google_Client();

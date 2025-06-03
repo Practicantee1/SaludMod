@@ -50,6 +50,7 @@ function llenarFirmas(mensaje){
         inputsFirmas.querySelector(".documento").value = mensaje[indice].num_documento;
 
         inputsFirmas.querySelector(".validarBtn").disabled = true;
+        inputsFirmas.querySelector(".validarBtn").dataset.firmado = "Si";
 
         inputsFirmas.querySelector(".documento").dataset.id = mensaje[indice].idusuario;
         

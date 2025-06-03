@@ -131,10 +131,9 @@ $(document).ready(function() {
                     //$('#salida-tab').prop('disabled', false).removeClass('disabled');
                     $('#idFormEntrada input, #idFormEntrada select, #idFormEntrada textarea').prop('disabled', true); 
                     $('#idProcedimientoDatos input, #idProcedimientoDatos select, #idProcedimientoDatos textarea').prop('disabled', true); 
-                    document.getElementById('guardarFirmaEntrada').removeAttribute('disabled');
                     //document.getElementById("agregarInicio").removeAttribute('disabled');
                     document.getElementById("firmas-container").querySelector(".validarBtn").removeAttribute('disabled');
-                    document.getElementById("firmas-container").querySelector(".remove-row").removeAttribute('disabled');
+                    // document.getElementById("firmas-container").querySelector(".remove-row").removeAttribute('disabled');
 
                     
                     Swal.fire({

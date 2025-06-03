@@ -68,7 +68,7 @@ if (!isset($_SESSION["nombre"])) {
                                         <h4 class="form-label text-divider-r"><span class="left-span" ></span><span>INFORMACIÓN GENERAL</span></h4>
                                         <br>
                                         <div class="well">
-                                            <div class="row">
+                                            <div class="row mb-3">
                                                 <div class="col-md-4">
                                                     <label>Número de episodio</label>
                                                     <input type="number" id="episodio" class="form-control rqr" name="episodio" required>
@@ -82,11 +82,11 @@ if (!isset($_SESSION["nombre"])) {
                                                     <input readonly type="text" id="idEdad" class="form-control rqr" name="idEdad">
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <label>G�nero</label>
+                                                    <label>Género</label>
                                                     <input readonly type="text" id="idSexo" class="form-control rqr" name="idSexo">
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <label>Nombres del paciente</label>
                                                     <input readonly type="text" class="form-control rqr" id="idNombrePaciente" name="idNombrePaciente">
@@ -96,13 +96,13 @@ if (!isset($_SESSION["nombre"])) {
                                                     <input readonly type="text" class="form-control rqr" id="idAsegurador" name="asegurador" disabled>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <label>Procedimiento</label>
                                                     <input type="text" class="form-control rqr fechasDP" id="idProcedimiento" name="idProcedimiento" required>                                    
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mb-3">
                                                 <div class="col-md-4">
                                                     <label>Nombre del responsable</label>
                                                     <input type="text" class="form-control rqr fechasDP" id="idNombreCirujano" name="idNombreCirujano" required>
@@ -115,6 +115,16 @@ if (!isset($_SESSION["nombre"])) {
                                                 <div class="col-md-4">
                                                     <label>Fecha de la cirugía</label>
                                                     <input readonly type="text" class="form-control" id="Fecha" name="Fecha">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-4">
+                                                    <label>Ubicación</label>
+                                                    <input  readonly type="text" class="form-control" id="idUbicacion" name="idUbicacion" required >
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label>Ubicación Quirófano</label>
+                                                    <input  readonly type="text" class="form-control" id="idUbicacionQuiro" name="idUbicacionQuiro" required >
                                                 </div>
                                             </div>
                                             <br>
@@ -210,7 +220,7 @@ if (!isset($_SESSION["nombre"])) {
                                                             </select>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr id="seleccionar">
                                                         <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">5.2 Seleccione el lugar de la marcación :</td>
                                                         <td id="tds">
                                                             <select class="form-control form-completar" style="width: 100%; height: 50%;" name="Seleccione" id="idSeleccione" required disabled>
@@ -385,6 +395,9 @@ if (!isset($_SESSION["nombre"])) {
                                                 </div>
                                             </form>
                                             <br>
+                                            <h4 class="form-label text-divider-rh"><span class="left-span"></span><span>EQUIPO IQ</span></h4>
+                                            <br>
+                                            <br>
                                             <h4 class="form-label text-divider-rh"><span class="left-span"></span><span>FIRMAS ANTES DE LA INDUCCIÓN DE LA CIRUGÍA</span></h4>
                                             <br>
                                             <form id="firmas" method="POST" enctype="multipart/form-data">
@@ -392,7 +405,7 @@ if (!isset($_SESSION["nombre"])) {
                                                     <!-- <div style="text-align: right;"> 
                                                         <button type="button" class="btn btn-success add-row" id="agregarInicio">+</button>
                                                     </div> -->                                                    
-						    <div class="row firma-item">
+						                            <div class="row firma-item">
                                                         <div class="col-md-3">
                                                             <label>Cargo</label>
                                                             <input readonly type="text" class="form-control rqr cargo" name="idCargoEntrada[]">
@@ -411,14 +424,13 @@ if (!isset($_SESSION["nombre"])) {
                                                         <div class="col-md-3">
                                                             <br>
                                                             <button type="button" class="btn btn-primary validarBtn" data-bs-toggle="modal" data-bs-target="#Modal" data-tipo="INICIO" >FIRMAR</button>
-                                                            <button type="button" class="btn btn-danger remove-row" data-tipo="INICIO">-</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div id="contenedor-boton-entrada">
+                                                <!-- <div id="contenedor-boton-entrada">
                                                     <input type="button" id="guardarFirmaEntrada" name="agregarEntrada" class="btn" value="Guardar Firma Entrada">
-                                                </div>
+                                                </div> -->
                                             </form>
                                             <div class="table-responsive" style="width: 950px;">
                                                 <table class="table table-striped table-entrada">
@@ -474,7 +486,7 @@ if (!isset($_SESSION["nombre"])) {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">3. Existen riesgos adicionales:</td>
+                                                        <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">3. Cumple el número máximo de personas permitidas (9 incluyendo el paciente):</td>
                                                         <td id="tds">
                                                             <select class="form-control form-completar" style="width: 100%; height: 50%;" name="Existen" id="id_Existen" required>
                                                                 <option value="" disabled selected>Seleccione</option>
@@ -505,8 +517,8 @@ if (!isset($_SESSION["nombre"])) {
                                                     </tr>
                                                     <tr id="texto_Plan_completar">
                                                         <td colspan="2">
-							    <textarea placeholder="5.1. ¿Cuáles antibióticos? ¿En qué momento?" style="width: 100%; padding: 5px; margin:0; border:0; text-align: left;" id="textoarea_Plan" readonly></textarea>
-							</td>
+                                                            <textarea placeholder="5.1. ¿Cuáles antibióticos? ¿En qué momento?" style="width: 100%; padding: 5px; margin:0; border:0; text-align: left;" id="textoarea_Plan" readonly></textarea>
+                                                        </td>
                                                     </tr>
 
                                                     <tr>
@@ -548,8 +560,16 @@ if (!isset($_SESSION["nombre"])) {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="left-align sub-header" colspan="2" style="font-weight: bold; font-size: 16px;background-color: #006941;">
-                                                            Se confirma con Perfusionista</th>
+                                                        <th class="left-align sub-header" style="font-weight: bold; font-size: 16px;background-color: #006941;">
+                                                            Se confirma con Perfusionista
+                                                        </th>
+                                                        <th id="perfusionista">
+                                                            <div class="form-check form-switch">
+                                                                
+                                                                <input class="form-check-input" type="checkbox" id="confirm_perfusionista" name="confirm_perfusionista">
+                                                                <label class="form-check-label" for="confirm_perfusionista">SI/NO</label>
+                                                            </div>
+                                                        </th>
                                                     </tr>
                                                     <tr>
                                                         <td class="left-align sub-header" style="font-family: Arial, sans-serif; font-size: 15px; text-align: left;">8. Se validaron detalles relevantes respecto a la canulación:</td>
@@ -558,6 +578,7 @@ if (!isset($_SESSION["nombre"])) {
                                                                 <option value="" disabled selected>Seleccione</option>
                                                                 <option value="si">Sí</option>
                                                                 <option value="no">No</option>
+                                                                <option value="N/A">N/A</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -568,6 +589,7 @@ if (!isset($_SESSION["nombre"])) {
                                                                 <option value="" disabled selected>Seleccione</option>
                                                                 <option value="si">Sí</option>
                                                                 <option value="no">No</option>
+                                                                <option value="N/A">N/A</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -578,6 +600,7 @@ if (!isset($_SESSION["nombre"])) {
                                                                 <option value="" disabled selected>Seleccione</option>
                                                                 <option value="si">Sí</option>
                                                                 <option value="no">No</option>
+                                                                <option value="N/A">N/A</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -704,7 +727,7 @@ if (!isset($_SESSION["nombre"])) {
                                                         </div>
                                                         <div class="col-md-3">
                                                             <br>
-                                                            <button type="button" class="btn btn-primary validarBtn abrirModal" data-tipo="FINAL">FIRMAR</button>
+                                                            <button type="button" class="btn btn-primary validarBtn abrirModal" data-tipo="FINAL" data-firmado="No">FIRMAR</button>
                                                             <button type="button" class="btn btn-danger remove-row" data-tipo="FINAL">-</button>
                                                         </div>
                                                     </div>

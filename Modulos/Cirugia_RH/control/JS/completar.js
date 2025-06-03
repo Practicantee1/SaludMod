@@ -40,7 +40,7 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     } else {
                         document.getElementById('guardarEntrada').style.display = 'none'; // Oculta el bot贸n
                         document.getElementById('idObservacionesEntrada').disabled = true;  
-                        document.getElementById('guardarFirmaEntrada').removeAttribute('disabled'); 
+                        // document.getElementById('guardarFirmaEntrada').removeAttribute('disabled'); 
                         $('#pausa-tab').prop('disabled', false).removeClass('disabled');                 
                     }
                    
@@ -82,7 +82,11 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     }
                     $('#id_Consentimiento').val(item.Consentimiento);
                     $('#Marcacion').val(item.Marcacion);
-                    $('#idSeleccione').val(item.Seleccione);
+                    if(item.Seleccione !== null && item.Seleccione !== undefined && item.Seleccione !== ""){
+                        $('#idSeleccione').val(item.Seleccione); 
+                    }else{
+                        $("#seleccionar").prop("hidden", true);
+                    }
                     $('#id_Verificacion').val(item.Verificacion);
                     $('#id_Confirmacion').val(item.Confirmacion);
                     $("#id_esterilidad").val(item.esterilidad);
@@ -134,6 +138,10 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                     select.forEach(select => {
                         select.style.fontWeight  = "bold";
                     });
+
+                    if($("#id_equipoHumano").val() != "" && $("#id_equipoHumano").val() != null){
+                        $("#confirm_perfusionista").prop("disabled", true)
+                    }
                 
                     
                     // L贸gica para habilitar/deshabilitar campos seg煤n los valores
@@ -211,13 +219,25 @@ function consultar(id_Paciente) { // Cambiado a 'idPaciente'
                         }
                     });
 
+                    if ($("input[name='confirm_perfusionista']:checked").length === 0) {
+                        $("#id_T").prop("disabled", true);
+                        $("#id_Detalles_relevantes").prop("disabled", true);
+                        $("#id_perfusion").prop("disabled", true);
+                    }
+                    console.log("pdpsdpksd", $("#id_T").val())
+                    if($("#id_T").val() == null ){
+                        console.log("Entra aquiiiii")
+                        $("#id_T").val("N/A");
+                        $("#id_Detalles_relevantes").val("N/A");
+                        $("#id_perfusion").val("N/A");
+                    }
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "No se encontr贸 informaci贸n...",
                         text: "No hay registros disponibles",
-			confirmButtomText: "ntendido!",
-			confirmButtomColor: "#066E45"
+                        confirmButtomText: "锟紼ntendido!",
+                        confirmButtomColor: "#066E45"
                     });
                 }
             } else {

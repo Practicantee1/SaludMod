@@ -469,6 +469,20 @@ if (!isset($_SESSION["nombre"])) {
             <script src="../../../view/scripts/usuario.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 <script>
+    $(document).ready(async function(){
+        let dato = await new Promise(resolve => {
+            $.ajax({
+                url: "./prueba.php",
+                type: "POST",
+                success: function(response){
+                    response = JSON.parse(response)
+                    console.log(response.DatosPaciente)
+                }
+            });
+        })
+    });
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         let idProfesional = "<?php echo $idusuario ?>";
         console.log("id: " + idProfesional);

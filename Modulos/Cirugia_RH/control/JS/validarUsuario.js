@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  if (validarBtn) {
                      validarBtn.disabled = false; // Deshabilitar el botón
                  }
-
+                nuevaFila.querySelector(".validarBtn").dataset.firmado = "No";
                 // Agregar la nueva fila al contenedor específico
                 const contenedor = document.getElementById(tipo === 'entrada' ? 'firmas-container' : 'firmas-container-salida');
                 contenedor.appendChild(nuevaFila);
@@ -154,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        console.log(firma);
         return firma
     }
 
@@ -188,13 +187,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Evento para el botón "Confirmar" en el modal
     document.getElementById('confirmarBtn').addEventListener('click', function(e) {
         let tipo = e.target.getAttribute("data-firma");
-        let datos;
         if(paciente == null){
             paciente = window.paciente;
         }
         let username = document.getElementById('username').value;
         let password = document.getElementById('password').value;
         let boleano = true;
+        let firmaInicio = false;
 
         // Validar que los campos no estén vacíos
         if (username === '' || password === '') {
@@ -217,22 +216,27 @@ document.addEventListener('DOMContentLoaded', function() {
                             mostrarMensaje('Credenciales correctas', 'success');
                             // Llenar los campos de la fila actual
                             if (filaActual.closest('#firmas-container')) {
+                                firmaInicio = await confirmarFirmas();
+                                if(!firmaInicio) return;
+                                actualizarFirma(paciente, jsonResponse.id_usuario);
+
                                 // Si está en el contenedor de firmas de entrada
                                 filaActual.querySelector('[name="idNombreFirmaEntrada[]"]').value = jsonResponse.nombre;
                                 filaActual.querySelector('[name="idDocumentoFirmaEntrada[]"]').value = jsonResponse.num_documento;
                                 filaActual.querySelector('[name="idCargoEntrada[]"]').value = jsonResponse.cargo;
                                 const inputEntrada = filaActual.querySelector('.documento');
 
-                                datos = await ingresarFirmar(jsonResponse.id_usuario, paciente, tipo);
                                 inputEntrada.setAttribute("data-id", jsonResponse.id_usuario);
                                 
+                                
                             } else if (filaActual.closest('#firmas-container-salida')) {
+
                                 // Si está en el contenedor de firmas de salida
                                 filaActual.querySelector('[name="idNombreFirmaSalida[]"]').value = jsonResponse.nombre;
                                 filaActual.querySelector('[name="idDocumentoFirmaSalida[]"]').value = jsonResponse.num_documento;
                                 filaActual.querySelector('[name="idCargoSalida[]"]').value = jsonResponse.cargo;
                                 const inputEntrada = filaActual.querySelector('.documento');
-
+                                filaActual.querySelector(".validarBtn").dataset.firmado = "Si";
                                 datos = await ingresarFirmar(jsonResponse.id_usuario, paciente, tipo);           
                                 inputEntrada.setAttribute("data-id", jsonResponse.id_usuario);
                             }
@@ -265,9 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         mostrarMensaje(jsonResponse.message, 'error');
                     }
                 } catch (e) {
-                    // console.log("Nombre del error:", e.name);     // ej: TypeError, ReferenceError
-                    // console.log("Mensaje del error:", e.message); // ej: "Cannot read property 'x' of null"
-                    // console.log("Stack trace:", e.stack);
                     mostrarMensaje('Error en la respuesta del servidor', 'error');
                 }
             },
@@ -298,6 +299,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
+async function confirmarFirmas(){
+    let resultado = await Swal.fire({
+        icon: "info",
+        title: "¿Estás seguro que quieres completar las firmas de esta pausa?",
+        text: "Esta acción no se puede revertir",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#006941",
+        confirmButtonText: "Confirmar"
+    });
+
+    return resultado.isConfirmed;
+}
+
+async function actualizarFirma(paciente, usuario){
+    $.ajax({
+        type: "POST",
+        data: {paciente: paciente, usuario: usuario},
+        url: '../logica/guardarFirmaInicio.php',
+        success: function(response){
+            response = JSON.parse(response);
+
+            if(response.succes){
+                Swal.fire({
+                    icon: response.success ? "success" : "error",
+                    title: response.success ? "Proceso éxitoso" : "Error en el proceso",
+                    text: response.message,
+                    confirmButtonColor: "#006941",
+                    confirmButtonText: "Finalizar"
+                });    
+            }
+            
+        }
+    });
+    console.log("Devuelve la respuesta");
+    //$('#guardarFirmaEntrada').prop("disabled", true);
+    //$('.add-row').prop("disabled", true);
+    //$(".remove-row ").prop("disabled", true);
+	// $('#guardarFirmaEntrada').prop("disabled", true);
+    $('#agregarInicio').prop("disabled", true);
+    // $(".firma-item .remove-row ").prop("disabled", true);
+}
 
 
 // //  BLOQUEO DE BOTON FIRMA ARREGLAR
