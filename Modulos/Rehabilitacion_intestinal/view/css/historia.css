@@ -206,3 +206,23 @@ td:first-child {
     flex: 1;
     padding: 0 10px;
 }
+
+#tipoEstudio option{
+    text-align: left;
+}
+
+.borde_tabla{
+    border: 1px solid black;
+}
+
+.elim{
+    border: 1px solid;
+}
+
+.swal2-timer-progress-bar{
+    background-color: #006941;
+}
+
+.negrilla_borde{
+    font-weight: bold;
+}

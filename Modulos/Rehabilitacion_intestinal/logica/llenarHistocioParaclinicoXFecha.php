@@ -11,37 +11,19 @@ if ($conexion->connect_error) {
 }
 
 // Validar si el parámetro 'episodio' está definido
-if (isset($_POST['episodio']) && isset($_POST['documento'])) {
+if (isset($_POST['episodio']) && isset($_POST['documento']) && isset($_POST['fechaDesde']) && isset($_POST['fechaHasta'])) {
     $episodio = (int)$_POST['episodio'];
     $documento = $_POST['documento'];
+    $fechaDesde = $_POST['fechaDesde'];
+    $fechaHasta = $_POST['fechaHasta'];
     $examenes = [];
 
-
-    if(!isset($_POST['opcionHistorico'])){
-        echo json_encode(['status' => 'error', 'message' => 'Falta la opción de historial']);
-        exit;
-    }
-
     // Preparar la consulta SQL
-    if($_POST['opcionHistorico'] == "full"){
-        $sql = "CALL SP_consulta_examenes_RI(?, ?)";
-        $a = "hola";
-    }else{
-        $sql = "CALL SP_consulta_examenes_porfecha_RI(?, ?, ?, ?)";
-        $fechaDesde = $_POST['fechaDesde'];
-        $fechaHasta = $_POST['fechaHasta'];
-        $a = "d";
-    }
-
-    
+    $sql = "CALL SP_consulta_examenes_porfecha_RI(?, ?, ?, ?)";
     if ($stmt = $conexion->prepare($sql)) {
         // Vincular parámetro y ejecutar la consulta
-        if($_POST['opcionHistorico'] == "full"){
-            $stmt->bind_param('is', $episodio, $documento);
-        }else{
-            $stmt->bind_param('isss', $episodio, $documento, $fechaDesde, $fechaHasta);
-        }
-    
+        $stmt->bind_param('is', $episodio, $documento);
+
         if ($stmt->execute()) {
             $result = $stmt->get_result();
 
@@ -110,5 +92,3 @@ if (isset($_POST['episodio']) && isset($_POST['documento'])) {
 
 $conexion->close();
 ?>
-	
-

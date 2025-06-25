@@ -16,9 +16,10 @@ if (!isset($_SESSION["nombre"])) {
     $_SESSION['module_title'] = "Reportes paraclinicos";
     require_once '../../../view/template/header.php';
 
-    if ($_SESSION['Rehabilitacion_intestinal'] == 1) {
+    // if ($_SESSION['Rehabilitacion_intestinal'] == 1) {
+    if (1 == 1) {
         if (isset($_GET["param"]) && $_GET["param"] !== "") {
-            // $_SESSION["param"] = $_GET["param"];
+            $_SESSION["param"] = $_GET["param"];
         }
 
         require '../../../logica/ApiURL.php';
@@ -36,9 +37,33 @@ if (!isset($_SESSION["nombre"])) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Reportes paraclinicos</title>
             <link rel="stylesheet" href="<?php echo BASE_URL; ?>../Modulos/Rehabilitacion_intestinal/view/css/historia.css">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         </head>
 
         <body>
+            <!-- Modal para copiar texto en el portapapeles -->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Plantilla</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="plantilla" style="width: 100%; height: 60vh; background-color: #f1f1f1; resize: none; font-family: monospace;white-space: pre; overflow-y: auto; font-size: 0.7rem;"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="bi bi-x"></i> Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="boton_copiar"><i class="bi bi-copy"></i> Copiar</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-wrapper">
                 <div id="alertContainer" class="alert" role="alert"></div>
                 <div class="container-fluid">
@@ -61,21 +86,24 @@ if (!isset($_SESSION["nombre"])) {
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <center><label for="episodio">Episodio:</label></center>
-                                            <input type="text" id="episodio" name="episodio" class="form-control"
+                                            <input type="text" id="episodio" name="episodio" class="form-control bloquear"
                                                 value="<?php echo $Doc ?>">
                                         </div>
                                         <div class="form-group col-md-4" style="display:none;">
-                                            <input readonly type="text" id="tipo" name="tipo" class="form-control"
+                                            <input readonly type="text" id="tipo" name="tipo" class="form-control bloquear"
                                                 value="<?php echo $DatosIncapacidad['TypeIdentification']; ?>">
                                         </div>
+                                        <!-- <div>
+                                            <button id="ja">AJA</button>
+                                        </div> -->
                                         <div class="form-group col-md-3">
-                                            <center><label for="nroDoc">Numero de documento:</label></center>
-                                            <input type="text" id="nroDoc" name="nroDoc" class="form-control"
+                                            <center><label for="nroDocu">Numero de documento:</label></center>
+                                            <input type="text" id="nroDocu" name="nroDocu" class="form-control docu bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['IDNumberPaciente']) && !empty($DatosIncapacidad['IDNumberPaciente']) ?$DatosIncapacidad['IDNumberPaciente']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <center><label for -="nombre">Nombre paciente:</label></center>
-                                            <input type="text" id="nombre" name="nombre" class="form-control"
+                                            <input type="text" id="nombre" name="nombre" class="form-control bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['NombreApellido']) && !empty($DatosIncapacidad['NombreApellido']) ?$DatosIncapacidad['NombreApellido']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-1" hidden>
@@ -88,22 +116,22 @@ if (!isset($_SESSION["nombre"])) {
                                     <div class="row">
                                         <div class="form-group col-md-2">
                                             <center><label for="edad">Edad:</label></center>
-                                            <input type="text" id="edad" name="edad" class="form-control"
+                                            <input type="text" id="edad" name="edad" class="form-control bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['Edad']) && !empty($DatosIncapacidad['Edad']) ?$DatosIncapacidad['Edad']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <center><label for="sexo">Genero:</label></center>
-                                            <input type="text" id="sexo" name="sexo" class="form-control"
+                                            <input type="text" id="sexo" name="sexo" class="form-control bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['Sexo']) && !empty($DatosIncapacidad['Sexo']) ?$DatosIncapacidad['Sexo']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <center><label for="ubicacion">Ubicacion:</label></center>
-                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control"
+                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control bloquear"
                                                 value="<?php echo isset($UbicacionPaciente["UbicacionEdificio"]) && !empty($UbicacionPaciente["UbicacionEdificio"]) ?$UbicacionPaciente["UbicacionEdificio"]:''; ?>">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <center><label for="cama">Cama:</label></center>
-                                            <input type="text" id="cama" name="cama" class="form-control"
+                                            <input type="text" id="cama" name="cama" class="form-control bloquear"
                                                 value="<?php echo isset($UbicacionPaciente["IdUbicacion_cama"]) && !empty($UbicacionPaciente["IdUbicacion_cama"]) ?$UbicacionPaciente["IdUbicacion_cama"]:''; ?>">
                                         </div>
                                     </div>
@@ -111,7 +139,7 @@ if (!isset($_SESSION["nombre"])) {
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <center><label for="entidad">Aseguradora:</label></center>
-                                            <input type="text" id="entidad" name="entidad" class="form-control"
+                                            <input type="text" id="entidad" name="entidad" class="form-control bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['NomEntidad']) && !empty($DatosIncapacidad['NomEntidad']) ?$DatosIncapacidad['NomEntidad']:''; ?>">
                                         </div>
 
@@ -129,12 +157,12 @@ if (!isset($_SESSION["nombre"])) {
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <center><label for="especialidad">Especialidad:</label></center>
-                                            <input type="text" id="especialidad" name="especialidad" class="form-control" value="<?php echo isset($DatosIncapacidad['Especialidad']) && !empty($DatosIncapacidad['Especialidad']) ?$DatosIncapacidad['Especialidad']:''; ?>" >
+                                            <input type="text" id="especialidad" name="especialidad" class="form-control bloquear" value="<?php echo isset($DatosIncapacidad['Especialidad']) && !empty($DatosIncapacidad['Especialidad']) ?$DatosIncapacidad['Especialidad']:''; ?>" >
                                         </div>
                                         
                                         <div class="form-group col-md-7">
                                             <center><label for -="nombre">Nombre medico:</label></center>
-                                            <input type="text" id="nombreMed" name="nombreMed" class="form-control"
+                                            <input type="text" id="nombreMed" name="nombreMed" class="form-control bloquear"
                                                 value="<?php echo isset($DatosIncapacidad['NombreMedico']) && !empty($DatosIncapacidad['NombreMedico']) ?$DatosIncapacidad['NombreMedico']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-1" hidden >
@@ -167,7 +195,7 @@ if (!isset($_SESSION["nombre"])) {
                                             </a>
                                         </td>
                                     </div>
-                                    <div class="exam-container">
+                                    <div class="exam-container container">
                                         <div class="exam-item" id="leucocitos">
                                             <input type="text" placeholder="Valor" class="value-input">
                                             <label>LEUCOCITOS</label>
@@ -288,10 +316,10 @@ if (!isset($_SESSION["nombre"])) {
                                             <input type="text" placeholder="Valor" class="value-input">
                                             <label>PRE-ALBUMINA</label>
                                         </div>
-                                        <div class="exam-item" id="electroforesis_proteinas">
+                                        <!-- <div class="exam-item" id="electroforesis_proteinas">
                                             <input type="text" placeholder="Valor" class="value-input">
                                             <label>ELECTROFORESIS DE PROTEINAS</label>
-                                        </div>
+                                        </div> -->
                                         <div class="exam-item" id="vitamina_b12">
                                             <input type="text" placeholder="Valor" class="value-input">
                                             <label>VITAMINA B12</label>
@@ -323,23 +351,67 @@ if (!isset($_SESSION["nombre"])) {
                                                 <label>GASES Ph</label>
                                             </div>
                                         </div>
-                                        <div class="exam-item" id="aislamientos">
+                                        <!-- <div class="exam-item col-12" id="examenesComplementarios">
+                                            <label>EXAMENES COMPLEMENTARIOS</label>
+                                            <input type="text" placeholder="Valor" class="value-input">
+                                        </div> -->
+                                        <div class="exam-item col-12" id="examenesComplementarios">
+                                            <label style="font-size:16px; font-weight:bold;"
+                                                for="aislamientos">EXAMANES COMPLEMENTARIOS</label>
+                                            <div class="row gy-2" style="display: flex; justify-content: center;align-items: center;">
+                                                <div class="col-md-4">
+                                                    <label for="nombreExamen">NOMBRE</label>
+                                                    <input type="text" placeholder="Valor" class="value-input"
+                                                        id="nombreExamen" value="">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label for="valorExamen">VALOR</label>
+                                                    <input type="text" placeholder="Valor" class="value-input"
+                                                        id="valorExamen" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="margin-left: 0px;">
+                                                <button id="agregar_examen" class="btn btn-primary" style="width: 10vw;"><i class="bi bi-plus-circle"></i> Agregar</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-5">
+                                            <table class="table table-striped" id="tabla_examenes">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="font-weight: bold;">Nombre Examen</th>
+                                                        <th style="font-weight: bold;">Valor Examen</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="exam-item " id="aislamientos">
                                             <label style="font-size:16px; font-weight:bold;"
                                                 for="aislamientos">AISLAMIENTOS</label>
-                                            <div class="row gy-2">
-                                                <div class="col-md-6 col-12">
-                                                    <label for="fechaAislamientos">FECHA</label>
-                                                    <input type="date" placeholder="Valor" class="value-input"
-                                                        id="fechaAislamientos">
+                                            <div class="row gy-2" style="display: flex; justify-content: center;align-items: center;">
+                                                <div hidden class="col-md-12" id="mensaje_cultivos" style="width: 50vw; height: auto; margin: 20px; display: flex; justify-content: center;align-items: center;">
+                                                    <p style="margin-top: 10px"></p>
                                                 </div>
                                                 <div class="col-md-6 col-12">
+                                                    <label for="fechaAislamientos">FECHA</label>
+                                                    <input type="datetime-local" placeholder="Valor" class="value-input"
+                                                        id="fechaAislamientos" value="">
+                                                </div>
+                                                <div class="col-md-6 col-12" id="cultivos_">
                                                     <label for="tipoEstudio">MUESTRA</label>
                                                     <select class="value-input" id="tipoEstudio" name="tipoEstudio"
                                                         onchange="toggleOtherInput()">
-                                                        <option value="" disabled selected hidden></option>
+                                                        <option value="" disabled selected >Seleccionar</option>
                                                         <option value="urocultivo">Urocultivo</option>
-                                                        <option value="hemocultivo">Hemocultivo</option>
-                                                        <option value="otros">Otros</option>
+                                                        <option value="hemocultivoPediatri">Hemocultivo pediatrico aerobio</option>
+                                                        <option value="hemocultivoAero">Hemocultivo aerobio</option>
+                                                        <option value="hemocultivo">Hemocultivo anaerobio</option>
+                                                        <option value="otros" hidden>Otros</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 col-12" id="otherFieldContainer" style="display: none;">
@@ -361,15 +433,32 @@ if (!isset($_SESSION["nombre"])) {
                                                     <label for="germen">GERMEN</label>
                                                     <input type="text" placeholder="Valor" class="value-input" id="germen">
                                                 </div>
+                                                <div class="col-md-6 col-12">
+                                                    <button id="codigolab" hidden>Código Lab</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="margin-left: 0px;">
+                                                <button id="agregar_aisla" class="btn btn-primary" style="width: 10vw;"><i class="bi bi-plus-circle"></i> Agregar</button>
                                             </div>
                                         </div>
 
-                                        <div class="exam-item" id="examenesComplementarios">
-                                            <label>EXAMENES COMPLEMENTARIOS</label>
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                        </div>
                                     </div>
-
+                                        <table style="width: 100%;" class="table table-striped mb-5" id="tabla_cultivos">
+                                            <thead>
+                                                <tr>
+                                                    <th style="font-weight: bold;">Fecha</th>
+                                                    <th style="font-weight: bold;">Prueba</th>
+                                                    <th style="font-weight: bold;">Resultado</th>
+                                                    <th style="font-weight: bold;">Origen</th>
+                                                    <th></th>
+                                                    <th hidden>CodigoLab</th>
+                                                    <th hidden>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Se crean dinámicamente los registros -->
+                                            </tbody>
+                                        </table>
                                     <br>
                                         
                                     <button id="guardarBtn" name="guardaRegistro" class="btn waves-effect waves-light"
@@ -383,151 +472,162 @@ if (!isset($_SESSION["nombre"])) {
                                 <div class="container">
                                     <div class="row titles-UbiCita">
                                         <div class="col">
-                                            <div class="well">
+                                            <div class="well mb-4">
                                                 <h4 class="form-label text-divider-Epid"><span
                                                         class="left-span"></span><span class="span">Registros</span></h4>
                                             </div>
                                         </div>
+                                        <div class="d-flex gap-3 align-items-center mb-3">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <label for="fecha_desde" class="mb-0">Desde:</label>
+                                                <input id="fecha_desde" class="form-control" type="date">
+                                            </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <label for="fecha_hasta" class="mb-0">Hasta:</label>
+                                                <input id="fecha_hasta" class="form-control" type="date">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="table-container">
-                                        <table id="registroTabla">
-                                            <tr id="fecha">
-                                                <th>FECHA</td>
+                                    <div class="table-container mb-3">
+                                        <table id="registroTabla" class="borde_tabla">
+                                            <tr id="fecha" class="borde_tabla">
+                                                <th class="negrilla_borde">FECHA</td>
                                             </tr>
-                                            <tr id="hora">
-                                                <th>HORA</td>
+                                            <tr id="hora" class="borde_tabla">
+                                                <th class="negrilla_borde">HORA</td>
                                             </tr>
-                                            <tr id="leucocitos">
-                                                <td>LEUCOCITOS</td>
+                                            <tr id="leucocitos" class="borde_tabla">
+                                                <td class="negrilla_borde">LEUCOCITOS</td>
                                             </tr>
-                                            <tr id="neutrofilos">
-                                                <td>NEUTROFILOS</td>
+                                            <tr id="neutrofilos" class="borde_tabla">
+                                                <td class="negrilla_borde">NEUTROFILOS</td>
                                             </tr>
-                                            <tr id="linfocitos">
-                                                <td>LINFOCITOS</td>
+                                            <tr id="linfocitos" class="borde_tabla">
+                                                <td class="negrilla_borde">LINFOCITOS</td>
                                             </tr>
-                                            <tr id="eosinofilos">
-                                                <td>EOSINOFILOS</td>
+                                            <tr id="eosinofilos" class="borde_tabla">
+                                                <td class="negrilla_borde">EOSINOFILOS</td>
                                             </tr>
-                                            <tr id="hemoglobina">
-                                                <td>HEMOGLOBINA</td>
+                                            <tr id="hemoglobina" class="borde_tabla">
+                                                <td class="negrilla_borde">HEMOGLOBINA</td>
                                             </tr>
-                                            <tr id="hematocrito">
-                                                <td>HEMATOCRITO</td>
+                                            <tr id="hematocrito" class="borde_tabla">
+                                                <td class="negrilla_borde">HEMATOCRITO</td>
                                             </tr>
-                                            <tr id="plaquetas">
-                                                <td>PLAQUETAS</tds>
+                                            <tr id="plaquetas" class="borde_tabla">
+                                                <td class="negrilla_borde">PLAQUETAS</tds>
                                             </tr>
-                                            <tr id="vsg">
-                                                <td>VSG</td>
+                                            <tr id="vsg" class="borde_tabla">
+                                                <td class="negrilla_borde">VSG</td>
                                             </tr>
-                                            <tr id="pcr">
-                                                <td>PCR</td>
+                                            <tr id="pcr" class="borde_tabla">
+                                                <td class="negrilla_borde">PCR</td>
                                             </tr>
-                                            <tr id="tgo">
-                                                <td>TGO/AST </td>
+                                            <tr id="tgo" class="borde_tabla">
+                                                <td class="negrilla_borde">TGO/AST </td>
                                             </tr>
-                                            <tr id="tgp">
-                                                <td>TGP/ALT </td>
+                                            <tr id="tgp" class="borde_tabla">
+                                                <td class="negrilla_borde">TGP/ALT </td>
                                             </tr>
-                                            <tr id="bilirrubina_total">
-                                                <td>BILIRRUBINA TOTAL</td>
+                                            <tr id="bilirrubina_total" class="borde_tabla">
+                                                <td class="negrilla_borde">BILIRRUBINA TOTAL</td>
                                             </tr>
-                                            <tr id="bilirrubina_directa">
-                                                <td>BILIRRUBINA DIRECTA</td>
+                                            <tr id="bilirrubina_directa" class="borde_tabla">
+                                                <td class="negrilla_borde">BILIRRUBINA DIRECTA</td>
                                             </tr>
-                                            <tr id="ggt">
-                                                <td>GGT</td>
+                                            <tr id="ggt" class="borde_tabla">
+                                                <td class="negrilla_borde">GGT</td>
                                             </tr>
-                                            <tr id="fosfatasa_alcalina">
-                                                <td>FOSFATASA ALCALINA</td>
+                                            <tr id="fosfatasa_alcalina" class="borde_tabla">
+                                                <td class="negrilla_borde">FOSFATASA ALCALINA</td>
                                             </tr>
-                                            <tr id="tp_inr">
-                                                <td>TP/INR</td>
+                                            <tr id="tp_inr" class="borde_tabla">
+                                                <td class="negrilla_borde">TP/INR</td>
                                             </tr>
-                                            <tr id="tpt">
-                                                <td>TPT</td>
+                                            <tr id="tpt" class="borde_tabla">
+                                                <td class="negrilla_borde">TPT</td>
                                             </tr>
-                                            <tr id="amilasa">
-                                                <td>AMILASA</td>
+                                            <tr id="amilasa" class="borde_tabla">
+                                                <td class="negrilla_borde">AMILASA</td>
                                             </tr>
-                                            <tr id="sodio">
-                                                <td>SODIO</td>
+                                            <tr id="sodio" class="borde_tabla">
+                                                <td class="negrilla_borde">SODIO</td>
                                             </tr>
-                                            <tr id="fosforo">
-                                                <td>FOSFORO</td>
+                                            <tr id="fosforo" class="borde_tabla">
+                                                <td class="negrilla_borde">FOSFORO</td>
                                             </tr>
-                                            <tr id="potasio">
-                                                <td>POTASIO</td>
+                                            <tr id="potasio" class="borde_tabla">
+                                                <td class="negrilla_borde">POTASIO</td>
                                             </tr>
-                                            <tr id="cloro">
-                                                <td>CLORO</td>
+                                            <tr id="cloro" class="borde_tabla">
+                                                <td class="negrilla_borde">CLORO</td>
                                             </tr>
-                                            <tr id="calcio">
-                                                <td>CALCIO</td>
+                                            <tr id="calcio" class="borde_tabla">
+                                                <td class="negrilla_borde">CALCIO</td>
                                             </tr>
-                                            <tr id="magnesio">
-                                                <td>MAGNESIO</td>
+                                            <tr id="magnesio" class="borde_tabla">
+                                                <td class="negrilla_borde">MAGNESIO</td>
                                             </tr>
-                                            <tr id="colesterol_total">
-                                                <td>COLESTEROL TOTAL</td>
+                                            <tr id="colesterol_total" class="borde_tabla">
+                                                <td class="negrilla_borde">COLESTEROL TOTAL</td>
                                             </tr>
-                                            <tr id="colesterol_hdl">
-                                                <td>COLESTEROL HDL</td>
+                                            <tr id="colesterol_hdl" class="borde_tabla">
+                                                <td class="negrilla_borde">COLESTEROL HDL</td>
                                             </tr>
-                                            <tr id="trigliceridos">
-                                                <td>TRIGLICERIDOS</td>
+                                            <tr id="trigliceridos" class="borde_tabla">
+                                                <td class="negrilla_borde">TRIGLICERIDOS</td>
                                             </tr>
-                                            <tr id="proteinas_totales">
-                                                <td>PROTEINAS TOTALES</td>
+                                            <tr id="proteinas_totales" class="borde_tabla">
+                                                <td class="negrilla_borde">PROTEINAS TOTALES</td>
                                             </tr>
-                                            <tr id="albumina">
-                                                <td>ALBUMINA</td>
+                                            <tr id="albumina" class="borde_tabla">
+                                                <td class="negrilla_borde">ALBUMINA</td>
                                             </tr>
-                                            <tr id="pre_albumina">
-                                                <td>PRE-ALBUMINA</td>
+                                            <tr id="pre_albumina" class="borde_tabla">
+                                                <td class="negrilla_borde">PRE-ALBUMINA</td>
                                             </tr>
-                                            <tr id="electroforesis_proteinas">
+                                            <!-- <tr id="electroforesis_proteinas" class="borde_tabla">
                                                 <td>ELECTROFORESIS DE PROTEINAS</td>
+                                            </tr> -->
+                                            <tr id="vitamina_b12" class="borde_tabla">
+                                                <td class="negrilla_borde">VITAMINA B12</td>
                                             </tr>
-                                            <tr id="vitamina_b12">
-                                                <td>VITAMINA B12</td>
+                                            <tr id="vitamina_d" class="borde_tabla">
+                                                <td class="negrilla_borde">VITAMINA D</td>
                                             </tr>
-                                            <tr id="vitamina_d">
-                                                <td>VITAMINA D</td>
+                                            <tr id="creatinina" class="borde_tabla">
+                                                <td class="negrilla_borde">CREATININA</td>
                                             </tr>
-                                            <tr id="creatinina">
-                                                <td>CREATININA</td>
+                                            <tr id="glicemia" class="borde_tabla">
+                                                <td class="negrilla_borde">GLICEMIA</td>
                                             </tr>
-                                            <tr id="glicemia">
-                                                <td>GLICEMIA</td>
+                                            <tr id="HCO" class="borde_tabla">
+                                                <td class="negrilla_borde">GASES HCO&#8323;&#8315;</td>
                                             </tr>
-                                            <tr id="HCO">
-                                                <td>GASES HCO&#8323;&#8315;</td>
+                                            <tr id="EB" class="borde_tabla">
+                                                <td class="negrilla_borde">GASES EB</td>
                                             </tr>
-                                            <tr id="EB">
-                                                <td>GASES EB</td>
+                                            <tr id="Ph" class="borde_tabla">
+                                                <td class="negrilla_borde">GASES Ph</td>
                                             </tr>
-                                            <tr id="Ph">
-                                                <td>GASES Ph</td>
+                                            <tr id="examenesComplementarios" class="borde_tabla">
+                                                <td class="negrilla_borde">EXAMENES COMPLEMENTARIOS</td>
                                             </tr>
-                                            <tr id="aislamientos">
-                                                <td>AISLAMIENTOS</td>
+                                            <tr id="aislamientos" class="borde_tabla">
+                                                <td class="negrilla_borde">AISLAMIENTOS</td>
                                             </tr>
-                                            <tr id="examenesComplementarios">
-                                                <td>EXAMENES COMPLEMENTARIOS</td>
-                                            </tr>
-                                            <tr id="btnEditar">
-                                                <td>Editar</td>
+                                            <tr id="btnEditar" class="borde_tabla">
+                                                <td class="negrilla_borde">Editar</td>
                                             </tr>
                                             <tr id="id" hidden>
                                                 <td>id</td>
                                             </tr>
 
                                         </table>
-
                                     </div>
-
+                                    <div hidden id="button_plantilla">
+                                        <button type="button" class="mb-3 btn btn-info" id="plantilla" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-journal-plus"></i> Crear plantilla</button>
+                                    </div>
                                 </div>
 
                             </div>
@@ -540,6 +640,10 @@ if (!isset($_SESSION["nombre"])) {
             <script src="../Control/JS/Reloj.js"></script>
             <script src="../Control/JS/reporteParaclinico.js"></script>
             <script src="../Control/JS/controlApi.js"></script>
+            <script src="../Control/JS/obtenerReporteParaclinico.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 function toggleOtherInput() {
                     var tipoEstudio = document.getElementById("tipoEstudio").value;
@@ -573,7 +677,7 @@ if (!isset($_SESSION["nombre"])) {
 
                         origen.appendChild(option1);
                         origen.appendChild(option2);
-                    } else if (tipoEstudio === "hemocultivo") {
+                    } else if (tipoEstudio === "hemocultivoPediatri" || tipoEstudio === "hemocultivoAero" || tipoEstudio === "hemocultivo") {
                         // Show origen and set options for hemocultivo
                         origenContainer.style.display = "block";
                         var option1 = document.createElement("option");

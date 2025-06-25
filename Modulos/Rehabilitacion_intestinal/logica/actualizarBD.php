@@ -13,12 +13,12 @@ if (isset($data['idPaciente']) && isset($data['data'])) {
         $parsedValues[$item['idExam']] = $item['value'];
     }
 
-    $sql = "CALL SP_actualizar_examenes_RI(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "CALL SP_actualizar_examenes_RI(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     if ($stmt = $conexion->prepare($sql)) {
         $stmt->bind_param(
-            'sssssssssssssssssssssssssssssssssssssssss', 
+            'ssssssssssssssssssssssssssssssssssssss', 
             $idPaciente,
-            $parsedValues['leucocitos'], $parsedValues['neutrofilos'], $parsedValues['linfocitos'], $parsedValues['eosinofilos'], $parsedValues['hemoglobina'],$parsedValues['hematocrito'], $parsedValues['plaquetas'], $parsedValues['vsg'], $parsedValues['pcr'], $parsedValues['tgo'],$parsedValues['tgp'], $parsedValues['bilirrubina_total'], $parsedValues['bilirrubina_directa'], $parsedValues['ggt'], $parsedValues['fosfatasa_alcalina'],$parsedValues['tp_inr'], $parsedValues['tpt'], $parsedValues['amilasa'], $parsedValues['sodio'], $parsedValues['fosforo'],$parsedValues['potasio'], $parsedValues['cloro'], $parsedValues['calcio'], $parsedValues['magnesio'], $parsedValues['colesterol_total'],$parsedValues['colesterol_hdl'], $parsedValues['trigliceridos'], $parsedValues['proteinas_totales'], $parsedValues['albumina'], $parsedValues['pre_albumina'],$parsedValues['electroforesis_proteinas'], $parsedValues['vitamina_b12'], $parsedValues['vitamina_d'], $parsedValues['creatinina'], $parsedValues['glicemia'],$parsedValues['HCO'], $parsedValues['EB'], $parsedValues['Ph'], $parsedValues['aislamientos'], $parsedValues['examenesComplementarios']);
+            $parsedValues['leucocitos'], $parsedValues['neutrofilos'], $parsedValues['linfocitos'], $parsedValues['eosinofilos'], $parsedValues['hemoglobina'],$parsedValues['hematocrito'], $parsedValues['plaquetas'], $parsedValues['vsg'], $parsedValues['pcr'], $parsedValues['tgo'],$parsedValues['tgp'], $parsedValues['bilirrubina_total'], $parsedValues['bilirrubina_directa'], $parsedValues['ggt'], $parsedValues['fosfatasa_alcalina'],$parsedValues['tp_inr'], $parsedValues['tpt'], $parsedValues['amilasa'], $parsedValues['sodio'], $parsedValues['fosforo'],$parsedValues['potasio'], $parsedValues['cloro'], $parsedValues['calcio'], $parsedValues['magnesio'], $parsedValues['colesterol_total'],$parsedValues['colesterol_hdl'], $parsedValues['trigliceridos'], $parsedValues['proteinas_totales'], $parsedValues['albumina'], $parsedValues['pre_albumina'], $parsedValues['vitamina_b12'], $parsedValues['vitamina_d'], $parsedValues['creatinina'], $parsedValues['glicemia'],$parsedValues['HCO'], $parsedValues['EB'], $parsedValues['Ph']);
 
         if ($stmt->execute()) {
             echo json_encode(["message" => "Data saved successfully"]);

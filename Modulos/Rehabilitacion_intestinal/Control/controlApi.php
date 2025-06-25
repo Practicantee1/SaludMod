@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $DatosUltimoEpisodio = isset($DataPaciente["DatosUltimoEpisodio"]) ? $DataPaciente["DatosUltimoEpisodio"] : null;
 
         // Asignar valores a los campos de entrada
-        echo "document.getElementById('nroDoc').value = '".addslashes($DatosBasicos["Numero_documento"])."';";
+        echo "document.getElementById('nroDocu').value = '".addslashes($DatosBasicos["Numero_documento"])."';";
         echo "document.getElementById('nombre').value = '".addslashes($DatosBasicos["Nombre_completo"])."';";
         echo "document.getElementById('sexo').value = '".addslashes($DatosBasicos["Sexo"])."';";
         echo "document.getElementById('edad').value = '".addslashes($DatosBasicos["Edad"])."';";
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         // }
     } else {
-        echo "document.getElementById('nroDoc').value = '';";
+        echo "document.getElementById('nroDocu').value = '';";
         echo "document.getElementById('nombre').value = '';";
         echo "document.getElementById('sexo').value = '';";
         echo "document.getElementById('edad').value = '';";

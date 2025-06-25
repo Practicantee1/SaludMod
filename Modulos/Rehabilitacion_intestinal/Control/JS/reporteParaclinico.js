@@ -1,6 +1,52 @@
 let isEditMode = false;
 let activeColumnIndex=null;
 let id;
+let reportePlantillas = [];
+
+
+let nombresTit = [
+    "Fecha",
+    "LEUCOCITOS",
+    "NEUTROFILOS",
+    "LINFOCITOS",
+    "EOSINOFILOS",
+    "HEMOGLOBINA",
+    "HEMATOCRITO",
+    "PLAQUETAS",
+    "VSG",
+    "PCR",
+    "TGO/AST",
+    "TGP/ALT",
+    "BILIRRUBINA TOTAL",
+    "BILIRRUBINA DIRECTA",
+    "GGT",
+    "FOSFATASA ALCALINA",
+    "TP/INR",
+    "TPT",
+    "AMILASA",
+    "SODIO",
+    "FOSFORO",
+    "POTASIO",
+    "CLORO",
+    "CALCIO",
+    "MAGNESIO",
+    "COLESTEROL TOTAL",
+    "COLESTEROL HDL",
+    "TRIGLICERIDOS",
+    "PROTEINAS TOTALES",
+    "ALBUMINA",
+    "PRE-ALBUMINA",
+    "VITAMINA B12",
+    "VITAMINA D",
+    "CREATININA",
+    "GLICEMIA",
+    "GASES HCO₃⁻",
+    "GASES EB",
+    "GASES Ph",
+];
+
+
+
 function guardarDefinitivoVertical(idTabla) {
     if (isEditMode) {
         Swal.fire({
@@ -37,58 +83,46 @@ function guardarDefinitivoVertical(idTabla) {
                 const examItems = document.querySelectorAll('.exam-container .exam-item');
                 examItems.forEach(examItem => {
                     const idExam = examItem.id;
-                    let examValue = '';
+                    let examValue = "";
                     if (idExam === "aislamientos") {
-                        // Obtener valores de los campos
-                        const fechaAislamiento = document.getElementById("fechaAislamientos").value;
-                        const muestra = document.getElementById("tipoEstudio").value;
-                        const origen = document.getElementById("origen") ? document.getElementById("origen").value : '';
-                        const germen = document.getElementById("germen").value;
-                        const cual = document.getElementById("otherInput") ? document.getElementById("otherInput").value : '';
-                        const observaciones = document.getElementById("observacionesInput") ? document.getElementById("observacionesInput").value : '';
 
-                        if (muestra === "otros") {
-                            examValue = `${fechaAislamiento}, ${muestra},${cual}, ${observaciones}, ${germen}`;
-                        } else {
-                            examValue = `${fechaAislamiento}, ${muestra}, ${origen}, ${germen}`;
-                        }
-                    } else {
+                        let datos = document.querySelectorAll("#tabla_cultivos tbody tr");
+                        datos.forEach(elemento => {
+                            examValue += `${elemento.cells[0].textContent},${elemento.cells[1].textContent},${elemento.cells[3].textContent},${elemento.cells[2].textContent}` + "\n";
+                        });
+
+                    } else if(idExam === "examenesComplementarios"){
+                        let datos = document.querySelectorAll("#tabla_examenes tbody tr");
+                        datos.forEach(elemento => {
+                            examValue += `${elemento.cells[0].textContent}:${elemento.cells[1].textContent}` + "\n";
+                        });
+                    }else {
                         examValue = examItem.querySelector('input.value-input').value;
-                        // examValue = examItem.querySelector('input.value-input').value.trim();
+
                     }
                     console.log(`ID: ${idExam}, Valor: ${examValue}`);
                     examValues.push({ examId: idExam, value: examValue }); 
-                    const row = registroTable.querySelector(`tr#${idExam}`);
-                    if (row) {
-                        const newCell = row.insertCell(1);
-                        newCell.textContent = examValue ? examValue : '';
-                    }
+
                 });
                 const newRow = registroTable.querySelector('tr:nth-child(43)');
                 savePaciente(examValues);
-                // console.log(id)
-                const editarCell = newRow.insertCell(1);
-                const editarBtn = document.createElement('button');
-                editarBtn.textContent = "Editar";
-                editarBtn.classList.add('btn', 'btn-primary');
-                editarBtn.onclick = () => editarFila(idTabla, editarBtn, editarCell.cellIndex);
-                editarCell.appendChild(editarBtn);
 
-                const formElements = document.querySelectorAll('#agregarLinea input');
-                formElements.forEach(input => {
-                    if (input.type !== 'hidden') {
-                        input.value = ''; // Limpia el valor de los campos
-                    }
+                const tabla = document.querySelectorAll("#tabla_cultivos tbody tr");
+                tabla.forEach(element => {
+                    element.remove();
                 });
                 const idField = document.getElementById("id");
                 if (idField) {
                     idField.value = ''; // Limpia el campo 'id'
                 }
 
+                $("#mensaje_cultivos").prop("hidden", true);
+            
                 examItems.forEach(examItem => {
                     const inputFields = examItem.querySelectorAll('input.value-input, select.value-input');
                     inputFields.forEach(input => {
                         input.value = ''; // Limpia los campos
+                        input.style.backgroundColor = "white";
                     });
                 });
                 toggleOtherInput();
@@ -103,7 +137,7 @@ function guardarDefinitivoVertical(idTabla) {
 
 function savePaciente(examValues) {
     let episodio = $("#episodio").val();
-    let documento = $("#nroDoc").val();
+    let documento = $("#nroDocu").val();
     let tipo_documento = $("#tipo").val();
     let nombre = $("#nombre").val();
     let edad = $("#edad").val();
@@ -157,6 +191,17 @@ function savePaciente(examValues) {
                     if (idField) {
                         idField.value = ''; // Limpia el campo 'id'
                     }
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Confirmación",
+                        text: "Registro guardado con éxito",
+                        timer: 2000
+                    });
+                    limpiarCampos();
+                    limpiarRegistrosExamanes();
+                    $("#mensaje_cultivos").prop("hidden", true);
+                    llenarHistoricoParaclinico(episodio, documento);
                 } else {
                     console.error("Error del servidor:", result.message || "Unknown error");
                 }
@@ -177,6 +222,20 @@ function savePaciente(examValues) {
     
 }
 
+function limpiarCampos(){
+    let filasElim = document.querySelectorAll(".elim");
+    filasElim.forEach(elemento => {
+        elemento.remove();
+    });
+}
+
+
+function limpiarRegistrosExamanes(){
+    let filasElim = document.querySelectorAll("#tabla_examenes tbody tr");
+    filasElim.forEach(elemento => {
+        elemento.remove();
+    });
+}
 
 function filterExams() {
     const searchValue = document.getElementById("searchInput").value.toLowerCase();
@@ -193,24 +252,84 @@ function filterExams() {
 }
 
 
+function CargarHistoricoEdicion(historico = "full"){
+    let episodio = $("#episodio").val();
+    let documento = $("#nroDocu").val();
+    let datos;
+    if(!episodio){
+        return;
+    }
 
-function llenarHistoricoParaclinico(episodio) {
+    if(historico === "full"){
+        datos = {
+            episodio: episodio,
+            documento: documento,
+            opcionHistorico: historico
+        };
+    }else{
+        let fechaDesde = $("#fecha_desde").val();
+        let fechaHasta = $("#fecha_hasta").val();
+        datos = {
+            episodio: episodio,
+            documento: documento,
+            opcionHistorico: historico,
+            fechaDesde: fechaDesde,
+            fechaHasta: fechaHasta
+        };
+    }
+
+    $.ajax({
+        type: "POST",
+        url: '../logica/llenarHistoricoParaclinico.php',
+        data: datos,
+        // data: { episodio: episodio, documento: documento, opcionHistorico: historico },
+        dataType: "json",
+        success: function(response){
+            console.log(response)
+            if(response.status == "success"){
+                reportePlantillas = response.examenes;
+            }
+        }
+    });
+}
+
+
+function llenarHistoricoParaclinico(episodio, documento, historico = "full") {
     if (!episodio) {
         console.error("Error: El parámetro 'episodio' no está definido");
         return;
     }
 
+    if(historico === "full"){
+        datos = {
+            episodio: episodio,
+            documento: documento,
+            opcionHistorico: historico
+        };
+    }else{
+        let fechaDesde = $("#fecha_desde").val();
+        let fechaHasta = $("#fecha_hasta").val();
+        datos = {
+            episodio: episodio,
+            documento: documento,
+            opcionHistorico: historico,
+            fechaDesde: fechaDesde,
+            fechaHasta: fechaHasta
+        };
+    }
+
     $.ajax({
         type: "POST",
-        url: '/SaludMod/Modulos/Rehabilitacion_intestinal/logica/llenarHistoricoParaclinico.php',
-        data: { episodio: episodio },
+        url: '../logica/llenarHistoricoParaclinico.php',
+        // data: { episodio: episodio, documento: documento },
+        data: datos,
         dataType: "json",
         success: function (response) {
             if (response.status !== 'success') {
                 console.error("Error del servidor:", response.message || "Respuesta no exitosa");
                 return;
             }
-        
+            reportePlantillas = response.examenes;
             // Verifica si existen datos en el response
             if (response.examenes && response.examenes.length > 0) {
                 const registroTable = $("#registroTabla tbody");
@@ -229,12 +348,15 @@ function llenarHistoricoParaclinico(episodio) {
                     let rowIndex = 0;
 
                     Object.values(examen).forEach((value, index, arr) => {
-                        const row = registroTable.find(`tr:eq(${rowIndex})`); // Selecciona la fila por índice
+                        const row = registroTable.find(`tr:eq(${rowIndex})`); 
                         if (row.length) {
-                            let cellIndex = row.find("td").length; // Calcula el índice actual basado en la cantidad de celdas
-                            if (index < arr.length - 2) {
-                                // Agregar celdas para valores normales (hasta penúltimo valor)
-                                row.append(`<td>${value || ""}</td>`);
+                            let cellIndex = row.find("td").length; 
+                            if (index < arr.length - 4) {
+
+                                row.append(`<td class="elim">${value || ""}</td>`);
+                                // }
+                            } else if(index === arr.length - 3 || index === arr.length - 4){
+                                row.append(`<td class="elim"><pre>${value || ""}</pre></td>`);
                             } else if (index === arr.length - 2) {
                                 // Determinar si se deshabilita el botón
                                 const fechaRegistro = arr[0]; // Fecha en la posición 0
@@ -242,11 +364,11 @@ function llenarHistoricoParaclinico(episodio) {
 
                                 // Agregar botón después del penúltimo valor
                                 row.append(
-                                    `<td><button class="btn btn-primary" onclick="editarFila('registroTabla', this, ${cellIndex})" ${disabled}>Editar</button></td>`
+                                    `<td class="elim"><button class="btn btn-primary" onclick="editarFila('registroTabla', this, ${cellIndex})" ${disabled}>Editar</button></td>`
                                 );
                             } else if (index === arr.length - 1) {
                                 // Agregar última celda con el ID
-                                row.append(`<td>${value || ""}</td>`);
+                                row.append(`<td class="elim">${value || ""}</td>`);
                             }
                         } else {
                             console.warn(`No se encontró la fila en el índice ${rowIndex}`);
@@ -286,60 +408,28 @@ function editarFila(idTabla, editButton, columnIndex) {
                     // Obtener el valor actual de la celda correspondiente
                     const currentValue = row.cells[columnIndex].textContent; // Esta es la columna que se va a editar
 
-                    if (idExam === "aislamientos") {
-                        const tipoEstudioSelect = document.getElementById("tipoEstudio");
-                        // console.log(currentValue)
-                        if (tipoEstudioSelect) {
-                            // Divide currentValue en partes y asegura que cada elemento está definido
-                            const [fecha, muestra, origen,germen, extra] = currentValue.split(',').map(val => val ? val.trim() : "");
-                        
-                            if (muestra === "otros") {
-                                const [cual] = origen ? origen.split(',').map(val => val.trim()) : ["", ""];
-                                
-                                // Asigna valores a los campos correspondientes
-                                document.getElementById("fechaAislamientos").value = fecha || "";
-                                tipoEstudioSelect.value = muestra;
-                                document.getElementById("otherInput").value = cual || ""; // Cual (debe ser cual en "otros")
-                                document.getElementById("observacionesInput").value = germen || ""; // Observaciones
-                                document.getElementById("germen").value = extra;
-                        
-                                // Mostrar campos específicos para "otros"
-                                document.getElementById("otherFieldContainer").style.display = 'block';
-                                document.getElementById("observaciones").style.display = 'block';
-                                document.getElementById("origenContainer").style.display = 'none';
-                        
-                            } else {
-                                // Para otros valores, configura los selectores de origen
-                                const origenSelect = document.getElementById("origen");
-                                origenSelect.innerHTML = ""; // Limpiar opciones anteriores
-                        
-                                if (muestra === "urocultivo") {
-                                    origenSelect.add(new Option("Sonda", "sonda"));
-                                    origenSelect.add(new Option("Ocasional", "ocasional"));
-                                } else if (muestra === "hemocultivo") {
-                                    origenSelect.add(new Option("Periférico", "Periferico"));
-                                    origenSelect.add(new Option("Central", "central"));
-                                }
-                        
-                                // Asigna el valor de origen y muestra el selector adecuado
-                                origenSelect.value = origen || ""; // Asegúrate de asignar el valor correcto a origen
-                                document.getElementById("fechaAislamientos").value = fecha || "";
-                                tipoEstudioSelect.value = muestra;
-                                document.getElementById("germen").value = germen;
-                        
-                                document.getElementById("origenContainer").style.display = 'block';
-                                document.getElementById("otherFieldContainer").style.display = 'none';
-                                document.getElementById("observaciones").style.display = 'none';
-                            }
-                        }
-                        
-                        
-                    } else {
+                    if(idExam !== "aislamientos" && idExam !== "examenesComplementarios"){
                         // Rellenar el input correspondiente para otros exámenes
                         const input = examItem.querySelector('input.value-input');
                         input.value = currentValue;
-
+                        if(input.value != ""){
+                            input.style.backgroundColor = "#bbffb9";
+                            input.style.color = "green";
+                        }
                     }
+
+                    // if (idExam === "aislamientos" && idExam === "examenesComplementarios") {
+
+                        
+                    // } else {
+                    //     // Rellenar el input correspondiente para otros exámenes
+                    //     const input = examItem.querySelector('input.value-input');
+                    //     input.value = currentValue;
+                    //     if(input.value != ""){
+                    //         input.style.backgroundColor = "#bbffb9";
+                    //         input.style.color = "green";
+                    //     }
+                    // }
                 }
             });
             
@@ -356,31 +446,15 @@ function editarFila(idTabla, editButton, columnIndex) {
             examItems.forEach(examItem => {
                 const idExam = examItem.id;
                 let inputValue = examItem.querySelector('input.value-input').value.trim();
+                let aisla = false;
 
-                if (idExam === "aislamientos") {
-                    const tipoEstudioSelect = document.getElementById("tipoEstudio");
-                    const fechaAislamiento = document.getElementById("fechaAislamientos").value;
-                    const muestra = tipoEstudioSelect.value;
-                    const germen = document.getElementById("germen").value;
-                    let origen = '';
-                    let cual = '';
-                    let observaciones = '';
+                if (idExam === "aislamientos" || idExam === "examenesComplementarios") {
 
-                    // Si seleccionaron "otros"
-                    if (muestra === "otros") {
-                        cual = document.getElementById("otherInput").value;
-                        observaciones = document.getElementById("observacionesInput").value;
-                        inputValue = `${fechaAislamiento}, ${muestra}, ${cual}, ${observaciones}, ${germen}`;
-                    } else {
-                        // Si no seleccionaron "otros"
-                        origen = document.getElementById("origen").value;
-                        inputValue = `${fechaAislamiento}, ${muestra}, ${origen}, ${germen}`;
-                    }
+                    aisla = true;
                 }
-
                 const row = registroTable.querySelector(`tr#${idExam}`);
                 // console.log(idExam);
-                if (row && row.cells[columnIndex]) {
+                if (row && row.cells[columnIndex] && idExam !== "aislamientos" && idExam !== "examenesComplementarios") {
                     dataToSend.push({
                         idExam,
                         value: inputValue !== null ? inputValue : ""
@@ -391,21 +465,26 @@ function editarFila(idTabla, editButton, columnIndex) {
                 }
             });
             
-            const fila = registroTable.querySelector('tr:nth-child(44)');
+            const fila = registroTable.querySelector('tr:nth-child(43)');
             const celdas = fila.querySelectorAll('td');
             idPaciente = celdas[columnIndex].textContent.trim();
     
             
             console.log("id:", idPaciente);
-            // console.log("id:", idPaciente, "data:", JSON.stringify(dataToSend, null, 2));
 
             $.ajax({
                 type: "POST",
                 url: 'http://localhost/SaludMod/Modulos/Rehabilitacion_intestinal/logica/actualizarBD.php',
                 contentType: "application/json", 
                 data: JSON.stringify({ idPaciente: idPaciente, data: dataToSend }),
-                success: function(response) {
+                success: async function(response) {
                     console.log("se guardó:", response);
+                    if($("#fecha_desde").val() === "" && $("#fecha_hasta").val() === ""){
+                        await CargarHistoricoEdicion();
+                    }else{
+                        await CargarHistoricoEdicion("PorFecha");
+                    }
+                    
                     Swal.fire({
                         title: "Solicitud Registrada!",
                         icon: "success"
@@ -420,8 +499,12 @@ function editarFila(idTabla, editButton, columnIndex) {
             examItems.forEach(examItem => {
                 const input = examItem.querySelector('input.value-input');
                 if (input) {
-                    input.value = ''; // Limpiar el valor del input
+                    input.value = ''; 
                 }
+            });
+
+            document.querySelectorAll(".value-input").forEach(elemento => {
+                elemento.style.backgroundColor = "white";
             });
 
             // Limpieza específica para "aislamientos"
@@ -450,12 +533,195 @@ function editarFila(idTabla, editButton, columnIndex) {
     }
 }
 
+
 $(document).ready(function() {
+
     
-    $('#episodio').change(function() {
-        episodio = document.getElementById("episodio").value || "N/A";  
-        llenarHistoricoParaclinico(episodio); 
+    let input_documento = document.getElementById("nroDocu");
+
+    input_documento.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            episodio = document.getElementById("episodio").value || "N/A";  
+        documento = document.getElementById("nroDocu").value || "N/A";
+        llenarHistoricoParaclinico(episodio, documento); 
+        }
+    });
+    
+    // $('#ja').on("click", function(event) {
+    //     event.preventDefault();
+    //     episodio = document.getElementById("episodio").value || "N/A";  
+    //     documento = document.getElementById("nroDocu").value || "N/A";
+    //     llenarHistoricoParaclinico(episodio, documento); 
+
+    // });
+
+    $('#exampleModal').on('show.bs.modal', function () {
+        crearPlantilla();
     });
 
-    $('#episodio').trigger('change');
+    $('#exampleModal').on('hidden.bs.modal', function () {
+        document.querySelector("#plantilla").value = "";
+    });
+
+
+    function crearPlantilla(){
+        let plantilla = "";
+        let indiceNombre = 0;
+
+        plantilla += "Laboratorios:\nPARACLÍNICOS INSTITUCIONALES\n\n"
+
+        const indicesAExcluir = [42, 1, 40, 41, 39]; 
+        const ancho = 7;
+
+
+        const matriz = reportePlantillas.map(fila => {
+            const datos = Object.values(fila);
+
+
+            let etiquetaRaw = datos[0] ?? "-";
+            let etiqueta = "-";
+
+            if (typeof etiquetaRaw === "string" && etiquetaRaw.includes("-")) {
+                const partes = etiquetaRaw.split("-");
+                if (partes.length === 3) {
+                    etiqueta = `${partes[2]}/${partes[1]}`; 
+                } else {
+                    etiqueta = etiquetaRaw;
+                }
+            } else {
+                etiqueta = etiquetaRaw;
+            }
+
+            etiqueta = String(etiqueta).padEnd(ancho); 
+
+            const resto = datos
+                .map((valor, valorIndex) => {
+                if (indicesAExcluir.includes(valorIndex) || valorIndex === 0 ) return null;
+                    const contenido = (valor === "" || valor === null || valor === undefined) ? "-" : valor;
+                    return String(contenido).padEnd(ancho);
+                })
+                .filter(v => v !== null);
+            return [etiqueta, ...resto];
+        });
+        const numFilas = matriz.length;
+        const numColumnas = matriz[0]?.length || 0;
+        for (let col = 0; col < numColumnas; col++) {
+            
+            let nombre = nombresTit[indiceNombre];
+            plantilla += String(nombre).padEnd(21);
+            
+            for (let fila = 0; fila < numFilas; fila++) {
+                plantilla += matriz[fila][col];
+            }
+            plantilla += '\n'; // nueva línea después de cada columna
+            if (col === 0) {
+                plantilla += "--------------------------------------------------------------------------------------------\n";
+            }
+            indiceNombre++;
+        }
+
+        let examenes = [];
+        let textoExamenes = "";
+        reportePlantillas.forEach(element => {
+            let datos = [element["EXAMENES COMPLEMENTARIOS"], element["FECHA"]];
+            examenes.push(datos);
+        });
+
+        examenes.forEach(elemento => {
+            let fecha = elemento[1];
+            let dato = elemento[0].replace(/\r/g, "").split("\n");
+            dato.forEach(element => {
+                if(element !== "" && fecha != ""){
+                    textoExamenes += `${fecha}:   ${element.replace(",", "")}\n`;
+                }
+            });
+        });
+        if(textoExamenes !== ""){
+            plantilla += "\n--------------------------------------------------------------------------------------------\n";
+            plantilla += "Examenes Complementarios:\n\n";
+            plantilla += textoExamenes;
+        }
+
+        let prueba = [];
+        let textoAislamientos = "";
+        reportePlantillas.forEach(elemento =>{
+            let datos = elemento['AISLAMIENTOS'].split("\n");
+            prueba.push(datos);
+        });
+
+        prueba.forEach(elemento => {
+            elemento.forEach(Element => {
+                let dato = Element.split(",");
+                if(Element !== ""){
+                    textoAislamientos += `${dato[0].split("T")[0]}:   Muestra:${dato[1]} | Origen:${dato[2]} | Valor:${dato[3]}\n`;
+                }
+            });
+        });
+        if(textoAislamientos !== ""){
+            plantilla += "\n--------------------------------------------------------------------------------------------\n";
+            plantilla += "Aislamientos:\n\n"
+            plantilla += textoAislamientos + "\n";
+        }
+        document.querySelector("#plantilla").value = plantilla;
+    }
+
+
+    $("#boton_copiar").on("click", function(){
+        let texto = $("#plantilla").val();
+        navigator.clipboard.writeText(texto);
+
+        Swal.fire({
+            toast: true,
+            text: "¡Texto copiado en el portapapeles!",
+            icon: "success",
+            timer: 3000
+        });
+    });
+
+
+    $("#fecha_desde, #fecha_hasta").on("change", function(){
+        let episodio = $("#episodio").val();
+        let documento = $("#nroDocu").val();
+        let fechaDesdeValor = $("#fecha_desde").val();
+        let fechaHastaValor = $("#fecha_hasta").val();
+
+        if(fechaDesdeValor === "" || fechaHastaValor === ""){
+            return;
+        }
+
+        let fechaDesde = new Date(fechaDesdeValor);
+        let fechaHasta = new Date(fechaHastaValor);
+
+        if(fechaHasta < fechaDesde){
+            Swal.fire({
+                icon: "info",
+                toast: true,
+                text: "La fecha inicio debe ser menor de la fecha final",
+                timer: 2000,
+                timerProgressBar: true
+            });
+            return;
+        }
+        let datosTabla = document.querySelectorAll(".elim");
+        datosTabla.forEach(elemento => {
+            elemento.remove();
+        });
+        llenarHistoricoParaclinico(episodio, documento, "PorFecha");
+        document.getElementById("button_plantilla").removeAttribute("hidden");
+        console.log("Llego aquí")
+    });
+
+
+    let intervalo = setInterval(() => {
+        let episodio = $("#episodio").val();
+        let documento = $("#nroDocu").val();
+
+        if(episodio && documento){
+            $(".bloquear").prop("disabled", true);
+            llenarHistoricoParaclinico(episodio, documento);
+            clearInterval(intervalo);
+        }
+    }, 100);
+
+
 });
