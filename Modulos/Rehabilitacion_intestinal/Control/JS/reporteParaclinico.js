@@ -73,12 +73,12 @@ function guardarDefinitivoVertical(idTabla) {
             const hora = new Date().toLocaleTimeString();
             const registroTable = document.getElementById(idTabla);
             if (registroTable) {
-                const fechaRow = registroTable.querySelector('tr:nth-child(1)');
-                const horaRow = registroTable.querySelector('tr:nth-child(2)');
-                const newFechaCell = fechaRow.insertCell(1);
-                const newHoraCell = horaRow.insertCell(1);
-                newFechaCell.textContent = fecha;
-                newHoraCell.textContent = hora;
+                // const fechaRow = registroTable.querySelector('tr:nth-child(1)');
+                // const horaRow = registroTable.querySelector('tr:nth-child(2)');
+                // const newFechaCell = fechaRow.insertCell(1);
+                // const newHoraCell = horaRow.insertCell(1);
+                // newFechaCell.textContent = fecha;
+                // newHoraCell.textContent = hora;
                 const examValues = []; // Array para almacenar los valores de los exámenes
                 const examItems = document.querySelectorAll('.exam-container .exam-item');
                 examItems.forEach(examItem => {
@@ -104,7 +104,7 @@ function guardarDefinitivoVertical(idTabla) {
                     examValues.push({ examId: idExam, value: examValue }); 
 
                 });
-                const newRow = registroTable.querySelector('tr:nth-child(43)');
+                // const newRow = registroTable.querySelector('tr:nth-child(43)');
                 savePaciente(examValues);
 
                 const tabla = document.querySelectorAll("#tabla_cultivos tbody tr");
@@ -125,7 +125,7 @@ function guardarDefinitivoVertical(idTabla) {
                         input.style.backgroundColor = "white";
                     });
                 });
-                toggleOtherInput();
+                // toggleOtherInput();
             } else {
                 console.error(`No se encontró la tabla con id ${idTabla}.`);
             }
@@ -177,20 +177,20 @@ function savePaciente(examValues) {
             try {
                 if (result.status === 'success') {
                     console.log("Se guardó en la BD");
-                    id = result.idPaciente;
+                    // id = result.idPaciente;
                     // document.getElementById("id").value = '';
-                    document.getElementById("id").value = id;
-                    const registroTable = document.getElementById('registroTabla');
-                    const newRow = registroTable.querySelector('tr:nth-child(44)');
-                    if (newRow) {
-                        const idCell = newRow.insertCell(1);
-                        idCell.textContent = id;
-                        idCell.style.display = 'none';
-                    }
-                    const idField = document.getElementById("id");
-                    if (idField) {
-                        idField.value = ''; // Limpia el campo 'id'
-                    }
+                    // document.getElementById("id").value = id;
+                    // const registroTable = document.getElementById('registroTabla');
+                    // const newRow = registroTable.querySelector('tr:nth-child(44)');
+                    // if (newRow) {
+                    //     const idCell = newRow.insertCell(1);
+                    //     idCell.textContent = id;
+                    //     idCell.style.display = 'none';
+                    // }
+                    // const idField = document.getElementById("id");
+                    // if (idField) {
+                    //     idField.value = ''; // Limpia el campo 'id'
+                    // }
 
                     Swal.fire({
                         icon: "success",
@@ -666,9 +666,22 @@ $(document).ready(function() {
     }
 
 
+    // $("#boton_copiar").on("click", function(){
+    //     let texto = $("#plantilla").val();
+    //     navigator.clipboard.writeText(texto);
+
+    //     Swal.fire({
+    //         toast: true,
+    //         text: "¡Texto copiado en el portapapeles!",
+    //         icon: "success",
+    //         timer: 3000
+    //     });
+    // });
+
     $("#boton_copiar").on("click", function(){
-        let texto = $("#plantilla").val();
-        navigator.clipboard.writeText(texto);
+        let texto = $("#plantilla");
+        texto.select();
+        document.execCommand('copy');
 
         Swal.fire({
             toast: true,

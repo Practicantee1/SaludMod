@@ -10,7 +10,7 @@ $(document).ready(function(){
     "p90221015": "hemoglobina",
     "p90221016": "hematocrito",
     "p90222001": "plaquetas",
-    "p90222003": "plaquetas",
+    // "p90222003": "plaquetas",
     "p902204": "vsg",
     "p903867": "tgo",
     "p903866": "tgp",
