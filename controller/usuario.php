@@ -307,6 +307,7 @@ switch ($_GET["op"]){
 			$_SESSION['idusuario'] = $fetch->idusuario;
 			$_SESSION['nombre'] = $fetch->nombre;
 			$_SESSION['cargo'] = $fetch->cargo;
+			$_SESSION['num_documento'] = $fetch->num_documento;
 			$_SESSION['login'] = $fetch->login;
 			$_SESSION['clave'] = $fetch->clave;
 		
@@ -325,7 +326,7 @@ switch ($_GET["op"]){
 			include("../config/Conexion.php");
 		
 			// Consultamos todos los permisos
-			$sql = "SELECT `idpermiso`, `nombre` FROM `permiso`";
+			$sql = "SELECT `idpermiso`, `nombre`, `nombreSubmodulo` FROM `permiso`";
 			$query = $conexion->query($sql);
 		
 			// Almacenamos los resultados de la consulta en el array $permisos
@@ -337,7 +338,8 @@ switch ($_GET["op"]){
 			// Configuramos los permisos en la sesión
 			foreach ($permisos as $permiso) {
 				$id = $permiso['idpermiso'];
-				$nombre = $permiso['nombre'];
+				// $nombre = $permiso['nombre'];
+				$nombre = $permiso['nombreSubmodulo'];
 		
 				// Asigna 1 o 0 en $_SESSION según si el permiso está en $valores
 				$_SESSION[$nombre] = in_array($id, $valores) ? 1 : 0;
@@ -494,6 +496,7 @@ switch ($_GET["op"]){
 			$_SESSION['idusuario'] = $fetch->idusuario;
 			$_SESSION['nombre'] = $fetch->nombre;
 			$_SESSION['cargo'] = $fetch->cargo;
+			$_SESSION['num_documento'] = $fetch->num_documento;
 		
 			// Obtenemos los permisos del usuario
 			$marcados = $usuario->listarmarcados($fetch->idusuario);
@@ -510,7 +513,7 @@ switch ($_GET["op"]){
 			include("../config/Conexion.php");
 		
 			// Consultamos todos los permisos
-			$sql = "SELECT `idpermiso`, `nombre` FROM `permiso`";
+			$sql = "SELECT `idpermiso`, `nombre`, `nombreSubmodulo` FROM `permiso`";
 			$query = $conexion->query($sql);
 		
 			// Almacenamos los resultados de la consulta en el array $permisos
@@ -522,7 +525,8 @@ switch ($_GET["op"]){
 			// Configuramos los permisos en la sesión
 			foreach ($permisos as $permiso) {
 				$id = $permiso['idpermiso'];
-				$nombre = $permiso['nombre'];
+				// $nombre = $permiso['nombre'];
+				$nombre = $permiso['nombreSubmodulo'];
 		
 				// Asigna 1 o 0 en $_SESSION según si el permiso está en $valores
 				$_SESSION[$nombre] = in_array($id, $valores) ? 1 : 0;

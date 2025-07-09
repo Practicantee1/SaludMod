@@ -48,16 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //     }
             
         // }
-    } else {
-        echo "document.getElementById('nroDocu').value = '';";
-        echo "document.getElementById('nombre').value = '';";
-        echo "document.getElementById('sexo').value = '';";
-        echo "document.getElementById('edad').value = '';";
-        echo "document.getElementById('entidad').value = '';";
-        echo "document.getElementById('ubicacion').value = '';";
-        echo "document.getElementById('cama').value = '';";
-        echo "Swal.fire({ icon: 'info', title: 'No se encontró el episodio solicitado', showConfirmButton: false, timer: 1500 });";
-    }
+    } 
+    // else {
+    //     echo "document.getElementById('nroDocu').value = '';";
+    //     echo "document.getElementById('nombre').value = '';";
+    //     echo "document.getElementById('sexo').value = '';";
+    //     echo "document.getElementById('edad').value = '';";
+    //     echo "document.getElementById('entidad').value = '';";
+    //     echo "document.getElementById('ubicacion').value = '';";
+    //     echo "document.getElementById('cama').value = '';";
+    //     echo "Swal.fire({ icon: 'info', title: 'No se encontró el episodio solicitado', showConfirmButton: false, timer: 1500 });";
+    // }
 } else {
     echo "console.error('Error: Invalid request method.');";
 }

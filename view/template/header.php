@@ -774,15 +774,22 @@ include(__DIR__ . '/../../config/Conexion.php');
 
 // Consulta para obtener los módulos con sus permisos
 $consultaModulos = "
-    SELECT m.nombreCarpeta, m.nombreModulo, p.nombre AS nombrePermiso
+    SELECT m.nombreCarpeta, m.nombreModulo, p.nombre, p.nombreSubmodulo AS nombrePermiso
     FROM Modulos m
     INNER JOIN permiso p ON p.idpermiso = m.idPermiso
 ";
 $resultadoModulos = $conexion->query($consultaModulos);
 
 // Consulta para obtener los submódulos con sus permisos y asociarlos a sus módulos
+// $consultaSubmodulos = "
+//     SELECT sm.nombreSubmodulo, sm.nombreArchivoPHP, m.nombreModulo, m.nombreCarpeta, p.nombre AS nombrePermiso
+//     FROM Submodulos sm
+//     INNER JOIN Modulos m ON sm.idModulo = m.id
+//     INNER JOIN permiso p ON p.idpermiso = sm.idPermiso
+// ";
+
 $consultaSubmodulos = "
-    SELECT sm.nombreSubmodulo, sm.nombreArchivoPHP, m.nombreModulo, m.nombreCarpeta, p.nombre AS nombrePermiso
+    SELECT sm.nombreSubmodulo, sm.nombreArchivoPHP, m.nombreModulo, m.nombreCarpeta, p.nombre, p.nombreSubmodulo AS nombrePermiso
     FROM Submodulos sm
     INNER JOIN Modulos m ON sm.idModulo = m.id
     INNER JOIN permiso p ON p.idpermiso = sm.idPermiso

@@ -425,9 +425,10 @@ if (!isset($_SESSION["nombre"])) {
                                                 </div>
                                                 <div class="col-md-6 col-12" style="display: none;" id="origenContainer">
                                                     <label for="origen">ORIGEN</label>
-                                                    <select class="value-input" id="origen" name="origen">
+                                                    <!-- <select class="value-input" id="origen" name="origen">
                                                         <option value="" disabled selected hidden></option>
-                                                    </select>
+                                                    </select> -->
+                                                    <input id="origen" type="text" class="value-input" >
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <label for="germen">GERMEN</label>

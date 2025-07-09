@@ -565,6 +565,7 @@ $(document).ready(function() {
 
 
     function crearPlantilla(){
+        reportePlantillas.reverse();
         let plantilla = "";
         let indiceNombre = 0;
 
@@ -572,7 +573,7 @@ $(document).ready(function() {
 
         const indicesAExcluir = [42, 1, 40, 41, 39]; 
         const ancho = 7;
-
+        
 
         const matriz = reportePlantillas.map(fila => {
             const datos = Object.values(fila);
@@ -622,11 +623,11 @@ $(document).ready(function() {
 
         let examenes = [];
         let textoExamenes = "";
+
         reportePlantillas.forEach(element => {
             let datos = [element["EXAMENES COMPLEMENTARIOS"], element["FECHA"]];
             examenes.push(datos);
         });
-
         examenes.forEach(elemento => {
             let fecha = elemento[1];
             let dato = elemento[0].replace(/\r/g, "").split("\n");

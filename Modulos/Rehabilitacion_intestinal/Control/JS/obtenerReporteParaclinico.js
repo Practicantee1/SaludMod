@@ -130,45 +130,42 @@ $(document).ready(function(){
     let valor = e.target.value;
     $("#germen").val("");
     $("#fechaAislamientos").val("");
-    if(valor == "urocultivo"){
-      const resultado = datos.find(arr => arr[4] === 'p90123601');
-      if(resultado != []) {
-        $("#germen").val(resultado[3]);
-        $("#fechaAislamientos").val(resultado[0]);
-        $("#codigolab").val(resultado[4]);
-      }
-      return;
-    }
+    $("#origen").val("");
 
-    if(valor == "hemocultivoPediatri"){
-      const resultado = datos.find(arr => arr[4] === 'p901221022');
-      if(resultado != []) {
-        $("#germen").val(resultado[3]);
-        $("#fechaAislamientos").val(resultado[0]);
-        $("#codigolab").val(resultado[4]);
-      }
-      return;
-    }
+    const cultivos = {
+      'urocultivo' : 'p90123601',
+      'hemocultivoPediatri' : 'p901221022',
+      'hemocultivoAero' : 'p90122102',
+      'hemocultivo' : 'p901223'
+    };
 
-    if(valor == "hemocultivoAero"){
-      const resultado = datos.find(arr => arr[4] === 'p90122102');
-      if(resultado != []) {
-        $("#germen").val(resultado[3]);
-        $("#fechaAislamientos").val(resultado[0]);
-        $("#codigolab").val(resultado[4]);
-      }
-      return;
-    }
+    let cultivo_buscar = cultivos[valor];
+   
 
-    if(valor == "hemocultivo"){
-      const resultado = datos.find(arr => arr[4] === 'p901223');
-      if(resultado != []) {
-        $("#germen").val(resultado[3]);
-        $("#fechaAislamientos").val(resultado[0]);
-        $("#codigolab").val(resultado[4]);
-      }
+    const resultado = datos.find(arr => arr[4] === cultivo_buscar);
+
+    if(resultado == []){
       return;
     }
+    const texto = resultado[5];
+    const pares = [...texto.matchAll(/'([^']+)'\s*:\s*'([^']*)'/g)];
+    const vector = pares.map(([_, clave, valor]) => [clave, valor]);
+
+    // Obtener valor de fecha
+    const fecha = vector.filter(([clave]) => clave === "Fecha Validación").map(([_, fecha])=> fecha);
+
+    // Obtener valor de tipo de muestra
+    const tipoMuestra = vector.filter(([clave]) => clave === "Tipo Muestra").map(([_, muestra]) => muestra);
+
+    // Obtener todos los valores de "Microorganismo"
+    const microorganismos = vector
+      .filter(([clave]) => clave === 'Microorganismo')
+      .map(([_, valor]) => valor);
+
+    $("#origen").val(tipoMuestra[0]);
+    $("#fechaAislamientos").val(cambiarFormatoFecha(fecha[0]));
+    $("#germen").val(obtenerTextoGermen(microorganismos));
+   
     
   });
 
@@ -182,11 +179,9 @@ $(document).ready(function(){
                                     arr[4] === "p90122102" ||
                                     arr[4] === "p901223");
       cultivos.forEach(element => {
-        console.log(element)
         informacion += element[2] + "<br>";
       });
     }
-    console.log(informacion == "")
     if(informacion == ""){
         $("#mensaje_cultivos p").html("<strong>El paciente actual no tiene cultivos</strong>");
         $("#mensaje_cultivos").css("background-color", "#fbadad");
@@ -316,8 +311,73 @@ $(document).ready(function(){
       document.body.style.position = '';
   });
 
+  function cambiarFormatoFecha(fechaNF){
+    const [dia, mes, anioYhora] = fechaNF.split('/');
+    const [anio, hora] = anioYhora.split(' ');
+    const fechaFormateada = `${anio}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}T${hora}`;
+    return fechaFormateada; 
+  }
+
+  function obtenerTextoGermen(texto){
+    return texto.join(";");
+  }
 
 });
 
 
 
+
+
+
+
+
+
+
+
+
+
+// $("#tipoEstudio").change(function(e){
+//     let valor = e.target.value;
+//     $("#germen").val("");
+//     $("#fechaAislamientos").val("");
+//     if(valor == "urocultivo"){
+//       const resultado = datos.find(arr => arr[4] === 'p90123601');
+//       if(resultado != []) {
+//         $("#germen").val(resultado[3]);
+//         $("#fechaAislamientos").val(resultado[0]);
+//         $("#codigolab").val(resultado[4]);
+//       }
+//       return;
+//     }
+
+//     if(valor == "hemocultivoPediatri"){
+//       const resultado = datos.find(arr => arr[4] === 'p901221022');
+//       if(resultado != []) {
+//         $("#germen").val(resultado[3]);
+//         $("#fechaAislamientos").val(resultado[0]);
+//         $("#codigolab").val(resultado[4]);
+//       }
+//       return;
+//     }
+
+//     if(valor == "hemocultivoAero"){
+//       const resultado = datos.find(arr => arr[4] === 'p90122102');
+//       if(resultado != []) {
+//         $("#germen").val(resultado[3]);
+//         $("#fechaAislamientos").val(resultado[0]);
+//         $("#codigolab").val(resultado[4]);
+//       }
+//       return;
+//     }
+
+//     if(valor == "hemocultivo"){
+//       const resultado = datos.find(arr => arr[4] === 'p901223');
+//       if(resultado != []) {
+//         $("#germen").val(resultado[3]);
+//         $("#fechaAislamientos").val(resultado[0]);
+//         $("#codigolab").val(resultado[4]);
+//       }
+//       return;
+//     }
+    
+//   });
