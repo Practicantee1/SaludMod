@@ -460,12 +460,6 @@ if (isset($_SESSION['Escritorio']) && $_SESSION['Escritorio'] == 1) {
     &nbsp;&nbsp;Inicio
     </p>
   </a>
-  <a href="'.BASE_URL.'../Modulos/Medicamentos/view/StockMedicamentos.php" class="nav-link active" style="background-color: transparent;">
-  &nbsp;<i class="fa-solid fa-house fa-lg" style="color: #ffffff;"></i>
-    <p>
-    &nbsp;&nbsp;Stock Medicamentos
-    </p>
-  </a>
   </li>';
 
    
