@@ -22,7 +22,7 @@ if (!isset($_SESSION["nombre"])) {
 
     require_once '../../../view/template/header.php';
 
-    if ($_SESSION['Odontograma'] == 1) {
+    if ($_SESSION['Registrar odontograma'] == 1) {
 
         if (isset($_GET["param"]) && $_GET["param"] !== "") {
             $_SESSION["param"] = $_GET["param"];

@@ -14,7 +14,7 @@ if (!isset($_SESSION["nombre"])) {
 
     require_once '../../../view/template/header.php';
 
-    if ($_SESSION['Odontograma'] == 1) {
+    if ($_SESSION['Buscar odontograma'] == 1) {
 ?>
     <!-- Incluir jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>

@@ -16,7 +16,7 @@ if (!isset($_SESSION["nombre"])) {
     $_SESSION['module_title'] = "Ayudas diagnosticas";
     require_once '../../../view/template/header.php';
 
-    if ($_SESSION['Rehabilitacion_intestinal'] == 1) {
+    if ($_SESSION['RI_ayudasDiagnosticas'] == 1) {
         if (isset($_GET["param"]) && $_GET["param"] !== "") {
             // $_SESSION["param"] = $_GET["param"];
         }
@@ -172,7 +172,7 @@ if (!isset($_SESSION["nombre"])) {
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-md-12 col-12">
-                                        <label style="color:black margin-top:20px;" for="conclusion"
+                                        <label style="color:black; margin-top:20px;" for="conclusion">
                                             class="form-label">Conclusión:</label>
                                         <textarea class="form-control" id="conclusionImagenes" name="conclusion"
                                             rows="4"></textarea>
