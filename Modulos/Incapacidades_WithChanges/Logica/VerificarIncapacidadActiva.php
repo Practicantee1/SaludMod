@@ -5,20 +5,17 @@ include('../../../config/Conexion.php');
 $IDNumberPaciente = $_POST["IDPaciente"];
 
 
-$IDQuery = "CALL SPIncap_VerificarIncapacidad(?)";
+$IDQuery = "CALL SP_VerificarIncapacidadesActivas(?)";
 
 
 if($consulta = $conexion->prepare($IDQuery)){
 
     $consulta->bind_param("i", $IDNumberPaciente);
     if($consulta->execute()){
-        $consulta->store_result(); // Necesario para contar filas
+        $registros = $consulta->get_result(); // Necesario para contar filas
+        $filas = $registros->fetch_assoc();
+        echo json_encode(["success" => true, "message" => $filas]);
 
-        if ($consulta->num_rows > 0) {
-            echo json_encode(["success" => true, "message" => "El paciente tiene una incapacidad activa!"]);
-        } else {
-            echo json_encode(["success" => false, "message" => "No se encontró ninguna incapacidad activa para el paciente."]);
-        }
     }else{
         echo json_encode(["success" => false, "message" => "Ocurrió algo inesperado al ejecutar la consulta"]);
     }

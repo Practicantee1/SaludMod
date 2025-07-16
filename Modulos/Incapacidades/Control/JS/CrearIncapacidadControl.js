@@ -1,24 +1,4 @@
-let fecha;
-let esRenovacion = false;
-
 document.addEventListener('DOMContentLoaded', function() {
-
-  $("#FechaInicial").on("change", function(){
-    if(esRenovacion){
-      $("#FechaInicial").val(fecha);
-      $("#FechaInicial").attr("min", fecha);
-      $("#FechaInicial").attr("max", fecha);
-    }
-  });
-
-  $("input[name='Prorroga']").on("change", function(e){
-    if(esRenovacion){
-      $("input[name='Prorroga'][value='Si']").prop("checked", true);
-    }else{
-      $("input[name='Prorroga'][value='No']").prop("checked", true);
-    }
-  });
-
   // Get the form element
   var form = document.getElementById('AgregarIncapacidad');
 
@@ -32,92 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Verificar si la persona tiene incapacidades activas y cuantas de estas tienen
-$(document).ready(function(){
-  IDPaciente = document.getElementById("IDNumberPaciente").value;
-  console.log(fecha)
-  if(IDPaciente !== ""){
-    $.ajax({
-      type: "POST",
-      url: '../Logica/VerificarIncapacidadActiva.php',
-      data: {"IDPaciente" : IDPaciente},
-      success: async function(response){
-        response = JSON.parse(response);
-        if(response.success){
-          fecha = await obtenerFechaIncapacidad();
-          if(response.message["registros"] == 1){  //Si hay incapacidad entonces se hace una renovación
-            Swal.fire({
-              icon: "info",
-              title: "Hay una incapacidad activa",
-              text: `Actualmente el paciente cuenta con una incapacidad activa hasta el ${fecha}. Por tal motivo, solo se podrá gestionar una prórroga adicional.`,
-              confirmButtonText: "¡Entendido!",
-              confirmButtonColor: "#066E45"
-            });
-            cambiarDatosIniciales();
-            return;
-          }
-          if(response.message["registros"] >= 2){  //Si hay incapacidad y renovación se debe esperar a la fecha de finalización
-            Swal.fire({
-              icon: "info",
-              title: "Acción no permitida",
-              text: "El paciente ya cuenta con una incapacidad y una prórroga activas. Para generar una nueva, primero debes anular la existente.",
-              allowOutsideClick: false, 
-              allowEscapeKey: false,    
-              allowEnterKey: false,    
-              confirmButtonText: "Ir a consultar la incapacidad",
-              confirmButtonColor: "#066E45"
-            }).then(result => {
-              if(result.isConfirmed){
-                window.location.href = 'ConsolidadoIncapacidad.php';
-              }else{
-                window.close();
-              }
-            });
-          }
-        }   
-      }
-    })
-  }
-});
-
-
-//Mëtodo que cambia datos iniciales con base a si hay o no renovación de incapacidad
-function cambiarDatosIniciales(){
-  let dia = fecha.split("-");  //Separar la fecha en un array de año - mes - día
-  fecha = `${dia[0]}-${dia[1]}-${parseInt(dia[2])+1}`;   //Se le asigna a la fecha el día siguiente para la renovación de la incapacidad
-  $("#FechaInicial").val(fecha);
-  $("#FechaInicial").attr("min", fecha);
-  $("#FechaInicial").attr("max", fecha);
-  $("#FechaFinal").attr("min", fecha);
-  $("input[name='Prorroga'][value='Si'").attr("checked", true);
-  esRenovacion = true;
-}
-
-
-function obtenerFechaIncapacidad(){
-  let fech;
-  fech = new Promise(resolve => {
-    $.ajax({
-      type: "POST",
-      url: '../Logica/ObtenerFechaIncapacidad.php',
-      data: {"IDPaciente" : IDPaciente},
-      success: function(response){
-        response = JSON.parse(response);
-        console.log(JSON.parse(response.message["Datos_Incapacidad"])["FechaFinal"]);
-        // var quickScript = new Function($(response).text());
-        // quickScript();
-        resolve(JSON.parse(response.message["Datos_Incapacidad"])["FechaFinal"]);
-      }
-  
-    });
-  });
-  return fech;
-}
-
 
 $(document).ready(function() {
   $('#FechaInicial').change(function(e) {
-    $("#FechaInicial").removeAttr("disabled");
     IDPaciente = document.getElementById("IDNumberPaciente").value;
     FechaExpedicion = document.getElementById("FechaExpedicion").value;
     FechaIni = this.value;
@@ -133,9 +30,9 @@ $(document).ready(function() {
       url: '../Logica/VerificarIncapacidad.php',
       data: {"IDPaciente" : IDPaciente, "FechaIni" : FechaIni, "FechaExpedicion" : FechaExpedicion},
       success: function(response){
-        console.log(response)
-        // var quickScript = new Function($(response).text());
-        // quickScript();
+        var quickScript = new Function($(response).text());
+        quickScript();
+        
       },
       error: function(response) {
       } 
@@ -175,7 +72,6 @@ $(document).ready(function() {
         processData: false,
         contentType: false,
         success: function(response){
-          console.log(response)
           var quickScript = new Function($(response).text());
           quickScript();
           
@@ -234,45 +130,3 @@ $(document).ready(function() {
     }
 
   }
-
-
-
-
-
-
-// $(document).ready(function(){
-//   IDPaciente = document.getElementById("IDNumberPaciente").value;
-//   if(IDPaciente !== ""){
-//     $.ajax({
-//       type: "POST",
-//       url: '../Logica/VerificarIncapacidadActiva.php',
-//       data: {"IDPaciente" : IDPaciente},
-//       success: function(response){
-//         console.log(response)
-//         response = JSON.parse(response);
-//         if(response.success){
-//           console.log("si");
-//           Swal.fire({
-//             icon: "error",
-//             title: "No es posible ingresar",
-//             text: "El paciente tiene una incapacidad activa, para generar una nueva debes anular la existente",
-//             allowOutsideClick: false, // desactiva clic fuera del modal
-//             allowEscapeKey: false,    // desactiva tecla Escape
-//             allowEnterKey: false,    //Desactiva el teclado Enter,
-//             confirmButtonText: "Ir a consultar la incapacidad",
-//             confirmButtonColor: "#066E45"
-//           }).then(result => {
-//             if(result.isConfirmed){
-//               window.location.href = 'ConsolidadoIncapacidad.php';
-//             }else{
-//               window.close();
-//             }
-//           });
-//         }
-        
-//       }
-  
-//     })
-    
-//   }
-// });

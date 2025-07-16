@@ -313,7 +313,7 @@ if ($_SESSION['Generar Incapacidades']==1)
 
                   <div class="col-md-2" >
                     <center><label style="color:black" for="flexCheckChecked" class="form-label">Prorroga</label></center>
-                    <div class="row flex-nowrap">
+                    <div class="row flex-nowrap" id="prorroga">
                     
                       <div class="col-md-6" style="max-width: 50%">  
                        
@@ -472,4 +472,5 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="../Control/JS/CrearIncapacidadControl.js"></script>
