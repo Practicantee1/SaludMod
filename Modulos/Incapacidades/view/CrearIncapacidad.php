@@ -406,7 +406,18 @@ else
   if($_SESSION['ObservarIncapacidades']==1){
     header("Location: ConsolidadoIncapacidad.php");
   }else{
-    require '../../../view/noacceso.php';
+    if(empty($_GET["param"])){
+      require '../../../view/noacceso.php';
+    }
+    else{
+      ?>
+      <script>
+        let DatosPaciente = "<?php echo $_GET["param"]; ?>";
+      </script>
+      <?php
+      $DatosPaciente = $_GET["param"];
+    }
+    
   }
   
 }
@@ -451,6 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
             popup: 'custom-swal-Incapacidad-popup', // Custom class for dialog popup
             content: 'custom-swal-Incapacidad-Content',
             confirmButton: 'btn custom-swal-Incapacidad-ConfirmBtn',
+            htmlContainer: "texto"
         }
     }).then((result) => {
         // Check if the user clicked the "Confirm" button
@@ -472,4 +484,13 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../Control/JS/CrearIncapacidadControl.js"></script>
+
+<?php
+  if(!empty($DatosPaciente)){
+?>
+<script src="../Control/JS/ControlIncapacidad.js"></script>
+<?php
+  }
+?>

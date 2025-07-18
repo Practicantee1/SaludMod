@@ -4,9 +4,19 @@ $(document).ready(function() {
   
     createIncapacidadConsolidadoDataTable();
 
-});
+    $('#BuscarIncapacidad').click(function(e) {
+        listarIncapacidades();
+    });
 
-document.addEventListener('DOMContentLoaded', function() {
+    const url = new URLSearchParams(window.location.search);
+    const documennto_paciente = url.get('documento');
+    console.log(documennto_paciente)
+
+    if(documennto_paciente){
+      $("#DocumentoIncapacidad").val(documennto_paciente);
+      $("#BuscarIncapacidad").click();
+    }
+
     // Get the form element
     var Input = document.getElementById('DocumentoIncapacidad');
 
@@ -17,13 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
             listarIncapacidades();
         }
     });
-});
 
-$(document).ready(function() {
-    $('#BuscarIncapacidad').click(function(e) {
-        listarIncapacidades();
-    });
-});
+
+
 
 function listarIncapacidades(){
     var DocumentoIncapacidad = document.getElementById("DocumentoIncapacidad").value;
@@ -122,3 +128,4 @@ function createIncapacidadConsolidadoDataTable(){
     });
   
   }
+});
