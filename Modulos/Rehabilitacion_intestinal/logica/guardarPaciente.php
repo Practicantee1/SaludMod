@@ -8,14 +8,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Comprobar la conexión
+// Comprobar la conexiï¿½n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
 }
 $conexion->set_charset("utf8mb4");
 
-// Verificar la conexión
+// Verificar la conexiï¿½n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
@@ -57,7 +57,9 @@ $bilirrubina_total = $examData['bilirrubina_total'] ?? '';
 $bilirrubina_directa = $examData['bilirrubina_directa'] ?? '';
 $ggt = $examData['ggt'] ?? '';
 $fosfatasa_alcalina = $examData['fosfatasa_alcalina'] ?? '';
-$tp_inr = $examData['tp_inr'] ?? '';
+// $tp_inr = $examData['tp_inr'] ?? '';
+$tp = $examData['tp'];
+$inr = $examData['inr'];
 $tpt = $examData['tpt'] ?? '';
 $amilasa = $examData['amilasa'] ?? '';
 $sodio = $examData['sodio'] ?? '';
@@ -96,9 +98,9 @@ try {
     $stmt->close(); // Cierra el statement
     $conexion->next_result(); // Limpia cualquier resultado previo
 
-    $query = "CALL SP_guardar_examenes_RI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "CALL SP_guardar_examenes_RI(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($query);
-    $stmt->bind_param("issssssssssssssssssssssssssssssssssssssss", $idPaciente, $leucocitos, $neutrofilos, $linfocitos, $eosinofilos, $hemoglobina, $hematocrito, $plaquetas, $vsg, $pcr, $tgo_ast, $tgp_alt, $bilirrubina_total, $bilirrubina_directa, $ggt, $fosfatasa_alcalina, $tp_inr, $tpt, $amilasa, $sodio, $fosforo, $potasio, $cloro, $calcio, $magnesio, $colesterol_total, $colesterol_hdl, $trigliceridos, $proteinas_totales, $albumina, $pre_albumina, $electroforesis_proteinas, $vitamina_b12, $vitamina_d, $creatinina, $glicemia, $gases_hco, $gases_eb, $gases_ph, $aislamientos, $examenes_complementarios);
+    $stmt->bind_param("isssssssssssssssssssssssssssssssssssssssss", $idPaciente, $leucocitos, $neutrofilos, $linfocitos, $eosinofilos, $hemoglobina, $hematocrito, $plaquetas, $vsg, $pcr, $tgo_ast, $tgp_alt, $bilirrubina_total, $bilirrubina_directa, $ggt, $fosfatasa_alcalina, $tpt, $amilasa, $sodio, $fosforo, $potasio, $cloro, $calcio, $magnesio, $colesterol_total, $colesterol_hdl, $trigliceridos, $proteinas_totales, $albumina, $pre_albumina, $electroforesis_proteinas, $vitamina_b12, $vitamina_d, $creatinina, $glicemia, $gases_hco, $gases_eb, $gases_ph, $aislamientos, $examenes_complementarios, $tp, $inr);
     $stmt->execute();
     $stmt->close();
     $conexion->next_result();

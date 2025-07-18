@@ -16,8 +16,8 @@ if (!isset($_SESSION["nombre"])) {
     $_SESSION['module_title'] = "Reportes paraclinicos";
     require_once '../../../view/template/header.php';
 
-    // if ($_SESSION['Rehabilitacion_intestinal'] == 1) {
-    if (1 == 1) {
+    if ($_SESSION['RI_reportesParaclinicos'] == 1) {
+
         if (isset($_GET["param"]) && $_GET["param"] !== "") {
             $_SESSION["param"] = $_GET["param"];
         }
@@ -256,9 +256,13 @@ if (!isset($_SESSION["nombre"])) {
                                             <input type="text" placeholder="Valor" class="value-input">
                                             <label>FOSFATASA ALCALINA</label>
                                         </div>
-                                        <div class="exam-item" id="tp_inr">
+                                        <div class="exam-item" id="tp">
                                             <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TP/INR</label>
+                                            <label>TP</label>
+                                        </div>
+                                        <div class="exam-item" id="inr">
+                                            <input type="text" placeholder="Valor" class="value-input">
+                                            <label>INR</label>
                                         </div>
                                         <div class="exam-item" id="tpt">
                                             <input type="text" placeholder="Valor" class="value-input">
@@ -351,10 +355,6 @@ if (!isset($_SESSION["nombre"])) {
                                                 <label>GASES Ph</label>
                                             </div>
                                         </div>
-                                        <!-- <div class="exam-item col-12" id="examenesComplementarios">
-                                            <label>EXAMENES COMPLEMENTARIOS</label>
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                        </div> -->
                                         <div class="exam-item col-12" id="examenesComplementarios">
                                             <label style="font-size:16px; font-weight:bold;"
                                                 for="aislamientos">EXAMANES COMPLEMENTARIOS</label>
@@ -399,40 +399,43 @@ if (!isset($_SESSION["nombre"])) {
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <label for="fechaAislamientos">FECHA</label>
-                                                    <input type="datetime-local" placeholder="Valor" class="value-input"
-                                                        id="fechaAislamientos" value="">
+                                                    <input type="text" placeholder="Valor" class="value-input"
+                                                        id="fechaAislamientos">
                                                 </div>
                                                 <div class="col-md-6 col-12" id="cultivos_">
                                                     <label for="tipoEstudio">MUESTRA</label>
-                                                    <select class="value-input" id="tipoEstudio" name="tipoEstudio"
-                                                        onchange="toggleOtherInput()">
+                                                    <select class="value-input" id="tipoEstudio" name="tipoEstudio">
                                                         <option value="" disabled selected >Seleccionar</option>
-                                                        <option value="urocultivo">Urocultivo</option>
+                                                        <!-- <option value="urocultivo">Urocultivo</option>
                                                         <option value="hemocultivoPediatri">Hemocultivo pediatrico aerobio</option>
                                                         <option value="hemocultivoAero">Hemocultivo aerobio</option>
-                                                        <option value="hemocultivo">Hemocultivo anaerobio</option>
-                                                        <option value="otros" hidden>Otros</option>
+                                                        <option value="hemocultivo">Hemocultivo anaerobio</option> -->
+                                                        <!-- <option value="otros" hidden>Otros</option> -->
                                                     </select>
                                                 </div>
-                                                <div class="col-md-6 col-12" id="otherFieldContainer" style="display: none;">
+                                                <!-- <div class="col-md-6 col-12" id="otherFieldContainer" style="display: none;">
                                                     <label for="otherInput">¿Cuál?</label>
                                                     <input type="text" class="value-input" id="otherInput" name="otherInput">
-                                                </div>
-                                                <div class="col-md-6 col-12" id="observaciones" style="display: none;">
+                                                </div> -->
+                                                <!-- <div class="col-md-6 col-12" id="observaciones" style="display: none;">
                                                     <label for="observaciones">Observaciones</label>
                                                     <input type="text" class="value-input" id="observacionesInput"
                                                         name="otherInput">
-                                                </div>
-                                                <div class="col-md-6 col-12" style="display: none;" id="origenContainer">
+                                                </div> -->
+                                                <div class="col-md-6 col-12" id="origenContainer">
                                                     <label for="origen">ORIGEN</label>
                                                     <!-- <select class="value-input" id="origen" name="origen">
                                                         <option value="" disabled selected hidden></option>
                                                     </select> -->
-                                                    <input id="origen" type="text" class="value-input" >
+                                                    <input id="origen" type="text" class="value-input" placeholder="Valor">
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <label for="germen">GERMEN</label>
+                                                    <label for="germen" id="nom_germen">GERMEN</label>
                                                     <input type="text" placeholder="Valor" class="value-input" id="germen">
+                                                </div>
+                                                <div class="col-md-6 col-12" hidden id="campo_coloracion">
+                                                    <label for="coloracion">RESULTADO COLORACION DE GRAM</label>
+                                                    <input type="text" placeholder="Valor" class="value-input" id="coloracion">
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <button id="codigolab" hidden>Código Lab</button>
@@ -451,6 +454,7 @@ if (!isset($_SESSION["nombre"])) {
                                                     <th style="font-weight: bold;">Prueba</th>
                                                     <th style="font-weight: bold;">Resultado</th>
                                                     <th style="font-weight: bold;">Origen</th>
+                                                    <th style="font-weight: bold;">Resultado Gram</th>
                                                     <th></th>
                                                     <th hidden>CodigoLab</th>
                                                     <th hidden>Valor</th>
@@ -542,8 +546,14 @@ if (!isset($_SESSION["nombre"])) {
                                             <tr id="fosfatasa_alcalina" class="borde_tabla">
                                                 <td class="negrilla_borde">FOSFATASA ALCALINA</td>
                                             </tr>
-                                            <tr id="tp_inr" class="borde_tabla">
+                                            <!-- <tr id="tp_inr" class="borde_tabla">
                                                 <td class="negrilla_borde">TP/INR</td>
+                                            </tr> -->
+                                            <tr id="tp" class="borde_tabla">
+                                                <td class="negrilla_borde">TP</td>
+                                            </tr>
+                                            <tr id="inr" class="borde_tabla">
+                                                <td class="negrilla_borde">INR</td>
                                             </tr>
                                             <tr id="tpt" class="borde_tabla">
                                                 <td class="negrilla_borde">TPT</td>
@@ -646,53 +656,53 @@ if (!isset($_SESSION["nombre"])) {
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
-                function toggleOtherInput() {
-                    var tipoEstudio = document.getElementById("tipoEstudio").value;
-                    var otherFieldContainer = document.getElementById("otherFieldContainer");
-                    var origenContainer = document.getElementById("origenContainer");
-                    var observaciones = document.getElementById("observaciones");
-                    var origen = document.getElementById("origen");
+                // function toggleOtherInput() {
+                //     var tipoEstudio = document.getElementById("tipoEstudio").value;
+                //     var otherFieldContainer = document.getElementById("otherFieldContainer");
+                //     var origenContainer = document.getElementById("origenContainer");
+                //     var observaciones = document.getElementById("observaciones");
+                //     var origen = document.getElementById("origen");
 
-                    // Reset visibility
-                    otherFieldContainer.style.display = "none";
-                    origenContainer.style.display = "none";
-                    observaciones.style.display = "none";
+                //     // Reset visibility
+                //     otherFieldContainer.style.display = "none";
+                //     origenContainer.style.display = "none";
+                //     observaciones.style.display = "none";
 
-                    // Reset options in origen select
-                    origen.innerHTML = '<option value="" disabled selected hidden></option>';
+                //     // Reset options in origen select
+                //     origen.innerHTML = '<option value="" disabled selected hidden></option>';
 
-                    // Check the selected value and update options accordingly
-                    if (tipoEstudio === "otros") {
-                        otherFieldContainer.style.display = "block"; // Show other input
-                        observaciones.style.display = "block"; // Show Observaciones
-                    } else if (tipoEstudio === "urocultivo") {
-                        // Show origen and set options for urocultivo
-                        origenContainer.style.display = "block";
-                        var option1 = document.createElement("option");
-                        option1.value = "sonda";
-                        option1.textContent = "Sonda";
+                //     // Check the selected value and update options accordingly
+                //     if (tipoEstudio === "otros") {
+                //         otherFieldContainer.style.display = "block"; // Show other input
+                //         observaciones.style.display = "block"; // Show Observaciones
+                //     } else if (tipoEstudio === "urocultivo") {
+                //         // Show origen and set options for urocultivo
+                //         origenContainer.style.display = "block";
+                //         var option1 = document.createElement("option");
+                //         option1.value = "sonda";
+                //         option1.textContent = "Sonda";
 
-                        var option2 = document.createElement("option");
-                        option2.value = "ocasional";
-                        option2.textContent = "Ocasional";
+                //         var option2 = document.createElement("option");
+                //         option2.value = "ocasional";
+                //         option2.textContent = "Ocasional";
 
-                        origen.appendChild(option1);
-                        origen.appendChild(option2);
-                    } else if (tipoEstudio === "hemocultivoPediatri" || tipoEstudio === "hemocultivoAero" || tipoEstudio === "hemocultivo") {
-                        // Show origen and set options for hemocultivo
-                        origenContainer.style.display = "block";
-                        var option1 = document.createElement("option");
-                        option1.value = "Periferico";
-                        option1.textContent = "Periférico";
+                //         origen.appendChild(option1);
+                //         origen.appendChild(option2);
+                //     } else if (tipoEstudio === "hemocultivoPediatri" || tipoEstudio === "hemocultivoAero" || tipoEstudio === "hemocultivo") {
+                //         // Show origen and set options for hemocultivo
+                //         origenContainer.style.display = "block";
+                //         var option1 = document.createElement("option");
+                //         option1.value = "Periferico";
+                //         option1.textContent = "Periférico";
 
-                        var option2 = document.createElement("option");
-                        option2.value = "central";
-                        option2.textContent = "Central";
+                //         var option2 = document.createElement("option");
+                //         option2.value = "central";
+                //         option2.textContent = "Central";
 
-                        origen.appendChild(option1);
-                        origen.appendChild(option2);
-                    }
-                }
+                //         origen.appendChild(option1);
+                //         origen.appendChild(option2);
+                //     }
+                // }
 
             </script>
         </body>

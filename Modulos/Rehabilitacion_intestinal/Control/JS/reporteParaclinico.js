@@ -5,7 +5,7 @@ let reportePlantillas = [];
 
 
 let nombresTit = [
-    "Fecha",
+    "FECHA",
     "LEUCOCITOS",
     "NEUTROFILOS",
     "LINFOCITOS",
@@ -21,7 +21,9 @@ let nombresTit = [
     "BILIRRUBINA DIRECTA",
     "GGT",
     "FOSFATASA ALCALINA",
-    "TP/INR",
+    // "TP/INR",
+    "TP",
+    "INR",
     "TPT",
     "AMILASA",
     "SODIO",
@@ -69,16 +71,8 @@ function guardarDefinitivoVertical(idTabla) {
     }).then((result) => {
         if (result.isConfirmed) {
             
-            const fecha = new Date().toISOString().split('T')[0];
-            const hora = new Date().toLocaleTimeString();
             const registroTable = document.getElementById(idTabla);
             if (registroTable) {
-                // const fechaRow = registroTable.querySelector('tr:nth-child(1)');
-                // const horaRow = registroTable.querySelector('tr:nth-child(2)');
-                // const newFechaCell = fechaRow.insertCell(1);
-                // const newHoraCell = horaRow.insertCell(1);
-                // newFechaCell.textContent = fecha;
-                // newHoraCell.textContent = hora;
                 const examValues = []; // Array para almacenar los valores de los exámenes
                 const examItems = document.querySelectorAll('.exam-container .exam-item');
                 examItems.forEach(examItem => {
@@ -88,7 +82,17 @@ function guardarDefinitivoVertical(idTabla) {
 
                         let datos = document.querySelectorAll("#tabla_cultivos tbody tr");
                         datos.forEach(elemento => {
-                            examValue += `${elemento.cells[0].textContent},${elemento.cells[1].textContent},${elemento.cells[3].textContent},${elemento.cells[2].textContent}` + "\n";
+                            let linea = [
+                                elemento.cells[0].textContent,
+                                elemento.cells[1].textContent,
+                                elemento.cells[3].textContent,
+                                elemento.cells[2].textContent,
+                                elemento.cells[4].textContent
+                            ]
+                            .filter(valor => valor != null && valor !== "")
+                                .join(', ');
+                            
+                            examValue += linea + "\n";
                         });
 
                     } else if(idExam === "examenesComplementarios"){
@@ -176,22 +180,6 @@ function savePaciente(examValues) {
             console.log(result);  
             try {
                 if (result.status === 'success') {
-                    console.log("Se guardó en la BD");
-                    // id = result.idPaciente;
-                    // document.getElementById("id").value = '';
-                    // document.getElementById("id").value = id;
-                    // const registroTable = document.getElementById('registroTabla');
-                    // const newRow = registroTable.querySelector('tr:nth-child(44)');
-                    // if (newRow) {
-                    //     const idCell = newRow.insertCell(1);
-                    //     idCell.textContent = id;
-                    //     idCell.style.display = 'none';
-                    // }
-                    // const idField = document.getElementById("id");
-                    // if (idField) {
-                    //     idField.value = ''; // Limpia el campo 'id'
-                    // }
-
                     Swal.fire({
                         icon: "success",
                         title: "Confirmación",
@@ -321,10 +309,10 @@ function llenarHistoricoParaclinico(episodio, documento, historico = "full") {
     $.ajax({
         type: "POST",
         url: '../logica/llenarHistoricoParaclinico.php',
-        // data: { episodio: episodio, documento: documento },
         data: datos,
         dataType: "json",
         success: function (response) {
+            console.log(response)
             if (response.status !== 'success') {
                 console.error("Error del servidor:", response.message || "Respuesta no exitosa");
                 return;
@@ -354,11 +342,26 @@ function llenarHistoricoParaclinico(episodio, documento, historico = "full") {
                             if (index < arr.length - 4) {
 
                                 row.append(`<td class="elim">${value || ""}</td>`);
-                                // }
-                            } else if(index === arr.length - 3 || index === arr.length - 4){
-                                row.append(`<td class="elim"><pre>${value || ""}</pre></td>`);
-                            } else if (index === arr.length - 2) {
-                                // Determinar si se deshabilita el botón
+
+                            } else if(index === arr.length - 3){
+
+                                let aislamientos = value.split("\n");
+                                let texto = "";
+                                aislamientos.forEach(aislamiento => {
+                                    let valores = aislamiento.split(",");
+                                    valores.forEach(elemento => {
+                                        texto += elemento + "\n";
+                                    });
+                                    texto += "\n";
+                                });
+                                row.append(`<td class="elim"><pre>${texto || ""}</pre></td>`);
+
+                            }else if(index === arr.length - 4){
+
+                                row.append(`<td class="elim"><pre>${value || ""} </pre></td>`);
+
+                            }else if (index === arr.length - 2) {
+
                                 const fechaRegistro = arr[0]; // Fecha en la posición 0
                                 const disabled = fechaRegistro !== fechaHoy ? "disabled" : "";
 
@@ -417,19 +420,6 @@ function editarFila(idTabla, editButton, columnIndex) {
                             input.style.color = "green";
                         }
                     }
-
-                    // if (idExam === "aislamientos" && idExam === "examenesComplementarios") {
-
-                        
-                    // } else {
-                    //     // Rellenar el input correspondiente para otros exámenes
-                    //     const input = examItem.querySelector('input.value-input');
-                    //     input.value = currentValue;
-                    //     if(input.value != ""){
-                    //         input.style.backgroundColor = "#bbffb9";
-                    //         input.style.color = "green";
-                    //     }
-                    // }
                 }
             });
             
@@ -465,13 +455,12 @@ function editarFila(idTabla, editButton, columnIndex) {
                 }
             });
             
-            const fila = registroTable.querySelector('tr:nth-child(43)');
+            const fila = registroTable.querySelector('tr:nth-child(44)');
             const celdas = fila.querySelectorAll('td');
             idPaciente = celdas[columnIndex].textContent.trim();
     
             
             console.log("id:", idPaciente);
-
             $.ajax({
                 type: "POST",
                 url: 'http://localhost/SaludMod/Modulos/Rehabilitacion_intestinal/logica/actualizarBD.php',
@@ -508,22 +497,20 @@ function editarFila(idTabla, editButton, columnIndex) {
             });
 
             // Limpieza específica para "aislamientos"
-            if (document.getElementById("aislamientos")) {
-                document.getElementById("tipoEstudio").value = '';
-                document.getElementById("fechaAislamientos").value = '';
-                document.getElementById("germen").value = '';
-                document.getElementById("otherInput").value = '';
-                document.getElementById("observacionesInput").value = '';
-                const origenSelect = document.getElementById("origen");
-                if (origenSelect) {
-                    origenSelect.value = '';
-                    origenSelect.innerHTML = '';
-                }
+            // if (document.getElementById("aislamientos")) {
+            //     document.getElementById("tipoEstudio").value = '';
+            //     document.getElementById("fechaAislamientos").value = '';
+            //     document.getElementById("nom_germen").value = '';
+            //     const origenSelect = document.getElementById("origen");
+            //     if (origenSelect) {
+            //         origenSelect.value = '';
+            //         origenSelect.innerHTML = '';
+            //     }
 
-                document.getElementById("origenContainer").style.display = 'none';
-                document.getElementById("otherFieldContainer").style.display = 'none';
-                document.getElementById("observaciones").style.display = 'none';
-            }
+            //     document.getElementById("origenContainer").style.display = 'none';
+            //     // document.getElementById("otherFieldContainer").style.display = 'none';
+            //     // document.getElementById("observaciones").style.display = 'none';
+            // }
             editButton.textContent = "Editar";
             // });
 
@@ -546,14 +533,6 @@ $(document).ready(function() {
         llenarHistoricoParaclinico(episodio, documento); 
         }
     });
-    
-    // $('#ja').on("click", function(event) {
-    //     event.preventDefault();
-    //     episodio = document.getElementById("episodio").value || "N/A";  
-    //     documento = document.getElementById("nroDocu").value || "N/A";
-    //     llenarHistoricoParaclinico(episodio, documento); 
-
-    // });
 
     $('#exampleModal').on('show.bs.modal', function () {
         crearPlantilla();
@@ -563,64 +542,63 @@ $(document).ready(function() {
         document.querySelector("#plantilla").value = "";
     });
 
+    function convertirRegistros(reportes){
+        const resultado = nombresTit.map(clave => reportes.map(obj => obj[clave]));
+        console.log(resultado)
+        return resultado;
+    }
+
+    function crearTextoExamenes(examenes){
+        let texto = "";
+        let cont = 0;
+
+        texto +=  nombresTit[0].padEnd(21);
+
+        examenes[0].forEach(elemento => {
+            let fecha = elemento.split("-");
+            let nueva_fecha = `${fecha[2]}/${fecha[1]}`;
+            texto += nueva_fecha.padEnd(7);
+        });
+
+        texto += "\n";
+        texto += "-------------------------------------------\n";
+
+        for(let i = 1; i < examenes.length; i++){
+            cont = 0;
+            let total = examenes[i].length;
+            examenes[i].forEach(elemento => {
+                console.log(elemento)
+                if(elemento == ""){
+                    cont++;
+                }
+            });
+            if(cont == total){
+                continue;
+            }
+
+            texto += nombresTit[i].padEnd(21);
+            examenes[i].forEach(elemento => {
+                texto += elemento != "" ? elemento.padEnd(7) : "-".padEnd(7);
+            });
+            texto += "\n";
+        }
+
+        return texto;
+    }
+
 
     function crearPlantilla(){
         reportePlantillas.reverse();
         let plantilla = "";
-        let indiceNombre = 0;
 
-        plantilla += "Laboratorios:\nPARACLÍNICOS INSTITUCIONALES\n\n"
+        let nuevo_array = convertirRegistros(reportePlantillas)
 
-        const indicesAExcluir = [42, 1, 40, 41, 39]; 
-        const ancho = 7;
-        
-
-        const matriz = reportePlantillas.map(fila => {
-            const datos = Object.values(fila);
+        plantilla += "Laboratorios:\nPARACLÍNICOS INSTITUCIONALES\n\n";
 
 
-            let etiquetaRaw = datos[0] ?? "-";
-            let etiqueta = "-";
+        plantilla += crearTextoExamenes(nuevo_array);
 
-            if (typeof etiquetaRaw === "string" && etiquetaRaw.includes("-")) {
-                const partes = etiquetaRaw.split("-");
-                if (partes.length === 3) {
-                    etiqueta = `${partes[2]}/${partes[1]}`; 
-                } else {
-                    etiqueta = etiquetaRaw;
-                }
-            } else {
-                etiqueta = etiquetaRaw;
-            }
-
-            etiqueta = String(etiqueta).padEnd(ancho); 
-
-            const resto = datos
-                .map((valor, valorIndex) => {
-                if (indicesAExcluir.includes(valorIndex) || valorIndex === 0 ) return null;
-                    const contenido = (valor === "" || valor === null || valor === undefined) ? "-" : valor;
-                    return String(contenido).padEnd(ancho);
-                })
-                .filter(v => v !== null);
-            return [etiqueta, ...resto];
-        });
-        const numFilas = matriz.length;
-        const numColumnas = matriz[0]?.length || 0;
-        for (let col = 0; col < numColumnas; col++) {
-            
-            let nombre = nombresTit[indiceNombre];
-            plantilla += String(nombre).padEnd(21);
-            
-            for (let fila = 0; fila < numFilas; fila++) {
-                plantilla += matriz[fila][col];
-            }
-            plantilla += '\n'; // nueva línea después de cada columna
-            if (col === 0) {
-                plantilla += "--------------------------------------------------------------------------------------------\n";
-            }
-            indiceNombre++;
-        }
-
+        //----------------------------- Examenes y aislamientos
         let examenes = [];
         let textoExamenes = "";
 
@@ -649,12 +627,16 @@ $(document).ready(function() {
             let datos = elemento['AISLAMIENTOS'].split("\n");
             prueba.push(datos);
         });
-
         prueba.forEach(elemento => {
             elemento.forEach(Element => {
                 let dato = Element.split(",");
                 if(Element !== ""){
-                    textoAislamientos += `${dato[0].split("T")[0]}:   Muestra:${dato[1]} | Origen:${dato[2]} | Valor:${dato[3]}\n`;
+                    textoAislamientos += `${dato[0].split("T")[0]}:   Muestra:${dato[1]} | Origen:${dato[2]} | Valor:${dato[3]}`;
+                    
+                    if(dato[4]){
+                        textoAislamientos += ` | Resultado Gram:${dato[4]}`;
+                    }
+                    textoAislamientos += "\n";
                 }
             });
         });
@@ -666,18 +648,6 @@ $(document).ready(function() {
         document.querySelector("#plantilla").value = plantilla;
     }
 
-
-    // $("#boton_copiar").on("click", function(){
-    //     let texto = $("#plantilla").val();
-    //     navigator.clipboard.writeText(texto);
-
-    //     Swal.fire({
-    //         toast: true,
-    //         text: "¡Texto copiado en el portapapeles!",
-    //         icon: "success",
-    //         timer: 3000
-    //     });
-    // });
 
     $("#boton_copiar").on("click", function(){
         let texto = $("#plantilla");
@@ -722,7 +692,6 @@ $(document).ready(function() {
         });
         llenarHistoricoParaclinico(episodio, documento, "PorFecha");
         document.getElementById("button_plantilla").removeAttribute("hidden");
-        console.log("Llego aquí")
     });
 
 
