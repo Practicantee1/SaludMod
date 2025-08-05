@@ -4,17 +4,18 @@
     include('../../../config/Conexion.php');
 
     $documento = $_POST['documento'];
+    $fecha_hora = $_POST['fecha_hora'];
 
-    if(!isset($documento)){
-        echo json_encode(["success" => false, "message" => "La cedula del paciente es obligatoria."]);
+    if(!isset($documento) && !isset($fecha_hora)){
+        echo json_encode(["success" => false, "message" => "Faltan parámetros para realizar la solicitud."]);
         exit();
     }
 
-    $sql = "CALL SP_ObtenerReporteParaclinico(?)";
-    $sql2 = "CALL SP_ObtenerNuevoReporte(?)";
+    $sql = "CALL SP_ObtenerNuevosReportes(?, ?)";
+    $sql2 = "CALL SP_ObtenerFechaNuevoReporte(?, ?)";
 
     if($consulta = $conexion->prepare($sql)){
-        $consulta->bind_param("i", $documento);
+        $consulta->bind_param("ss", $documento, $fecha_hora);
 
         if($consulta->execute()){
             $registros = $consulta->get_result();
@@ -40,7 +41,7 @@
 
 
     if($consulta2 = $conexion->prepare($sql2)){
-        $consulta2->bind_param("s", $documento);
+        $consulta2->bind_param("ss", $documento, $fecha_hora);
 
         if($consulta2->execute()){
             $registros2 = $consulta2->get_result();

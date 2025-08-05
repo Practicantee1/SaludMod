@@ -93,9 +93,6 @@ if (!isset($_SESSION["nombre"])) {
                                             <input readonly type="text" id="tipo" name="tipo" class="form-control bloquear"
                                                 value="<?php echo $DatosIncapacidad['TypeIdentification']; ?>">
                                         </div>
-                                        <!-- <div>
-                                            <button id="ja">AJA</button>
-                                        </div> -->
                                         <div class="form-group col-md-3">
                                             <center><label for="nroDocu">Numero de documento:</label></center>
                                             <input type="text" id="nroDocu" name="nroDocu" class="form-control docu bloquear"
@@ -173,306 +170,6 @@ if (!isset($_SESSION["nombre"])) {
                                     </div>
                                 </form>
 
-                                <!-- examenes -->
-                                <div class="container mx-auto p-4">
-                                    <div class="row titles-UbiCita">
-                                        <div class="col">
-                                            <div class="well">
-                                                <h4 class="form-label text-divider-Epid"><span
-                                                        class="left-span"></span><span class="span">Examenes</span></h4>
-                                            </div>
-                                        </div>
-                                        <div class="search-container">
-                                            <div class="relative">
-                                                <input type="text" id="searchInput" onkeyup="filterExams()" placeholder="Search"
-                                                    class="search">
-                                                <i class="fas fa-search absolute right-3 top-2 text-gray-500"></i>
-                                            </div>
-                                        </div>
-                                        <td>
-                                            <a id="pdf" onclick="window.open('../../../Modulos/Rehabilitacion_intestinal/logica/PDF/GenerarPDF.php?episodio=<?php echo $Doc ?>', '_blank')" style="cursor: pointer;">
-                                                <i class="fa-solid fa-file-pdf fa-2x" ></i>
-                                            </a>
-                                        </td>
-                                    </div>
-                                    <div class="exam-container container">
-                                        <div class="exam-item" id="leucocitos">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>LEUCOCITOS</label>
-                                        </div>
-                                        <div class="exam-item" id="neutrofilos">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>NEUTROFILOS</label>
-                                        </div>
-                                        <div class="exam-item" id="linfocitos">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>LINFOCITOS</label>
-                                        </div>
-                                        <div class="exam-item" id="eosinofilos">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>EOSINOFILOS</label>
-                                        </div>
-                                        <div class="exam-item" id="hemoglobina">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>HEMOGLOBINA</label>
-                                        </div>
-                                        <div class="exam-item" id="hematocrito">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>HEMATOCRITO</label>
-                                        </div>
-                                        <div class="exam-item" id="plaquetas">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>PLAQUETAS</label>
-                                        </div>
-                                        <div class="exam-item" id="vsg">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>VSG</label>
-                                        </div>
-                                        <div class="exam-item" id="pcr">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>PCR</label>
-                                        </div>
-                                        <div class="exam-item" id="tgo">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TGO/AST</label>
-                                        </div>
-                                        <div class="exam-item" id="tgp">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TGP/ALT</label>
-                                        </div>
-                                        <div class="exam-item" id="bilirrubina_total">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>BILIRRUBINA TOTAL</label>
-                                        </div>
-                                        <div class="exam-item" id="bilirrubina_directa">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>BILIRRUBINA DIRECTA</label>
-                                        </div>
-                                        <div class="exam-item" id="ggt">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>GGT</label>
-                                        </div>
-                                        <div class="exam-item" id="fosfatasa_alcalina">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>FOSFATASA ALCALINA</label>
-                                        </div>
-                                        <div class="exam-item" id="tp">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TP</label>
-                                        </div>
-                                        <div class="exam-item" id="inr">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>INR</label>
-                                        </div>
-                                        <div class="exam-item" id="tpt">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TPT</label>
-                                        </div>
-                                        <div class="exam-item" id="amilasa">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>AMILASA</label>
-                                        </div>
-                                        <div class="exam-item" id="sodio">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>SODIO</label>
-                                        </div>
-                                        <div class="exam-item" id="fosforo">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>FOSFORO</label>
-                                        </div>
-                                        <div class="exam-item" id="potasio">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>POTASIO</label>
-                                        </div>
-                                        <div class="exam-item" id="cloro">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>CLORO</label>
-                                        </div>
-                                        <div class="exam-item" id="calcio">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>CALCIO</label>
-                                        </div>
-                                        <div class="exam-item" id="magnesio">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>MAGNESIO</label>
-                                        </div>
-                                        <div class="exam-item" id="colesterol_total">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>COLESTEROL TOTAL</label>
-                                        </div>
-                                        <div class="exam-item" id="colesterol_hdl">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>COLESTEROL HDL</label>
-                                        </div>
-                                        <div class="exam-item" id="trigliceridos">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>TRIGLICERIDOS</label>
-                                        </div>
-                                        <div class="exam-item" id="proteinas_totales">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>PROTEINAS TOTALES</label>
-                                        </div>
-                                        <div class="exam-item" id="albumina">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>ALBUMINA</label>
-                                        </div>
-                                        <div class="exam-item" id="pre_albumina">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>PRE-ALBUMINA</label>
-                                        </div>
-                                        <!-- <div class="exam-item" id="electroforesis_proteinas">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>ELECTROFORESIS DE PROTEINAS</label>
-                                        </div> -->
-                                        <div class="exam-item" id="vitamina_b12">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>VITAMINA B12</label>
-                                        </div>
-                                        <div class="exam-item" id="vitamina_d">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>VITAMINA D</label>
-                                        </div>
-
-                                        <div class="exam-item" id="creatinina">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>CREATININA</label>
-                                        </div>
-                                        <div class="exam-item" id="glicemia">
-                                            <input type="text" placeholder="Valor" class="value-input">
-                                            <label>GLICEMIA</label>
-                                        </div>
-                                        <div class="exam-item" id="gases">
-                                            <div class="input-group exam-item" id="HCO">
-                                                <input type="text" placeholder="Valor" class="value-input">
-                                                <label>GASES HCO&#8323;&#8315;</label>
-                                            </div>
-                                            <div class="input-group exam-item" id="EB">
-                                                <input type="text" placeholder="Valor" class="value-input">
-                                                <label>GASES EB</label>
-                                            </div>
-                                            <div class="input-group exam-item" id="Ph">
-                                                <input type="text" placeholder="Valor" class="value-input">
-                                                <label>GASES Ph</label>
-                                            </div>
-                                        </div>
-                                        <div class="exam-item col-12" id="examenesComplementarios">
-                                            <label style="font-size:16px; font-weight:bold;"
-                                                for="aislamientos">EXAMANES COMPLEMENTARIOS</label>
-                                            <div class="row gy-2" style="display: flex; justify-content: center;align-items: center;">
-                                                <div class="col-md-4">
-                                                    <label for="nombreExamen">NOMBRE</label>
-                                                    <input type="text" placeholder="Valor" class="value-input"
-                                                        id="nombreExamen" value="">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <label for="valorExamen">VALOR</label>
-                                                    <input type="text" placeholder="Valor" class="value-input"
-                                                        id="valorExamen" value="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2" style="margin-left: 0px;">
-                                                <button id="agregar_examen" class="btn btn-primary" style="width: 10vw;"><i class="bi bi-plus-circle"></i> Agregar</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 mb-5">
-                                            <table class="table table-striped" id="tabla_examenes">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="font-weight: bold;">Nombre Examen</th>
-                                                        <th style="font-weight: bold;">Valor Examen</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="exam-item " id="aislamientos">
-                                            <label style="font-size:16px; font-weight:bold;"
-                                                for="aislamientos">AISLAMIENTOS</label>
-                                            <div class="row gy-2" style="display: flex; justify-content: center;align-items: center;">
-                                                <div hidden class="col-md-12" id="mensaje_cultivos" style="width: 50vw; height: auto; margin: 20px; display: flex; justify-content: center;align-items: center;">
-                                                    <p style="margin-top: 10px"></p>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <label for="fechaAislamientos">FECHA</label>
-                                                    <input type="text" placeholder="Valor" class="value-input"
-                                                        id="fechaAislamientos">
-                                                </div>
-                                                <div class="col-md-6 col-12" id="cultivos_">
-                                                    <label for="tipoEstudio">MUESTRA</label>
-                                                    <select class="value-input" id="tipoEstudio" name="tipoEstudio">
-                                                        <option value="" disabled selected >Seleccionar</option>
-                                                        <!-- <option value="urocultivo">Urocultivo</option>
-                                                        <option value="hemocultivoPediatri">Hemocultivo pediatrico aerobio</option>
-                                                        <option value="hemocultivoAero">Hemocultivo aerobio</option>
-                                                        <option value="hemocultivo">Hemocultivo anaerobio</option> -->
-                                                        <!-- <option value="otros" hidden>Otros</option> -->
-                                                    </select>
-                                                </div>
-                                                <!-- <div class="col-md-6 col-12" id="otherFieldContainer" style="display: none;">
-                                                    <label for="otherInput">¿Cuál?</label>
-                                                    <input type="text" class="value-input" id="otherInput" name="otherInput">
-                                                </div> -->
-                                                <!-- <div class="col-md-6 col-12" id="observaciones" style="display: none;">
-                                                    <label for="observaciones">Observaciones</label>
-                                                    <input type="text" class="value-input" id="observacionesInput"
-                                                        name="otherInput">
-                                                </div> -->
-                                                <div class="col-md-6 col-12" id="origenContainer">
-                                                    <label for="origen">ORIGEN</label>
-                                                    <!-- <select class="value-input" id="origen" name="origen">
-                                                        <option value="" disabled selected hidden></option>
-                                                    </select> -->
-                                                    <input id="origen" type="text" class="value-input" placeholder="Valor">
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <label for="germen" id="nom_germen">GERMEN</label>
-                                                    <input type="text" placeholder="Valor" class="value-input" id="germen">
-                                                </div>
-                                                <div class="col-md-6 col-12" hidden id="campo_coloracion">
-                                                    <label for="coloracion">RESULTADO COLORACION DE GRAM</label>
-                                                    <input type="text" placeholder="Valor" class="value-input" id="coloracion">
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <button id="codigolab" hidden>Código Lab</button>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2" style="margin-left: 0px;">
-                                                <button id="agregar_aisla" class="btn btn-primary" style="width: 10vw;"><i class="bi bi-plus-circle"></i> Agregar</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                        <table style="width: 100%;" class="table table-striped mb-5" id="tabla_cultivos">
-                                            <thead>
-                                                <tr>
-                                                    <th style="font-weight: bold;">Fecha</th>
-                                                    <th style="font-weight: bold;">Prueba</th>
-                                                    <th style="font-weight: bold;">Resultado</th>
-                                                    <th style="font-weight: bold;">Origen</th>
-                                                    <th style="font-weight: bold;">Resultado Gram</th>
-                                                    <th></th>
-                                                    <th hidden>CodigoLab</th>
-                                                    <th hidden>Valor</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Se crean dinámicamente los registros -->
-                                            </tbody>
-                                        </table>
-                                    <br>
-                                        
-                                    <button id="guardarBtn" name="guardaRegistro" class="btn waves-effect waves-light"
-                                        style="background-color: #428E3F; color:white; display: block; margin: 0 auto;"
-                                        onclick="guardarDefinitivoVertical('registroTabla')">
-                                        <i class="fa-regular fa-floppy-disk"></i>&nbsp;&nbsp;Registrar datos
-                                    </button>
-
-                                </div>
                                 <!-- tabla de registros -->
                                 <div class="container">
                                     <div class="row titles-UbiCita">
@@ -482,7 +179,7 @@ if (!isset($_SESSION["nombre"])) {
                                                         class="left-span"></span><span class="span">Registros</span></h4>
                                             </div>
                                         </div>
-                                        <div class="d-flex gap-3 align-items-center mb-3">
+                                        <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
                                             <div class="d-flex align-items-center gap-2">
                                                 <label for="fecha_desde" class="mb-0">Desde:</label>
                                                 <input id="fecha_desde" class="form-control" type="date">
@@ -491,15 +188,19 @@ if (!isset($_SESSION["nombre"])) {
                                                 <label for="fecha_hasta" class="mb-0">Hasta:</label>
                                                 <input id="fecha_hasta" class="form-control" type="date">
                                             </div>
+                                            <div class="d-flex flex-column ms-auto">
+                                                <label for="fecha_actualizacion" class="mb-1">Última fecha actualización examenes:</label>
+                                                <input id="fecha_actualizacion" class="form-control" type="text" readonly>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="table-container mb-3">
                                         <table id="registroTabla" class="borde_tabla">
                                             <tr id="fecha" class="borde_tabla">
-                                                <th class="negrilla_borde">FECHA</td>
+                                                <td class="negrilla_borde">FECHA</td>
                                             </tr>
                                             <tr id="hora" class="borde_tabla">
-                                                <th class="negrilla_borde">HORA</td>
+                                                <td class="negrilla_borde">HORA</td>
                                             </tr>
                                             <tr id="leucocitos" class="borde_tabla">
                                                 <td class="negrilla_borde">LEUCOCITOS</td>
@@ -520,7 +221,7 @@ if (!isset($_SESSION["nombre"])) {
                                                 <td class="negrilla_borde">HEMATOCRITO</td>
                                             </tr>
                                             <tr id="plaquetas" class="borde_tabla">
-                                                <td class="negrilla_borde">PLAQUETAS</tds>
+                                                <td class="negrilla_borde">PLAQUETAS</td>
                                             </tr>
                                             <tr id="vsg" class="borde_tabla">
                                                 <td class="negrilla_borde">VSG</td>
@@ -546,9 +247,6 @@ if (!isset($_SESSION["nombre"])) {
                                             <tr id="fosfatasa_alcalina" class="borde_tabla">
                                                 <td class="negrilla_borde">FOSFATASA ALCALINA</td>
                                             </tr>
-                                            <!-- <tr id="tp_inr" class="borde_tabla">
-                                                <td class="negrilla_borde">TP/INR</td>
-                                            </tr> -->
                                             <tr id="tp" class="borde_tabla">
                                                 <td class="negrilla_borde">TP</td>
                                             </tr>
@@ -597,9 +295,6 @@ if (!isset($_SESSION["nombre"])) {
                                             <tr id="pre_albumina" class="borde_tabla">
                                                 <td class="negrilla_borde">PRE-ALBUMINA</td>
                                             </tr>
-                                            <!-- <tr id="electroforesis_proteinas" class="borde_tabla">
-                                                <td>ELECTROFORESIS DE PROTEINAS</td>
-                                            </tr> -->
                                             <tr id="vitamina_b12" class="borde_tabla">
                                                 <td class="negrilla_borde">VITAMINA B12</td>
                                             </tr>
@@ -621,17 +316,8 @@ if (!isset($_SESSION["nombre"])) {
                                             <tr id="Ph" class="borde_tabla">
                                                 <td class="negrilla_borde">GASES Ph</td>
                                             </tr>
-                                            <tr id="examenesComplementarios" class="borde_tabla">
-                                                <td class="negrilla_borde">EXAMENES COMPLEMENTARIOS</td>
-                                            </tr>
                                             <tr id="aislamientos" class="borde_tabla">
                                                 <td class="negrilla_borde">AISLAMIENTOS</td>
-                                            </tr>
-                                            <tr id="btnEditar" class="borde_tabla">
-                                                <td class="negrilla_borde">Editar</td>
-                                            </tr>
-                                            <tr id="id" hidden>
-                                                <td>id</td>
                                             </tr>
 
                                         </table>
@@ -651,60 +337,9 @@ if (!isset($_SESSION["nombre"])) {
             <script src="../Control/JS/Reloj.js"></script>
             <script src="../Control/JS/reporteParaclinico.js"></script>
             <script src="../Control/JS/controlApi.js"></script>
-            <script src="../Control/JS/obtenerReporteParaclinico.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                // function toggleOtherInput() {
-                //     var tipoEstudio = document.getElementById("tipoEstudio").value;
-                //     var otherFieldContainer = document.getElementById("otherFieldContainer");
-                //     var origenContainer = document.getElementById("origenContainer");
-                //     var observaciones = document.getElementById("observaciones");
-                //     var origen = document.getElementById("origen");
-
-                //     // Reset visibility
-                //     otherFieldContainer.style.display = "none";
-                //     origenContainer.style.display = "none";
-                //     observaciones.style.display = "none";
-
-                //     // Reset options in origen select
-                //     origen.innerHTML = '<option value="" disabled selected hidden></option>';
-
-                //     // Check the selected value and update options accordingly
-                //     if (tipoEstudio === "otros") {
-                //         otherFieldContainer.style.display = "block"; // Show other input
-                //         observaciones.style.display = "block"; // Show Observaciones
-                //     } else if (tipoEstudio === "urocultivo") {
-                //         // Show origen and set options for urocultivo
-                //         origenContainer.style.display = "block";
-                //         var option1 = document.createElement("option");
-                //         option1.value = "sonda";
-                //         option1.textContent = "Sonda";
-
-                //         var option2 = document.createElement("option");
-                //         option2.value = "ocasional";
-                //         option2.textContent = "Ocasional";
-
-                //         origen.appendChild(option1);
-                //         origen.appendChild(option2);
-                //     } else if (tipoEstudio === "hemocultivoPediatri" || tipoEstudio === "hemocultivoAero" || tipoEstudio === "hemocultivo") {
-                //         // Show origen and set options for hemocultivo
-                //         origenContainer.style.display = "block";
-                //         var option1 = document.createElement("option");
-                //         option1.value = "Periferico";
-                //         option1.textContent = "Periférico";
-
-                //         var option2 = document.createElement("option");
-                //         option2.value = "central";
-                //         option2.textContent = "Central";
-
-                //         origen.appendChild(option1);
-                //         origen.appendChild(option2);
-                //     }
-                // }
-
-            </script>
         </body>
 
 
