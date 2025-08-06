@@ -1,29 +1,23 @@
 <?php
+include('../../../config/Conexion.php');
+
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include('../../../config/Conexion.php');
-
-// Conectar a la base de datos usando mysqli
-
-// Comprobar la conexión
+// Comprobar la conexiÃ³n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
 }
 
-if ($conexion->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
-    exit();
-}
 
-$epidemiologa = [];
 
 if (isset($_POST['nombreProfesional'])) {
-    $nombreProfesional = $_POST['nombreProfesional'];
-    $sql = "CALL SP_consultarBundlesEpid(?)";
+    $nombreProfesional = (int)$_POST['nombreProfesional'];
+    $epidemiologa = [];
 
+    $sql = "CALL SP_consultarBundlesEpid(?)"; 
     if ($stmt = $conexion->prepare($sql)) {
         $stmt->bind_param('s', $nombreProfesional);
 
@@ -52,6 +46,7 @@ if (isset($_POST['nombreProfesional'])) {
                     'evaluacionesistu' => $evaluacionesistu ?: [],
                     'observaciones' => $row['observaciones'],
                     'estado' => $row['estado'],
+                    'id' => $row['id'],
                 ];
             }
 

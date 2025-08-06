@@ -1,16 +1,16 @@
 <?php
 include('../../../config/Conexion.php');
 
-// Configuración de la cabecera para JSON
+// ConfiguraciÃ³n de la cabecera para JSON
 header('Content-Type: application/json');
 
-// Verificar conexión
+// Verificar conexiÃ³n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
 }
 
-// Validar si el parámetro 'episodio' está definido
+// Validar si el parÃ¡metro 'episodio' estÃ¡ definido
 if (isset($_POST['episodio'])) {
     $episodio = (int)$_POST['episodio'];
     $enfermeras = [];
@@ -18,7 +18,7 @@ if (isset($_POST['episodio'])) {
     // Preparar la consulta SQL
     $sql = "CALL SP_consulta_BundlesEnfer(?)";
     if ($stmt = $conexion->prepare($sql)) {
-        // Vincular parámetro y ejecutar la consulta
+        // Vincular parÃ¡metro y ejecutar la consulta
         $stmt->bind_param('i', $episodio);
 
         if ($stmt->execute()) {
@@ -35,7 +35,7 @@ if (isset($_POST['episodio'])) {
                     'id' => $row['id'],
                     'fecha' => $row['fecha'],
                     'hora' => $row['hora'],
-                    'evaluacionesnav' => $evaluacionesnav ?: [], // Si es null, asignar un arreglo vacío
+                    'evaluacionesnav' => $evaluacionesnav ?: [], // Si es null, asignar un arreglo vacÃ­o
                     'evaluacionesits' => $evaluacionesits ?: [],
                     'evaluacionesistu' => $evaluacionesistu ?: [],
                     'observaciones' => $row['observaciones']

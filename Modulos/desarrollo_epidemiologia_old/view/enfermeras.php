@@ -89,61 +89,17 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                                             <input type="text" id="edad" name="edad" class="form-control"
                                                 value="<?php echo isset($DatosIncapacidad['Edad']) && !empty($DatosIncapacidad['Edad']) ?$DatosIncapacidad['Edad']:''; ?>" readonly>
                                         </div>
-                                        
                                         <div class="form-group col-md-3">
                                             <center><label for="sexo">Genero:</label></center>
                                             <input type="text" id="sexo" name="sexo" class="form-control" value="<?php echo isset($DatosIncapacidad['Sexo']) && !empty($DatosIncapacidad['Sexo']) ?$DatosIncapacidad['Sexo']:''; ?>" readonly>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <center><label for="ubicacion">Ubicacion:</label></center>
-                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="<?php echo isset($UbicacionPaciente["Unidad_Organizativa"]) && !empty($UbicacionPaciente["Unidad_Organizativa"]) ?$UbicacionPaciente["Unidad_Organizativa"]:''; ?>"  readonly>
+                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="<?php echo isset($UbicacionPaciente["UbicacionEdificio"]) && !empty($UbicacionPaciente["UbicacionEdificio"]) ?$UbicacionPaciente["UbicacionEdificio"]:''; ?>" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <center><label for="cama">Cama:</label></center>
                                             <input type="text" id="cama" name="cama" class="form-control" value="<?php echo isset($UbicacionPaciente["IdUbicacion_cama"]) && !empty($UbicacionPaciente["IdUbicacion_cama"]) ?$UbicacionPaciente["IdUbicacion_cama"]:''; ?>" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" hidden>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Fecha_nacimiento">Fecha_nacimiento:</label></center>
-                                            <input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad['Fecha_nacimiento']) && !empty($DatosIncapacidad['Fecha_nacimiento']) ?$DatosIncapacidad['Fecha_nacimiento']:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Email">Email:</label></center>
-                                            <input type="text" id="Email" name="Email" class="form-control"
-                                                value="<?php echo isset($Datoscontacto["Email"]) && !empty($Datoscontacto["Email"]) ?$Datoscontacto["Email"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Telefono">Telefono:</label></center>
-                                            <input type="text" id="Telefono" name="Telefono" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Telefono_principal"]) && !empty($DatosIncapacidad["Telefono_principal"]) ?$DatosIncapacidad["Telefono_principal"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Inicio_atencion">F_Inicio_atencion:</label></center>
-                                            <input type="text" id="F_Inicio_atencion" name="F_Inicio_atencion" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Inicio_atencion"]) && !empty($DatosIncapacidad["F_Inicio_atencion"]) ?$DatosIncapacidad["F_Inicio_atencion"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Clase_Episodio">Clase_Episodio:</label></center>
-                                            <input type="text" id="Clase_Episodio" name="Clase_Episodio" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Clase_Episodio"]) && !empty($DatosIncapacidad["Clase_Episodio"]) ?$DatosIncapacidad["Clase_Episodio"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Id_aseguradora">Id_aseguradora:</label></center>
-                                            <input type="text" id="Id_aseguradora" name="Id_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Id_aseguradora"]) && !empty($DatosIncapacidad["Id_aseguradora"]) ?$DatosIncapacidad["Id_aseguradora"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Ini_realcion_aseguradora">F_Ini_realcion_aseguradora:</label></center>
-                                            <input type="text" id="F_Ini_realcion_aseguradora" name="F_Ini_realcion_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Ini_realcion_aseguradora"]) && !empty($DatosIncapacidad["F_Ini_realcion_aseguradora"]) ?$DatosIncapacidad["F_Ini_realcion_aseguradora"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Fin_realcion_aseguradora">F_Fin_realcion_aseguradora:</label></center>
-                                            <input type="text" id="F_Fin_realcion_aseguradora" name="F_Fin_realcion_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Fin_realcion_aseguradora"]) && !empty($DatosIncapacidad["F_Fin_realcion_aseguradora"]) ?$DatosIncapacidad["F_Fin_realcion_aseguradora"]:''; ?>" readonly>
                                         </div>
                                     </div>
 
@@ -177,11 +133,11 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                                             <input type="text" class="form-control" id="especialidad" name="especialidad"
                                             value="<?php echo isset($DatosIncapacidad['Especialidad']) && !empty($DatosIncapacidad['Especialidad']) ?$DatosIncapacidad['Especialidad']:''; ?>" readonly>
                                         </div>
-                                        <div class="form-group col-md-1" hidden >
-                                            <center><label style="color:black" for="id" class="form-label">id:</label></center>
-                                            <input type="text" class="form-control" id="id" name="id" readonly>
-                                        </div>
                                         <div class="form-group col-md-1" hidden>
+                                            <center><label style="color:black" for="id" class="form-label">id:</label></center>
+                                            <input type="text" class="form-control" id="id" name="id">
+                                        </div>
+                                        <div class="form-group col-md-1" hidden >
                                             <center><label style="color:black" for="centrosanitario" class="form-label">centrosanitario:</label></center>
                                             <input type="text" class="form-control" id="centrosanitario" name="centrosanitario" value="<?php echo isset($DatosIncapacidad['CentroSanitario']) && !empty($DatosIncapacidad['CentroSanitario']) ?$DatosIncapacidad['CentroSanitario']:''; ?>">
                                         </div>
@@ -194,7 +150,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                             <div class="question">
                                 <h3>¿El paciente está conectado a ventilación mecánica invasiva?</h3>
                                 <label>
-                                    <input type="radio" name="ventilacion" value="si" onchange="toggleDivs()"> Si
+                                    <input type="radio" name="ventilacion" value="si" onchange="toggleDivs()"> Sí
                                 </label>
                                 <label>
                                     <input type="radio" name="ventilacion" value="no" onchange="toggleDivs()" checked> No
@@ -204,7 +160,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                             <div class="question">
                                 <h3>¿El paciente tiene un catéter venoso de inserción central (CVC, PICC, Mahurka, CCI, etc.)?</h3>
                                 <label>
-                                    <input type="radio" name="cvc" value="si" onchange="toggleDivs()"> Si
+                                    <input type="radio" name="cvc" value="si" onchange="toggleDivs()"> Sí
                                 </label>
                                 <label>
                                     <input type="radio" name="cvc" value="no" onchange="toggleDivs()" checked> No
@@ -214,7 +170,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                             <div class="question">
                                 <h3>¿El paciente tiene una sonda vesical insertada?</h3>
                                 <label>
-                                    <input type="radio" name="sonda" value="si" onchange="toggleDivs()"> Si
+                                    <input type="radio" name="sonda" value="si" onchange="toggleDivs()"> Sí
                                 </label>
                                 <label>
                                     <input type="radio" name="sonda" value="no" onchange="toggleDivs()" checked> No
@@ -238,7 +194,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
 
                                 </tr>
                                 <tr>
-                                    <td class="left-align sub-header" id="row">2. La cabecera esta elevada: Adultos: 30ú- 45ú - Pediatricos/neonatos: Trendelemburg invertido.</td>
+                                    <td class="left-align sub-header" id="row">2. La cabecera esta elevada: Adultos: 30°- 45° - Pediatricos/neonatos: Trendelemburg invertido.</td>
                                     <td id="tds"></td>
 
                                 </tr>
@@ -281,7 +237,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
 
                                 </tr>
                                 <tr>
-                                    <td class="left-align sub-header" id="row">3. Desinfecta la superficie de la conexión, los lados del conector sin aguja y los puertos de administraci�n con clorhexidina alcoholica o alcohol al 70% antes de acceder al cateter.</td>
+                                    <td class="left-align sub-header" id="row">3. Desinfecta la superficie de la conexión, los lados del conector sin aguja y los puertos de administración con clorhexidina alcoholica o alcohol al 70% antes de acceder al cateter.</td>
                                     <td id="tds"></td>
                                 </tr>
                                 <tr>
@@ -367,7 +323,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                                     <th colspan="2" style="font-weight: bold;">Fecha</th>
                                     <th colspan="6" style="font-weight: bold; background-color:#eceef1;">Neumonia asociada al ventilador (NAV)</th>
                                     <th colspan="7" style="font-weight: bold;">Infeccion torrente sanguineo asociado a cateter  (ITS-AC )</th>
-                                    <th colspan="7" style="font-weight: bold; background-color:#eceef1;">Infecci�n urinaria asociada a sonda vesical (ISTU-AC)</th>
+                                    <th colspan="7" style="font-weight: bold; background-color:#eceef1;">Infección urinaria asociada a sonda vesical (ISTU-AC)</th>
                                     <th colspan="1" style="font-weight: bold;">Observaciones</th>
                                    
                                 </tr>
@@ -399,7 +355,7 @@ if ($_SESSION['bundlesAux-Enfermeras']==1)
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Aqu� se agregar�n los registros -->
+                                    <!-- Aquí se agregarán los registros -->
                                 </tbody>
                             </table>
                             

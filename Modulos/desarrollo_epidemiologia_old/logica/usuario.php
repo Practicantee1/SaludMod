@@ -1,25 +1,25 @@
 <?php
 include('../../../config/Conexion.php');
 
-// Configuración de la cabecera para JSON
+// ConfiguraciÃ³n de la cabecera para JSON
 header('Content-Type: application/json');
 
-// Verificar conexión
+// Verificar conexiÃ³n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
 }
 
-// Validar si el parámetro 'episodio' está definido
-if (isset($_POST['episodio'])) {
-    $episodio = (int)$_POST['episodio'];
-    $enfermeras = [];
+// Validar si el parÃ¡metro 'episodio' estÃ¡ definido
+if (isset($_POST['usuario'])) {
+    $usuario = $_POST['usuario'];
+    $excelUsuario = [];
 
     // Preparar la consulta SQL
-    $sql = "CALL SP_consulta_BundlesEnfer(?)";
+    $sql = "CALL SP_bundlesUsuario(?)";
     if ($stmt = $conexion->prepare($sql)) {
-        // Vincular parámetro y ejecutar la consulta
-        $stmt->bind_param('i', $episodio);
+        // Vincular parÃ¡metro y ejecutar la consulta
+        $stmt->bind_param('i', $usuario);
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
@@ -31,11 +31,19 @@ if (isset($_POST['episodio'])) {
                 $evaluacionesits = json_decode($row['evaluacionesits'], true);
                 $evaluacionesistu = json_decode($row['evaluacionesistu'], true);
 
-                $enfermeras[] = [
+                $excelUsuario[] = [
                     'id' => $row['id'],
                     'fecha' => $row['fecha'],
                     'hora' => $row['hora'],
-                    'evaluacionesnav' => $evaluacionesnav ?: [], // Si es null, asignar un arreglo vacío
+                    'episodio' => $row['episodio'],
+                    'numero_documento' => $row['numero_documento'],
+                    'nombre' => $row['nombre'],
+                    'edad' => $row['edad'],
+                    'genero' => $row['genero'],
+                    'ubicacion' => $row['ubicacion'],
+                    'cama' => $row['cama'],
+                    'entidad' => $row['entidad'],
+                    'evaluacionesnav' => $evaluacionesnav ?: [], // Si es null, asignar un arreglo vacÃ­o
                     'evaluacionesits' => $evaluacionesits ?: [],
                     'evaluacionesistu' => $evaluacionesistu ?: [],
                     'observaciones' => $row['observaciones']
@@ -43,7 +51,7 @@ if (isset($_POST['episodio'])) {
             }
 
             // Respuesta JSON con los datos obtenidos
-            echo json_encode(['status' => 'success', 'enfermeras' => $enfermeras]);
+            echo json_encode(['status' => 'success', 'excelUsuario' => $excelUsuario]);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Query failed: ' . $stmt->error]);
         }

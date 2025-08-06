@@ -1,0 +1,208 @@
+/* Estilos globales para la tabla */
+table {
+    width: 100%; 
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    margin: 10px;
+    border-collapse: collapse;
+    table-layout: fixed; 
+}
+
+td, th, tr {
+    border: 1px solid #000;
+    text-align: left;
+    border: 1px solid #000;
+}
+.button-container {
+    display: flex; /* Habilita el modelo de caja flexible */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    margin-top: 20px; /* Espacio opcional en la parte superior */
+}
+
+.question-container {
+    display: flex; /* Habilita el modelo de caja flexible */
+    justify-content: space-between; /* Espacia las preguntas uniformemente */
+    gap: 15px; /* Espacio entre preguntas */
+}
+
+.question {
+    margin: 10px;
+    flex: 1; /* Permite que cada pregunta ocupe el mismo ancho */
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde alrededor de cada pregunta */
+    border-radius: 5px; /* Esquinas redondeadas */
+    min-width: 200px; /* Ancho mínimo para cada pregunta */
+}
+
+/* Estilo para cambiar el tamaño de letra */
+.question h3 {
+    font-size: 12px; /* Tamaño de letra para los encabezados */
+}
+
+.question label {
+    font-size: 12px; /* Tamaño de letra para las etiquetas */
+}
+
+
+th {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+.text-divider-Epid{
+    margin: 2em 0;
+    line-height: 0; 
+    text-align: left;
+    font-size: 23px;   /*Modificamos el el tamaño de la letra para darle resposividad al texto en vista móvil*/
+
+}
+
+.card-header{
+    padding-top: 0;
+}
+
+.card {
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 20px;
+}
+.text-divider-Epid span{
+    background-color:#eceef1; 
+    padding: 1em;
+    color: #006941 !important;
+    font-weight: 700;
+}
+
+.text-divider-Epid .left-span{
+    background-color: transparent; 
+    width: 15px;
+}
+#row {
+    width:831px ;
+    height:39px ;
+}
+#rowISTU {
+    width:850px ;
+    height:39px ;
+}
+#registros tr:nth-child(even){
+    background-color: #DEDEDE;
+}
+
+#registros tr:hover {
+    background-color: #bcbcbc;
+}
+
+.text-divider-Epid:before{ 
+    content: " "; 
+    display: block;                                 
+    border-top: 1px solid #006941; 
+    border-bottom: 2px solid #006941;
+}
+
+.sub-header {
+    background-color: #3F8755;
+    color: white;
+    font-size: 12px;
+    padding: 8px;
+    text-align: center;
+}
+
+.left-align {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    padding: 10px;
+    margin: 2px;
+    font-size: 12px;
+    z-index: 10;
+    color: white;
+    min-width: 350px; /* Cambia este valor según necesites */
+    word-wrap: break-word; /* Para asegurar que el texto largo se ajuste a la celda */
+}
+
+#istuTable{
+    width: 100%;
+}
+
+#tds {
+    background-color: #fff;
+}
+#MainTittle-Ver {
+    background-color: #006941;
+    font-size: 12px;
+    width: 70%;
+    margin: auto;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-bottom: 10px;
+}
+
+.header-table {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.well {
+    
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.col {
+    flex: 1;
+    padding: 0 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+
+.tab-content{
+    width: 100%;
+}
+
+#its, #neav, #istuTable {
+    width: 100%;
+}
+
+tbody{
+    width: 100%;
+}
+
+#its th{
+    width: 100%;
+}
+
+#neav th{
+    width: 100%;
+}
+
+#istuTable th{
+    width: 100%;
+}
+
+#buttom-search{
+    margin: 20px 10px;
+    width: 30%;
+    border-radius: 10px;
+}

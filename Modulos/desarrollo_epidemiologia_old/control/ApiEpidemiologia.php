@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $UbicacionPaciente = $DataPaciente["DatosEpisodio"]["Ubicacion"];
 
                 ?>
-                document.getElementById("ubicacion").value = '<?php echo $UbicacionPaciente["Unidad_Organizativa"]; ?>';
+                document.getElementById("ubicacion").value = '<?php echo $UbicacionPaciente["UbicacionEdificio"]; ?>';
                 document.getElementById("cama").value = '<?php echo $UbicacionPaciente["IdUbicacion_cama"]; ?>';
 
 

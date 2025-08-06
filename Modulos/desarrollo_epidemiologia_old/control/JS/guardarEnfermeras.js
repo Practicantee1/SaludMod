@@ -9,7 +9,7 @@ function toggleDivs() {
     const cvc = document.querySelector('input[name="cvc"]:checked');
     const sonde = document.querySelector('input[name="sonda"]:checked');
 
-    // ValidaciÛn para asegurarse de que al menos una evaluaciÛn estÈ seleccionada
+    // Validaci√≥n para asegurarse de que al menos una evaluaci√≥n est√© seleccionada
     if ((ventilacion && ventilacion.value === 'no') &&
         (cvc && cvc.value === 'no') &&
         (sonde && sonde.value === 'no')) {
@@ -18,7 +18,7 @@ function toggleDivs() {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Debe seleccionar al menos una evaluaciÛn',
+            text: 'Debe seleccionar al menos una evaluaci√≥n',
         }).then(() => {
             // Limpiar las selecciones de los radio buttons
             const radios = document.querySelectorAll('input[type="radio"]');
@@ -26,13 +26,13 @@ function toggleDivs() {
                 radio.checked = false;
             });
 
-            // TambiÈn podemos ocultar los divs en caso de que estÈn visibles
+            // Tambi√©n podemos ocultar los divs en caso de que est√©n visibles
             document.getElementById('navDiv').style.display = 'none';
             document.getElementById('itsDiv').style.display = 'none';
             document.getElementById('istuDiv').style.display = 'none';
         });
 
-        // Detener la ejecuciÛn para evitar mostrar u ocultar los divs si la validaciÛn falla
+        // Detener la ejecuci√≥n para evitar mostrar u ocultar los divs si la validaci√≥n falla
         return;
     }
 
@@ -68,7 +68,7 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Debe seleccionar al menos una evaluaciÛn.',
+            text: 'Debe seleccionar al menos una evaluaci√≥n.',
         }).then(() => {
             // Limpiar las selecciones de los radio buttons
             const radios = document.querySelectorAll('input[type="radio"]');
@@ -76,7 +76,7 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
                 radio.checked = false;
             });
 
-            // TambiÈn podemos ocultar los divs en caso de que estÈn visibles
+            // Tambi√©n podemos ocultar los divs en caso de que est√©n visibles
             document.getElementById('navDiv').style.display = 'none';
             document.getElementById('itsDiv').style.display = 'none';
             document.getElementById('istuDiv').style.display = 'none';
@@ -87,17 +87,17 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
             $('input[name="sonda"][value="no"]').prop('checked', true);
         });
 
-        // Detener la ejecuciÛn para evitar mostrar u ocultar los divs si la validaciÛn falla
+        // Detener la ejecuci√≥n para evitar mostrar u ocultar los divs si la validaci√≥n falla
         return;
     }
     Swal.fire({
-        title: "Si desea guardar el registro completo, por favor contin˙e",
-        text: "øEst· seguro de guardar todo el registro?",
+        title: "Si desea guardar el registro completo, por favor contin√∫e",
+        text: "¬øEst√° seguro de guardar todo el registro?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#428E3F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "SÌ, guardar",
+        confirmButtonText: "S√≠, guardar",
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -119,14 +119,14 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
 
                         if (cells.length > 0) {
                             if (rowIndex === rows.length - 1) {
-                                // ⁄ltima fila es el cumplimiento
+                                // √öltima fila es el cumplimiento
                                 cumplimiento = cells[cells.length - 1].textContent.trim() || "N/A";
                             } else {
                                 // Resto de las filas para evaluaciones
                                 const select = row.querySelector('select.response');
                                 if (select) {
                                     if (!select.value) {
-                                        seleccionInvalida = true; // Marca la selecciÛn como inv·lida
+                                        seleccionInvalida = true; // Marca la selecci√≥n como inv√°lida
                                     }
                                     evaluaciones.push(select.value || "N/A");
                                 } else {
@@ -136,14 +136,14 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
                         }
                     });
 
-                    // AÒadir las evaluaciones y el cumplimiento al arreglo de datos de la fila
+                    // A√±adir las evaluaciones y el cumplimiento al arreglo de datos de la fila
                     filaDatos.push(...evaluaciones, cumplimiento);
                 } else {
-                    console.error(`No se encontrÛ la pestaÒa con id ${tabId}.`);
+                    console.error(`No se encontr√≥ la pesta√±a con id ${tabId}.`);
                 }
             });
 
-            // Si hay selecciÛn inv·lida, muestra un mensaje y detiene el proceso
+            // Si hay selecci√≥n inv√°lida, muestra un mensaje y detiene el proceso
             
 
             // Obtener la fecha y la hora actuales
@@ -167,7 +167,7 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
                 });
                 newRow.insertCell(22).textContent = observaciones;
             } else {
-                console.error(`No se encontrÛ la tabla con id ${idTabla}.`);
+                console.error(`No se encontr√≥ la tabla con id ${idTabla}.`);
             }
 
             Swal.fire({
@@ -233,7 +233,7 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
                     }
                 });
             });
-            console.log("Contenido de filaDatos despuÈs de guardarDefinitivo_1_2:", filaDatos);
+            console.log("Contenido de filaDatos despu√©s de guardarDefinitivo_1_2:", filaDatos);
         }
 
 
@@ -243,37 +243,23 @@ function guardarDefinitivo_1_2(idTabla, idProfesinal) {
 }
 
 function saveBundles(idProfesinal) {
-
-    let tipo_documento = $("#tipo").val();
-    let documento = $("#nroDoc").val();
-    let nombre = $("#nombrePaciente").val();
-    let Fecha_nacimiento = $("#Fecha_nacimiento").val();
-    let genero = $("#sexo").val();
-    let Email = $("#Email").val();
-    let Telefono = $("#Telefono").val();
     let episodio = $("#episodio").val();
-    let Clase_Episodio = $("#Clase_Episodio").val();
-    let F_Inicio_atencion = $("#F_Inicio_atencion").val();
-    let Id_aseguradora = $("#Id_aseguradora").val();
+    let documento = $("#nroDoc").val();
+    let tipo_documento = $("#tipo").val();
+    let nombre = $("#nombrePaciente").val();
+    let edad = $("#edad").val();
+    let genero = $("#sexo").val();
+    let ubicacion = $("#ubicacion").val();
+    let cama = $("#cama").val();
     let entidad = $("#entidad").val();
-    let F_Ini_realcion_aseguradora = $("#F_Ini_realcion_aseguradora").val();
-    let F_Fin_realcion_aseguradora = $("#F_Fin_realcion_aseguradora").val();
-
     let evaluacionesnav = filaDatos.slice(0, 6);
     let evaluacionesits = filaDatos.slice(6, 13);
     let evaluacionesistu = filaDatos.slice(13, 20);
     let observaciones = $("#Observaciones").val();
     let estadoEvaluacion = 'FINALIZADO';
-    let id_usuario_registra = idProfesinal;
-
-
-    let ubicacion = $("#ubicacion").val();
-    let cama = $("#cama").val();
-    let tipo_escala = "EPIDEMIOLOGIA"
-    let centrosanitario = $("#centrosanitario").val();
-
-    let edad = $("#edad").val();
+    let nombreProfesional = idProfesinal;
     let cargo = $("#especialidad").val();
+    let centrosanitario = $("#centrosanitario").val();
 
     function obtenerValoresDeTabla(idTabla) {
         let claves = [];
@@ -304,7 +290,7 @@ function saveBundles(idProfesinal) {
     for (let i = 0; i < clavesEvaluacionesIts.length; i++) {
         // Si encontramos "Cumplimiento", primero agregamos la nueva pregunta
         if (clavesEvaluacionesIts[i] === "Cumplimiento") {
-            jsonEvaluacionesIts["TopicaciÛn con clorhexidina en mayores de 2 meses"] = "N/A Enfermera o Aux";
+            jsonEvaluacionesIts["Topicaci√≥n con clorhexidina en mayores de 2 meses"] = "N/A Enfermera o Aux";
         }
         jsonEvaluacionesIts[clavesEvaluacionesIts[i]] = evaluacionesits[i] || null;
     }
@@ -312,7 +298,7 @@ function saveBundles(idProfesinal) {
         jsonEvaluacionesIstu[clavesEvaluacionesIstu[i]] = evaluacionesistu[i] || null;  
     }
     
-    // Mostrar los JSON en consola (para depuraciÛn)
+    // Mostrar los JSON en consola (para depuraci√≥n)
     console.log(jsonEvaluacionesNav);
     console.log(jsonEvaluacionesIts);
     console.log(jsonEvaluacionesIstu);
@@ -323,29 +309,22 @@ function saveBundles(idProfesinal) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            tipo_documento: tipo_documento,
-            documento: documento,
-            nombre: nombre,
-            Fecha_nacimiento: Fecha_nacimiento,
-            genero: genero,
-            Email:Email,
-            Telefono:Telefono,
             episodio: episodio,
-            Clase_Episodio: Clase_Episodio,
-            F_Inicio_atencion:F_Inicio_atencion,
-            Id_aseguradora:Id_aseguradora,
+            documento: documento,
+            tipo_documento: tipo_documento,
+            nombre: nombre,
+            edad: edad,
+            genero: genero,
+            ubicacion: ubicacion,
+            cama: cama,
             entidad: entidad,
-            F_Ini_realcion_aseguradora:F_Ini_realcion_aseguradora,
-            F_Fin_realcion_aseguradora:F_Fin_realcion_aseguradora,
             evaluacionesnav: jsonEvaluacionesNav,
             evaluacionesits: jsonEvaluacionesIts,
             evaluacionesistu: jsonEvaluacionesIstu,
             observaciones: observaciones,
-            estado:estadoEvaluacion,
-            id_usuario_registra: id_usuario_registra,
-            ubicacion: ubicacion,
-            cama:cama,
-            tipo_escala:tipo_escala,
+            estadoEvaluacion: estadoEvaluacion,
+            nombreProfesional: nombreProfesional,
+            cargo: cargo,
             centrosanitario: centrosanitario
         })
     })
@@ -353,7 +332,7 @@ function saveBundles(idProfesinal) {
     .then(result => {
         console.log(result);
         if (result.status === 'success') {
-            console.log("Se guardÛ en la BD");
+            console.log("Se guard√≥ en la BD");
             id = result.idPaciente;
             console.log(id);
         } else {
@@ -367,7 +346,7 @@ function saveBundles(idProfesinal) {
 }
 function llenarHistoricoEnfermeras(episodio) {
     if (!episodio) {
-        console.error("Error: El par·metro 'episodio' no est· definido");
+        console.error("Error: El par√°metro 'episodio' no est√° definido");
         return;
     }
 
@@ -382,7 +361,7 @@ function llenarHistoricoEnfermeras(episodio) {
 
                 // Lista de claves a excluir
                 const clavesExcluir = [
-                    "TopicaciÛn con clorhexidina en mayores de 2 meses"
+                    "Topicaci√≥n con clorhexidina en mayores de 2 meses"
                 ];
 
                 response.enfermeras.forEach(function(enfermera) {
@@ -390,34 +369,34 @@ function llenarHistoricoEnfermeras(episodio) {
                         <td style="text-align: center;">${enfermera.fecha || ''}</td>
                         <td style="text-align: center;">${enfermera.hora || ''}</td>`;
                     
-                    // Procesar evaluaciones de NAV din·micamente
+                    // Procesar evaluaciones de NAV din√°micamente
                     if (enfermera.evaluacionesnav) {
                         Object.keys(enfermera.evaluacionesnav).forEach(function(key) {
-                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est· en la lista de exclusiÛn
+                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est√° en la lista de exclusi√≥n
                                 newRow += `<td style="text-align: center;">${enfermera.evaluacionesnav[key] || ''}</td>`;
                             }
                         });
                     }
 
-                    // Procesar evaluaciones de ITS din·micamente
+                    // Procesar evaluaciones de ITS din√°micamente
                     if (enfermera.evaluacionesits) {
                         Object.keys(enfermera.evaluacionesits).forEach(function(key) {
-                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est· en la lista de exclusiÛn
+                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est√° en la lista de exclusi√≥n
                                 newRow += `<td style="text-align: center;">${enfermera.evaluacionesits[key] || ''}</td>`;
                             }
                         });
                     }
 
-                    // Procesar evaluaciones de ISTU din·micamente
+                    // Procesar evaluaciones de ISTU din√°micamente
                     if (enfermera.evaluacionesistu) {
                         Object.keys(enfermera.evaluacionesistu).forEach(function(key) {
-                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est· en la lista de exclusiÛn
+                            if (!clavesExcluir.includes(key)) {  // Verificar si la clave no est√° en la lista de exclusi√≥n
                                 newRow += `<td style="text-align: center;">${enfermera.evaluacionesistu[key] || ''}</td>`;
                             }
                         });
                     }
 
-                    // AÒadir el campo de observaciones al final de la fila
+                    // A√±adir el campo de observaciones al final de la fila
                     newRow += `<td style="text-align: center;">${enfermera.observaciones || ''}</td>`;
                     newRow += `</tr>`;
 

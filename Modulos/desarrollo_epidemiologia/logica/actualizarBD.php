@@ -4,7 +4,7 @@ include('../../../config/Conexion.php');
 
 // Conectar a la base de datos usando mysqli
 
-// Comprobar la conexiÃ³n
+// Comprobar la conexión
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();
@@ -14,7 +14,7 @@ header('Content-Type: application/json');
 ob_start(); // Inicia el buffer de salida
 $conexion->set_charset("utf8mb4"); 
 
-// Verificar la conexiÃ³n
+// Verificar la conexión
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     ob_end_clean(); // Limpiar el buffer de salida si hay un error
@@ -29,10 +29,10 @@ if (!$data) {
     exit();
 }
 
-// Registrar los datos recibidos para depuraciÃ³n (usa el log de errores en lugar de stderr)
+// Registrar los datos recibidos para depuración (usa el log de errores en lugar de stderr)
 error_log(print_r($data, true));
 
-$idPacienteBundles = $data['idPacienteBundles'] ?? '';
+$episodio = $data['episodio'] ?? '';
 $evaluacionesnav = $data['evaluacionesnav'] ?? '';
 $evaluacionesits = $data['evaluacionesits'] ?? '';
 $evaluacionesistu = $data['evaluacionesistu'] ?? '';
@@ -49,18 +49,18 @@ try {
     if ($stmt === false) {
         throw new Exception("Error preparando la consulta: " . $conexion->error);
     }
-    $stmt->bind_param("sssss", $idPacienteBundles, $evaluacionesnav1, $evaluacionesits1, $evaluacionesistu1, $observaciones);
+    $stmt->bind_param("sssss", $episodio, $evaluacionesnav1, $evaluacionesits1, $evaluacionesistu1, $observaciones);
     $stmt->execute();
     
     // Comprobar si el UPDATE fue exitoso
     if ($stmt->affected_rows > 0) {
-        // Ã‰xito en la actualizaciÃ³n
-        ob_end_clean(); // Asegurarse de que el buffer de salida estÃ© limpio antes de enviar la respuesta JSON
-        echo json_encode(['status' => 'success', 'message' => 'ActualizaciÃ³n exitosa']);
+        // Éxito en la actualización
+        ob_end_clean(); // Asegurarse de que el buffer de salida esté limpio antes de enviar la respuesta JSON
+        echo json_encode(['status' => 'success', 'message' => 'Actualización exitosa']);
     } else {
-        // No se afectaron filas, lo que podrÃ­a significar que el idPacienteBundles no coincide
+        // No se afectaron filas, lo que podría significar que el idPacienteBundles no coincide
         ob_end_clean(); 
-        echo json_encode(['status' => 'warning', 'message' => 'No se actualizÃ³ ningÃºn registro, puede que el ID no coincida']);
+        echo json_encode(['status' => 'warning', 'message' => 'No se actualizó ningún registro, puede que el ID no coincida']);
     }
 
     $stmt->close();

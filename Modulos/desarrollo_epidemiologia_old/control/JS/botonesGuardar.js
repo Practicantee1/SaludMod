@@ -6,13 +6,13 @@ let estado;
 
 function guardarDefinitivo_1_2(idTabla) {
     Swal.fire({
-        title: "Si desea guardar el registro completo, por favor continúe",
-        text: "¿Está seguro de guardar todo el registro?",
+        title: "Si desea guardar el registro completo, por favor continÃºe",
+        text: "Â¿EstÃ¡ seguro de guardar todo el registro?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#428E3F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, guardar",
+        confirmButtonText: "SÃ­, guardar",
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -34,14 +34,14 @@ function guardarDefinitivo_1_2(idTabla) {
 
                         if (cells.length > 0) {
                             if (rowIndex === rows.length - 1) {
-                                // Última fila es el cumplimiento
+                                // Ãšltima fila es el cumplimiento
                                 cumplimiento = cells[cells.length - 1].textContent.trim() || "N/A";
                             } else {
                                 // Resto de las filas para evaluaciones
                                 const select = row.querySelector('select.response');
                                 if (select) {
                                     if (!select.value) {
-                                        seleccionInvalida = true; // Marca la selección como inválida
+                                        seleccionInvalida = true; // Marca la selecciÃ³n como invÃ¡lida
                                     }
                                     evaluaciones.push(select.value || "N/A");
                                 } else {
@@ -51,14 +51,14 @@ function guardarDefinitivo_1_2(idTabla) {
                         }
                     });
 
-                    // Añadir las evaluaciones y el cumplimiento al arreglo de datos de la fila
+                    // AÃ±adir las evaluaciones y el cumplimiento al arreglo de datos de la fila
                     filaDatos.push(...evaluaciones, cumplimiento);
                 } else {
-                    console.error(`No se encontró la pestaña con id ${tabId}.`);
+                    console.error(`No se encontrÃ³ la pestaÃ±a con id ${tabId}.`);
                 }
             });
 
-            // Si hay selección inválida, muestra un mensaje y detiene el proceso
+            // Si hay selecciÃ³n invÃ¡lida, muestra un mensaje y detiene el proceso
             
 
             // Obtener la fecha y la hora actuales
@@ -81,7 +81,7 @@ function guardarDefinitivo_1_2(idTabla) {
                 });
                 newRow.insertCell(22).textContent = observaciones;
             } else {
-                console.error(`No se encontró la tabla con id ${idTabla}.`);
+                console.error(`No se encontrÃ³ la tabla con id ${idTabla}.`);
             }
 
             Swal.fire({
@@ -90,7 +90,7 @@ function guardarDefinitivo_1_2(idTabla) {
                 icon: "success"
             }).then(() => {
                 saveBundles();
-                // Limpia los valores de las tablas después de guardar
+                // Limpia los valores de las tablas despuÃ©s de guardar
                 tabIds.forEach(tabId => {
                     const tab = document.getElementById(tabId);
                     if (tab) {
@@ -116,7 +116,7 @@ function guardarDefinitivo_1_2(idTabla) {
                     }
                 });
             });
-            console.log("Contenido de filaDatos después de guardarDefinitivo_1_2:", filaDatos);
+            console.log("Contenido de filaDatos despuÃ©s de guardarDefinitivo_1_2:", filaDatos);
         }
 
 
@@ -176,7 +176,7 @@ function saveBundles() {
         jsonEvaluacionesIstu[clavesEvaluacionesIstu[i]] = evaluacionesistu[i] || null;  
     }
     
-    // Mostrar los JSON en consola (para depuración)
+    // Mostrar los JSON en consola (para depuraciÃ³n)
     console.log(jsonEvaluacionesNav);
     console.log(jsonEvaluacionesIts);
     console.log(jsonEvaluacionesIstu);
@@ -209,7 +209,7 @@ function saveBundles() {
     .then(result => {
         console.log(result);
         if (result.status === 'success') {
-            console.log("Se guardó en la BD");
+            console.log("Se guardÃ³ en la BD");
             id = result.idPaciente;
             console.log(id);
         } else {
@@ -226,23 +226,23 @@ function saveBundles() {
 function guardarParcialEpid(idTabla) {
     estado='PENDIENTE';
     if (isEditMode) {
-        // Si está en modo de edición, prevenir guardado parcial
+        // Si estÃ¡ en modo de ediciÃ³n, prevenir guardado parcial
         Swal.fire({
-            title: "Edición en curso",
-            text: "No puede guardar parcialmente mientras hay un registro en edición.",
+            title: "EdiciÃ³n en curso",
+            text: "No puede guardar parcialmente mientras hay un registro en ediciÃ³n.",
             icon: "warning"
         });
         return;
     }
 
     Swal.fire({
-        title: "Si desea guardar el registro completo, por favor continúe",
-        text: "¿Está seguro de guardar todo el registro?",
+        title: "Si desea guardar el registro completo, por favor continÃºe",
+        text: "Â¿EstÃ¡ seguro de guardar todo el registro?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#428E3F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, guardar",
+        confirmButtonText: "SÃ­, guardar",
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -259,14 +259,14 @@ function guardarParcialEpid(idTabla) {
                         const cells = row.querySelectorAll('td');
                         if (cells.length > 0) {
                             if (rowIndex === rows.length - 1) {
-                                // Capturar el cumplimiento de la última fila
+                                // Capturar el cumplimiento de la Ãºltima fila
                                 cumplimiento = cells[cells.length - 1].textContent.trim() || "N/A";
                             } else {
                                 // Capturar las evaluaciones
                                 const select = row.querySelector('select.response');
                                 if (select) {
                                     if (select.value === "") {
-                                        tieneSelectVacio = true; // Marca si hay un select vacío
+                                        tieneSelectVacio = true; // Marca si hay un select vacÃ­o
                                     }
                                     evaluaciones.push(select.value || "N/A");
                                 } else {
@@ -276,13 +276,13 @@ function guardarParcialEpid(idTabla) {
                         }
                     });
 
-                    // Añadir evaluaciones y cumplimiento al arreglo de datos de la fila
+                    // AÃ±adir evaluaciones y cumplimiento al arreglo de datos de la fila
                     filaDatos.push(...evaluaciones, cumplimiento);
                 } else {
-                    console.error(`No se encontró la pestaña con id ${tabId}.`);
+                    console.error(`No se encontrÃ³ la pestaÃ±a con id ${tabId}.`);
                 }
             });
-            // Obtener valores adicionales de Episodio, Número de Documento, Nombre, Edad, Género, Ubicación, Cama y Entidad desde el HTML
+            // Obtener valores adicionales de Episodio, NÃºmero de Documento, Nombre, Edad, GÃ©nero, UbicaciÃ³n, Cama y Entidad desde el HTML
             const episodio = document.getElementById("episodio").value.trim();
             const numeroDocumento = document.getElementById("nroDoc").value.trim();
             const nombre = document.getElementById("nombrePaciente").value.trim();
@@ -322,7 +322,7 @@ function guardarParcialEpid(idTabla) {
                 });
                 newRow.insertCell(filaDatos.length + 10).textContent = observaciones;
 
-                // Añadir celdas "Estado" "Editar" "Guardar definitivo"
+                // AÃ±adir celdas "Estado" "Editar" "Guardar definitivo"
                 const estadoCell = newRow.insertCell(filaDatos.length + 11); 
                 estadoCell.textContent = "Pendiente";
 
@@ -344,7 +344,7 @@ function guardarParcialEpid(idTabla) {
                 guardarCell.appendChild(guardarBtn);
                 
             } else {
-                console.error(`No se encontró la tabla con id ${idTabla}.`);
+                console.error(`No se encontrÃ³ la tabla con id ${idTabla}.`);
             }
 
             Swal.fire({
@@ -435,7 +435,7 @@ function saveBundlesEpid(estado) {
     let clavesEvaluacionesIts = obtenerValoresDeTabla('its');
     let clavesEvaluacionesIstu = obtenerValoresDeTabla('istuTable');
 
-    // Ejemplo de creación de JSON para las evaluaciones
+    // Ejemplo de creaciÃ³n de JSON para las evaluaciones
     let jsonEvaluacionesNav = {};
     let jsonEvaluacionesIts = {};
     let jsonEvaluacionesIstu = {};
@@ -484,7 +484,7 @@ function saveBundlesEpid(estado) {
     .then(result => {
         console.log(result);
         if (result.status === 'success') {
-            console.log("Se guardó en la BD");
+            console.log("Se guardÃ³ en la BD");
             id = result.idPaciente;
             document.getElementById("id").value = id;
 
@@ -492,7 +492,7 @@ function saveBundlesEpid(estado) {
             const lastRow = registroTable ? registroTable.lastElementChild : null;
 
             if (lastRow) {
-                // Insertar el ID en una nueva celda después de "Guardar definitivo"
+                // Insertar el ID en una nueva celda despuÃ©s de "Guardar definitivo"
                 const idCell = lastRow.insertCell(filaDatos.length + 14);
                 idCell.textContent = id;
                 idCell.style.display = 'none';
@@ -514,21 +514,21 @@ function saveBundlesEpid(estado) {
 function editarFila(row) {
     if (isEditMode) {
         Swal.fire({
-            title: "Edición en progreso",
-            text: "Guarde o cancele la edición actual antes de continuar.",
+            title: "EdiciÃ³n en progreso",
+            text: "Guarde o cancele la ediciÃ³n actual antes de continuar.",
             icon: "warning"
         });
         return;
     }
 
-    isEditMode = true; // Marcar que estamos en modo de edición
+    isEditMode = true; // Marcar que estamos en modo de ediciÃ³n
 
     const cells = row.querySelectorAll('td');
     const evaluaciones = [];
     const cumplimientos = [];
 
     // Extraer los valores de las evaluaciones de la fila de la tabla "registros"
-    for (let i = 10; i < cells.length - 4; i++) { // Ajuste aquí para las evaluaciones
+    for (let i = 10; i < cells.length - 4; i++) { // Ajuste aquÃ­ para las evaluaciones
         evaluaciones.push(cells[i].textContent.trim());
     }
 
@@ -538,19 +538,19 @@ function editarFila(row) {
     const cumplimiento3 = cells[cells.length - 6].textContent.trim();  // Cumplimiento istu
     cumplimientos.push(cumplimiento1, cumplimiento2, cumplimiento3);
 
-    // Verificar si los cumplimientos son "N/A" y reemplazarlos por vacíos
+    // Verificar si los cumplimientos son "N/A" y reemplazarlos por vacÃ­os
     const normalizedCumplimientos = cumplimientos.map(c => c === 'N/A' ? '' : c);
 
-    // Asignar valores de evaluación y cumplimiento para la tabla 'neav'
+    // Asignar valores de evaluaciÃ³n y cumplimiento para la tabla 'neav'
     asignarValores('neav', evaluaciones.slice(0, 5), normalizedCumplimientos[0]);
 
-    // Asignar valores de evaluación y cumplimiento para la tabla 'its'
+    // Asignar valores de evaluaciÃ³n y cumplimiento para la tabla 'its'
     asignarValores('its', evaluaciones.slice(6, 13), normalizedCumplimientos[1]);
 
-    // Asignar valores de evaluación y cumplimiento para la tabla 'istuTable'
+    // Asignar valores de evaluaciÃ³n y cumplimiento para la tabla 'istuTable'
     asignarValores('istuTable', evaluaciones.slice(14, 20), normalizedCumplimientos[2]);
 
-    // Extraer y asignar los valores de los campos "Episodio", "Cama", "Ubicación", etc.
+    // Extraer y asignar los valores de los campos "Episodio", "Cama", "UbicaciÃ³n", etc.
     document.getElementById("episodio").value = cells[2].textContent.trim();
     document.getElementById("nroDoc").value = cells[3].textContent.trim();
     document.getElementById("nombre").value = cells[4].textContent.trim();
@@ -562,13 +562,13 @@ function editarFila(row) {
     document.getElementById("Observaciones").value = cells[cells.length - 5].textContent.trim(); 
     document.getElementById("id").value = cells[cells.length - 1].textContent.trim();
 
-    // Cambiar el botón "Editar" a "Guardar"
+    // Cambiar el botÃ³n "Editar" a "Guardar"
     const editButton = row.querySelector('button');
     if (editButton) {
         editButton.textContent = "Guardar";
         editButton.onclick = function () {
             guardarEdicion(row);
-            isEditMode = false; // Cambiar el modo de edición después de guardar
+            isEditMode = false; // Cambiar el modo de ediciÃ³n despuÃ©s de guardar
         };
     }
 }
@@ -579,17 +579,17 @@ function asignarValores(tabId, evaluaciones, cumplimiento) {
     const tab = document.getElementById(tabId);
     if (tab) {
         const rows = tab.querySelectorAll('tr');
-        let evalIndex = 0; // Reiniciar índice de evaluación para cada tabla
+        let evalIndex = 0; // Reiniciar Ã­ndice de evaluaciÃ³n para cada tabla
 
         rows.forEach((formRow, rowIndex) => {
             if (rowIndex === rows.length - 1) {
-                // Asignar el valor de cumplimiento de esa tabla (última fila)
+                // Asignar el valor de cumplimiento de esa tabla (Ãºltima fila)
                 const cumplimientoCell = formRow.querySelector('td:last-child');
                 if (cumplimientoCell) {
                     cumplimientoCell.textContent = cumplimiento; // Cumplimiento value
                 }
             } else {
-                // Asignar los valores de evaluación a los selects correspondientes
+                // Asignar los valores de evaluaciÃ³n a los selects correspondientes
                 const select = formRow.querySelector('select.response');
                 if (select && evalIndex < evaluaciones.length) {
                     select.value = evaluaciones[evalIndex] || "N/A"; // Evaluation value
@@ -620,7 +620,7 @@ function guardarEdicion(row) {
                         cumplimiento = cumplimientoCell.textContent.trim() || "N/A";
                     }
                 } else {
-                    // Filas de evaluación
+                    // Filas de evaluaciÃ³n
                     const select = formRow.querySelector('select.response');
                     if (select) {
                         tableEvaluations.push(select.value || "N/A");
@@ -631,17 +631,17 @@ function guardarEdicion(row) {
             // Guardar las evaluaciones y el cumplimiento de esta tabla
             evaluacionesEdicion.push(...tableEvaluations, cumplimiento);
         } else {
-            console.error(`No se encontró la tabla con id ${tabId}.`);
+            console.error(`No se encontrÃ³ la tabla con id ${tabId}.`);
         }
     });
 
-    // Actualizar los campos de evaluación en la fila original con los nuevos valores
+    // Actualizar los campos de evaluaciÃ³n en la fila original con los nuevos valores
     evaluacionesEdicion.forEach((evaluation, index) => {
         cells[evalIndex].textContent = evaluation; // Actualizar evaluaciones
         evalIndex++;
     });
 
-    // Recolectar y actualizar los valores de los campos específicos
+    // Recolectar y actualizar los valores de los campos especÃ­ficos
     const episodio = document.getElementById("episodio").value.trim();
     const numeroDocumento = document.getElementById("nroDoc").value.trim();
     const nombre = document.getElementById("nombre").value.trim();
@@ -667,7 +667,7 @@ function guardarEdicion(row) {
     cells[0].textContent = new Date().toISOString().split('T')[0]; // Fecha
     cells[1].textContent = new Date().toLocaleTimeString(); // Hora
 
-    // Cambiar el botón "Guardar" a "Editar"
+    // Cambiar el botÃ³n "Guardar" a "Editar"
     const editButton = cells[cells.length - 3].querySelector('button'); // Ajustado a cells.length - 3 por la nueva columna
     if (editButton) {
         editButton.textContent = "Editar";
@@ -738,7 +738,7 @@ function updateBundlesEpid() {
     let clavesEvaluacionesIts = obtenerValoresDeTabla('its');
     let clavesEvaluacionesIstu = obtenerValoresDeTabla('istuTable');
 
-    // Ejemplo de creación de JSON para las evaluaciones
+    // Ejemplo de creaciÃ³n de JSON para las evaluaciones
     let jsonEvaluacionesNav = {};
     let jsonEvaluacionesIts = {};
     let jsonEvaluacionesIstu = {};
@@ -774,7 +774,7 @@ function updateBundlesEpid() {
     })
     .then(response => response.json()).then(result => {
         if (result.status === 'success') {
-            console.log("Se actualizó en la BD");
+            console.log("Se actualizÃ³ en la BD");
         } else {
             console.log("Error al actualizar en la BD:", result.message || 'Sin detalles adicionales');
         }
@@ -785,22 +785,22 @@ function updateBundlesEpid() {
 }
 function guardarDefinitivo(row) {
     if (isEditMode) {
-        // Si está en modo de edición, prevenir guardado parcial
+        // Si estÃ¡ en modo de ediciÃ³n, prevenir guardado parcial
         Swal.fire({
-            title: "Edición en curso",
-            text: "No puede guardar definitivamente mientras hay un registro en edición.",
+            title: "EdiciÃ³n en curso",
+            text: "No puede guardar definitivamente mientras hay un registro en ediciÃ³n.",
             icon: "warning"
         });
         return;
     }
     Swal.fire({
-        title: "¿Está seguro de guardar todo el registro definitivo?",
-        text: "No podrá volverlo a editar",
+        title: "Â¿EstÃ¡ seguro de guardar todo el registro definitivo?",
+        text: "No podrÃ¡ volverlo a editar",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#428E3F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, guardar",
+        confirmButtonText: "SÃ­, guardar",
         cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -813,21 +813,21 @@ function guardarDefinitivo(row) {
             if (estadoCell.textContent === "Pendiente") {
                 estadoCell.textContent = "Finalizado";
 
-                // Deshabilitar el botón de "Editar"
-                const editarCell = cells[cells.length - 3]; // La celda del botón "Editar" es la tercera desde el final
+                // Deshabilitar el botÃ³n de "Editar"
+                const editarCell = cells[cells.length - 3]; // La celda del botÃ³n "Editar" es la tercera desde el final
                 const editarBtn = editarCell.querySelector('button');
                 if (editarBtn) {
-                    editarBtn.disabled = true; // Deshabilitar el botón
+                    editarBtn.disabled = true; // Deshabilitar el botÃ³n
                 }
 
-                // Deshabilitar el botón "Guardar Definitivo"
-                const guardarCell = cells[cells.length - 2]; // La celda del botón "Guardar Definitivo" es la segunda desde el final
+                // Deshabilitar el botÃ³n "Guardar Definitivo"
+                const guardarCell = cells[cells.length - 2]; // La celda del botÃ³n "Guardar Definitivo" es la segunda desde el final
                 const guardarBtn = guardarCell.querySelector('button');
                 if (guardarBtn) {
-                    guardarBtn.disabled = true; // Deshabilitar el botón
+                    guardarBtn.disabled = true; // Deshabilitar el botÃ³n
                 }
 
-                // Mostrar alerta de éxito con SweetAlert
+                // Mostrar alerta de Ã©xito con SweetAlert
                 Swal.fire({
                     title: "Guardado Definitivo",
                     text: "El registro ha sido marcado como Finalizado.",
@@ -864,7 +864,7 @@ function updateEstado(status,cells) {
     })
     .then(response => {return response.json()}).then(result => {
         if (result.status === 'success') {
-            console.log("Se actualizó el estado");
+            console.log("Se actualizÃ³ el estado");
         } else {
             console.error("Error al actualizar el estado:", result.message);
         }
@@ -886,7 +886,7 @@ function validarColumna(tablaID, columnaIndex) {
                 if (select) {
                     const value = select.value;
                     if (value === "" || value === "N/A") {
-                        seleccionInvalida = true; // Si algún select está vacío, la validación falla
+                        seleccionInvalida = true; // Si algÃºn select estÃ¡ vacÃ­o, la validaciÃ³n falla
                     }
                 }
             }
@@ -932,7 +932,7 @@ function toggleDivs() {
 //                 if (tabla === "1" && response['enfermeras'] && response['enfermeras'].length > 0) {
 //                     $('#registros tbody').empty(); 
                     
-//                     let uniqueDates = {}; // Fechas únicas para evitar duplicados
+//                     let uniqueDates = {}; // Fechas Ãºnicas para evitar duplicados
 //                     response['enfermeras'].forEach(function(enfermeras) {
 //                         if (!uniqueDates[enfermeras.fecha]) {
 //                             uniqueDates[enfermeras.fecha] = enfermeras;
@@ -977,7 +977,7 @@ function toggleDivs() {
 //             },
 //             error: function(xhr, status, error) {
 //                 console.error("AJAX Error:", status, error);
-//                 console.log("Response Text:", xhr.responseText); // Mostrar la respuesta completa para depuración
+//                 console.log("Response Text:", xhr.responseText); // Mostrar la respuesta completa para depuraciÃ³n
 //             }
 //         });
 //     }

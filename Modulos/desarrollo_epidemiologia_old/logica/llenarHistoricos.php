@@ -7,7 +7,7 @@ include('../../../config/Conexion.php');
 
 // Conectar a la base de datos usando mysqli
 
-// Comprobar la conexión
+// Comprobar la conexiÃ³n
 if ($conexion->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed: ' . $conexion->connect_error]);
     exit();

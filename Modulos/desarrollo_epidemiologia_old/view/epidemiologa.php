@@ -19,12 +19,12 @@ if (!isset($_SESSION["nombre"])) {
 
     if ($_SESSION['bundlesEpidemiologa'] == 1) {
         if (isset($_GET["param"]) && $_GET["param"] !== "") {
-            //$_SESSION["param"] = $_GET["param"];
+            $_SESSION["param"] = $_GET["param"];
         }
 
         require '../../../logica/ApiURL.php';
 
-        //$_SESSION["param"] = "";
+        $_SESSION["param"] = "";
         $idusuario = $_SESSION["idusuario"];
 
         ?>
@@ -86,61 +86,17 @@ if (!isset($_SESSION["nombre"])) {
                                             <input type="text" id="edad" name="edad" class="form-control"
                                                 value="<?php echo isset($DatosIncapacidad['Edad']) && !empty($DatosIncapacidad['Edad']) ?$DatosIncapacidad['Edad']:''; ?>" readonly>
                                         </div>
-                                        
                                         <div class="form-group col-md-3">
                                             <center><label for="sexo">Genero:</label></center>
                                             <input type="text" id="sexo" name="sexo" class="form-control" value="<?php echo isset($DatosIncapacidad['Sexo']) && !empty($DatosIncapacidad['Sexo']) ?$DatosIncapacidad['Sexo']:''; ?>" readonly>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <center><label for="ubicacion">Ubicacion:</label></center>
-                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="<?php echo isset($UbicacionPaciente["Unidad_Organizativa"]) && !empty($UbicacionPaciente["Unidad_Organizativa"]) ?$UbicacionPaciente["Unidad_Organizativa"]:''; ?>" readonly>
+                                            <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="<?php echo isset($UbicacionPaciente["UbicacionEdificio"]) && !empty($UbicacionPaciente["UbicacionEdificio"]) ?$UbicacionPaciente["UbicacionEdificio"]:''; ?>" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <center><label for="cama">Cama:</label></center>
                                             <input type="text" id="cama" name="cama" class="form-control" value="<?php echo isset($UbicacionPaciente["IdUbicacion_cama"]) && !empty($UbicacionPaciente["IdUbicacion_cama"]) ?$UbicacionPaciente["IdUbicacion_cama"]:''; ?>" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" hidden>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Fecha_nacimiento">Fecha_nacimiento:</label></center>
-                                            <input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad['Fecha_nacimiento']) && !empty($DatosIncapacidad['Fecha_nacimiento']) ?$DatosIncapacidad['Fecha_nacimiento']:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Email">Email:</label></center>
-                                            <input type="text" id="Email" name="Email" class="form-control"
-                                                value="<?php echo isset($Datoscontacto["Email"]) && !empty($Datoscontacto["Email"]) ?$Datoscontacto["Email"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Telefono">Telefono:</label></center>
-                                            <input type="text" id="Telefono" name="Telefono" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Telefono_principal"]) && !empty($DatosIncapacidad["Telefono_principal"]) ?$DatosIncapacidad["Telefono_principal"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Inicio_atencion">F_Inicio_atencion:</label></center>
-                                            <input type="text" id="F_Inicio_atencion" name="F_Inicio_atencion" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Inicio_atencion"]) && !empty($DatosIncapacidad["F_Inicio_atencion"]) ?$DatosIncapacidad["F_Inicio_atencion"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Clase_Episodio">Clase_Episodio:</label></center>
-                                            <input type="text" id="Clase_Episodio" name="Clase_Episodio" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Clase_Episodio"]) && !empty($DatosIncapacidad["Clase_Episodio"]) ?$DatosIncapacidad["Clase_Episodio"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="Id_aseguradora">Id_aseguradora:</label></center>
-                                            <input type="text" id="Id_aseguradora" name="Id_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["Id_aseguradora"]) && !empty($DatosIncapacidad["Id_aseguradora"]) ?$DatosIncapacidad["Id_aseguradora"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Ini_realcion_aseguradora">F_Ini_realcion_aseguradora:</label></center>
-                                            <input type="text" id="F_Ini_realcion_aseguradora" name="F_Ini_realcion_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Ini_realcion_aseguradora"]) && !empty($DatosIncapacidad["F_Ini_realcion_aseguradora"]) ?$DatosIncapacidad["F_Ini_realcion_aseguradora"]:''; ?>" readonly>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <center><label for="F_Fin_realcion_aseguradora">F_Fin_realcion_aseguradora:</label></center>
-                                            <input type="text" id="F_Fin_realcion_aseguradora" name="F_Fin_realcion_aseguradora" class="form-control"
-                                                value="<?php echo isset($DatosIncapacidad["F_Fin_realcion_aseguradora"]) && !empty($DatosIncapacidad["F_Fin_realcion_aseguradora"]) ?$DatosIncapacidad["F_Fin_realcion_aseguradora"]:''; ?>" readonly>
                                         </div>
                                     </div>
 
@@ -174,7 +130,7 @@ if (!isset($_SESSION["nombre"])) {
                                             <input type="text" class="form-control" id="especialidad" name="especialidad"
                                             value="<?php echo isset($DatosIncapacidad['Especialidad']) && !empty($DatosIncapacidad['Especialidad']) ?$DatosIncapacidad['Especialidad']:''; ?>" readonly>
                                         </div>
-                                        <div class="form-group col-md-1" hidden >
+                                        <div class="form-group col-md-1" hidden>
                                             <center><label style="color:black" for="id" class="form-label">id:</label></center>
                                             <input type="text" class="form-control" id="id" name="id" readonly>
                                         </div>
@@ -191,7 +147,7 @@ if (!isset($_SESSION["nombre"])) {
                                         <div class="question">
                                             <h3>¿El paciente está conectado a ventilación mecánica invasiva?</h3>
                                             <label>
-                                                <input type="radio" name="ventilacion" value="si" onchange="toggleDivs(event)"> Si
+                                                <input type="radio" name="ventilacion" value="si" onchange="toggleDivs(event)"> Sí
                                             </label>
                                             <label>
                                                 <input type="radio" name="ventilacion" value="no" onchange="toggleDivs(event)"
@@ -203,7 +159,7 @@ if (!isset($_SESSION["nombre"])) {
                                             <h3>¿El paciente tiene un catéter venoso de inserción central (CVC, PICC, Mahurka,
                                                 CCI, etc.)?</h3>
                                             <label>
-                                                <input type="radio" name="cvc" value="si" onchange="toggleDivs(event)"> Si
+                                                <input type="radio" name="cvc" value="si" onchange="toggleDivs(event)"> Sí
                                             </label>
                                             <label>
                                                 <input type="radio" name="cvc" value="no" onchange="toggleDivs(event)" checked> No
@@ -213,7 +169,7 @@ if (!isset($_SESSION["nombre"])) {
                                         <div class="question">
                                             <h3>¿El paciente tiene una sonda vesical insertada?</h3>
                                             <label>
-                                                <input type="radio" name="sonda" value="si" onchange="toggleDivs(event)"> Si
+                                                <input type="radio" name="sonda" value="si" onchange="toggleDivs(event)"> Sí
                                             </label>
                                             <label>
                                                 <input type="radio" name="sonda" value="no" onchange="toggleDivs(event)" checked> No
@@ -277,49 +233,49 @@ if (!isset($_SESSION["nombre"])) {
                                     <table class="table-responsive tab-pane fade show active" id="its">
                                         <tr>
                                             <center>
-                                                <th class="left-align sub-header" id="row">Infección torrente sanguineo asociado
+                                                <th class="left-align sub-header" id="row">Infeccion torrente sanguineo asociado
                                                     a cateter (ITS-AC )</th>
                                             </center>
                                             <th class="sub-header">Evaluacion</th>
                                         </tr>
 
                                         <tr>
-                                            <td class="left-align sub-header" id="row">1. El apósito de fijación cubre el sitio
-                                                de inserción del catéter central y se observa limpio, seco e integro.</td>
+                                            <td class="left-align sub-header" id="row">1. El aposito de fijacion cubre el sitio
+                                                de inserción del cateter central y se observa limpio, seco e integro.</td>
                                             <td id="tds" class="tds_its"></td>
 
                                         </tr>
                                         <tr>
                                             <td class="left-align sub-header" id="row">2. Higiene de manos antes de manipular el
-                                                catéter central, los puertos de inyección o los conectores sin aguja.</td>
+                                                cateter central, los puertos de inyeccion o los conectores sin aguja.</td>
                                             <td id="tds" class="tds_its"></td>
 
                                         </tr>
                                         <tr>
                                             <td class="left-align sub-header" id="row">3. Desinfecta la superficie de la
                                                 conexión, los lados del conector sin aguja y los puertos de administración con
-                                                clorhexidina alcohólica o alcohol al 70% antes de acceder al cateter.</td>
+                                                clorhexidina alcoholica o alcohol al 70% antes de acceder al cateter.</td>
                                             <td id="tds" class="tds_its"></td>
                                         </tr>
                                         <tr>
-                                            <td class="left-align sub-header" id="row">4. Los equipos de infusión, conectores
+                                            <td class="left-align sub-header" id="row">4. Los equipos de infusion, conectores
                                                 sin aguja, extensiones,llaves 3 vias, alargaderas, etc. estan visiblemente
-                                                limpios, integros y se cambian según protocolo.</td>
+                                                limpios, integros y se cambian segun protocolo.</td>
                                             <td id="tds" class="tds_its"></td>
                                         </tr>
                                         <tr>
-                                            <td class="left-align sub-header" id="row">5. La curación del catéter central esta
+                                            <td class="left-align sub-header" id="row">5. La curacion del cateter central esta
                                                 vigente.</td>
                                             <td id="tds" class="tds_its"></td>
                                         </tr>
                                         <tr>
-                                            <td class="left-align sub-header" id="row">6. ¿Existe una indicación para permanecer
-                                                con el catéter central?
+                                            <td class="left-align sub-header" id="row">6. ¿Existe una indicacion para permanecer
+                                                con el cateter central?
                                             </td>
                                             <td id="tds" class="tds_its"></td>
                                         </tr>
                                         <tr class="left-align sub-header" id="exclude-row">
-                                            <td class="left-align sub-header" id="row">Topicación con clorexidina en mayores de
+                                            <td class="left-align sub-header" id="row">Topicacion con clorexidina en mayores de
                                                 2 meses
                                             </td>
                                             <td id="tds" class="tds_its"></td>
@@ -414,7 +370,7 @@ if (!isset($_SESSION["nombre"])) {
                                                 </th>
                                                 <th colspan="8" style="font-weight: bold; background-color:#eceef1;">Infeccion
                                                     torrente sanguineo asociado a cateter (ITS-AC )</th>
-                                                <th colspan="7" style="font-weight: bold;">Infecci�n urinaria asociada a sonda
+                                                <th colspan="7" style="font-weight: bold;">Infección urinaria asociada a sonda
                                                     vesical (ISTU-AC)</th>
                                                 <th colspan="1" style="font-weight: bold; background-color:#eceef1;">
                                                     Observaciones</th>
@@ -462,7 +418,7 @@ if (!isset($_SESSION["nombre"])) {
                                             </tr>
                                         </thead>
                                         <tbody id="table-body-main">
-                                            <!-- Aqu� se agregar�n los registros -->
+                                            <!-- Aquí se agregarán los registros -->
                                         </tbody>
                                     </table>
 
@@ -512,7 +468,21 @@ if (!isset($_SESSION["nombre"])) {
             </script>
             <script src="../../../view/scripts/usuario.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
-<!-- <script>
+<script>
+    $(document).ready(async function(){
+        let dato = await new Promise(resolve => {
+            $.ajax({
+                url: "./prueba.php",
+                type: "POST",
+                success: function(response){
+                    response = JSON.parse(response)
+                    console.log(response.DatosPaciente)
+                }
+            });
+        })
+    });
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         let idProfesional = "<?php echo $idusuario ?>";
         console.log("id: " + idProfesional);
@@ -541,7 +511,7 @@ if (!isset($_SESSION["nombre"])) {
                     
                 } else {
                     console.log("No hay registros en la respuesta");
-                    // Aqu  puedes manejar el caso en que no hay datos
+                    // Aqu� puedes manejar el caso en que no hay datos
                     if (DatosIncapacidad["NombreMedico"] == "" && DatosIncapacidad["Registro"] == "" && DatosIncapacidad["IDNumberPaciente"] == "") {
                         Swal.fire({
                             title: 'No es posible realizar Solicitud',
@@ -574,7 +544,7 @@ if (!isset($_SESSION["nombre"])) {
         });
  
     });
-</script> -->
+</script>
         </body>
 
 
